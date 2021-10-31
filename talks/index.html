@@ -12,7 +12,7 @@
     <body class="h-full">
         <div class="min-h-full">
             <!-- navbar -->
-<nav class="bg-gray-800" x-data="{open: false}">
+<nav class="bg-gray-800" x-data="{showMobileNavbar: false}">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
             <div class="flex items-center">
@@ -38,24 +38,31 @@
             </div>
             <div class="hidden md:block">
                 <div class="ml-4 flex items-center md:ml-6">
-                    <button type="button" class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                        <span class="sr-only">View notifications</span>
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
-                    </button>
+                    <div class="relative inline-block">
+                        <button type="button" class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                            <span class="sr-only">View notifications</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                        </button>
+
+                        <!--
+                        <div class="absolute -right-36 z-20 mt-2">
+                        </div>
+                        -->
+                    </div>
 
                     <!-- Profile dropdown -->
                     <div class="ml-3 relative">
                         <button type="button" class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true"
-                            x-on:click="open = !open">
+                            x-on:click="showMobileNavbar = !showMobileNavbar">
                             <span class="sr-only">Open user menu</span>
                             <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                         </button>
 
-                        <div class="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
-                             x-show="open"
-                             x-on:click.outside="open = false"
+                        <div class="origin-top-right absolute z-50 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
+                             x-show="showMobileNavbar"
+                             x-on:click.outside="showMobileNavbar = false"
                              x-transition:enter="transition ease-out duration-100"
                              x-transition:enter-start="transform opacity-0 scale-95"
                              x-transition:enter-end="transform opacity-100 scale-100"
@@ -77,9 +84,9 @@
                 </div>
             </div>
             <div class="-mr-2 flex md:hidden">
-                <!-- Mobile menu button -->
+                <!-- mobile menu button -->
                 <button type="button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false"
-                    x-on:click="open = !open">
+                    x-on:click="showMobileNavbar = !showMobileNavbar">
                     <span class="sr-only">Open main menu</span>
                     <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -88,57 +95,57 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
+                <!-- /mobile menu button -->
             </div>
         </div>
     </div>
 
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden" id="mobile-menu">
-        <div x-show="open">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                                    <a href="/home" class="px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white block">
-                        Home
+    <!-- mobile menu -->
+    <div class="md:hidden" id="mobile-menu" x-show="showMobileNavbar">
+        <div class="p-3">
+                            <a href="/home" class="px-3 py-2 rounded-md text-base font-medium block text-gray-300 hover:bg-gray-700 hover:text-white">
+                    Home
+                </a>
+                            <a href="/halls" class="px-3 py-2 rounded-md text-base font-medium block text-gray-300 hover:bg-gray-700 hover:text-white">
+                    Halls
+                </a>
+                            <a href="/talks" class="px-3 py-2 rounded-md text-base font-medium block bg-gray-900 text-white">
+                    Talks
+                </a>
+                            <a href="/facilities" class="px-3 py-2 rounded-md text-base font-medium block text-gray-300 hover:bg-gray-700 hover:text-white">
+                    Facilities
+                </a>
+                    </div>
+        <div class="p-3 border-t border-gray-700">
+            <div class="flex items-center px-2">
+                <div class="flex-shrink-0">
+                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                </div>
+                <div class="ml-3">
+                    <div class="text-base font-medium leading-none text-white">Tom Cook</div>
+                    <div class="text-sm font-medium leading-none text-gray-400">tom@example.com</div>
+                </div>
+                <button type="button" class="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <span class="sr-only">View notifications</span>
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                </button>
+            </div>
+            <div class="mt-3 px-2 space-y-1">
+                                    <a href="#" class="block py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                        Your Profile
                     </a>
-                                    <a href="/halls" class="px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white block">
-                        Halls
+                                    <a href="#" class="block py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                        Settings
                     </a>
-                                    <a href="/talks" class="px-3 py-2 rounded-md text-base font-medium bg-gray-900 text-white block">
-                        Talks
-                    </a>
-                                    <a href="/facilities" class="px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white block">
-                        Facilities
+                                    <a href="#" class="block py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                        Sign out
                     </a>
                             </div>
-            <div class="pt-4 pb-3 border-t border-gray-700">
-                <div class="flex items-center px-5">
-                    <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                    </div>
-                    <div class="ml-3">
-                        <div class="text-base font-medium leading-none text-white">Tom Cook</div>
-                        <div class="text-sm font-medium leading-none text-gray-400">tom@example.com</div>
-                    </div>
-                    <button type="button" class="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                        <span class="sr-only">View notifications</span>
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="mt-3 px-2 space-y-1">
-                                            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
-                            Your Profile
-                        </a>
-                                            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
-                            Settings
-                        </a>
-                                            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
-                            Sign out
-                        </a>
-                                    </div>
-            </div>
         </div>
     </div>
+    <!-- /mobile menu -->
 </nav>
 <!-- /navbar -->
 
@@ -282,7 +289,7 @@
         </div>
 
         <div class="flex justify-between items-center py-5">
-            <h1 class="text-lg font-bold">molestias a dolorem saepe in vel dolores dolores fugit unde facere quia voluptate nobis dicta soluta cumque laborum quos aut</h1>
+            <h1 class="text-lg font-bold">voluptas commodi non earum et voluptate</h1>
                             <!--
                 <button type="button" class="inline-flex items-center px-3 py-1.5 bg-indigo-600 text-xs text-white font-medium rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -295,11 +302,11 @@
                     </div>
 
         <div class="text-gray-600" x-data="{show: false}">
-            <div class="line-clamp-3">quasi minima rerum rerum esse qui eum optio qui totam porro labore ut enim sed dolorum recusandae et ab magnam ipsum facere sit soluta ea accusantium debitis voluptatum molestias id inventore asperiores fugit voluptas aliquam qui ipsa iusto aspernatur nisi dolorem harum velit modi commodi quasi nihil quas maxime minus odit architecto possimus reiciendis corporis earum cum voluptates in maxime dicta</div>
+            <div class="line-clamp-3">et earum expedita dolores error delectus repellat dolores sint exercitationem debitis libero quae iure hic quia id ullam eos reiciendis doloremque perspiciatis aut doloremque minima quia perferendis consectetur accusamus magni laudantium quia voluptate nulla cumque non deserunt consequatur quisquam accusantium nihil corrupti quia ratione asperiores</div>
                             <strong role="button" x-show="!show" x-on:click="show = !show; return false">
                     Read more&hellip;
                 </strong>
-                        <div x-show="show">corrupti eum architecto praesentium fuga maxime optio quia iusto placeat quasi voluptatibus odio qui et vero et et consequatur mollitia ab fugiat deleniti ut maiores illo et aut nesciunt qui quis consequatur sed ipsam excepturi exercitationem facilis sapiente consequatur odio est delectus dolorum officia quia eveniet nihil et ut non</div>
+                        <div x-show="show">et neque est quia asperiores et quo earum amet tempore veritatis voluptatem dolores tempora dolorem quidem omnis assumenda ratione incidunt consectetur ut velit sint ratione perspiciatis omnis aut nemo exercitationem non laborum nihil quod sit dolore voluptatem velit doloribus omnis eum alias temporibus perferendis rerum facilis necessitatibus et et earum</div>
         </div>
 
         <div class="my-5 font-bold text-indigo-600 flex items-center">
@@ -317,8 +324,8 @@
         <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
     </div>
     <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Prof. Conor Denesik Sr.</p>
-        <p class="text-sm text-gray-500 truncate">Schaeferview, Luxembourg</p>
+        <p class="text-sm font-medium text-gray-900 truncate">Mona Becker</p>
+        <p class="text-sm text-gray-500 truncate">Kautzerberg, Aruba</p>
     </div>
 </div>
 <!-- /speaker -->
@@ -328,8 +335,8 @@
         <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
     </div>
     <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Margarett Glover</p>
-        <p class="text-sm text-gray-500 truncate">Maetown, Latvia</p>
+        <p class="text-sm font-medium text-gray-900 truncate">Anais Kassulke DVM</p>
+        <p class="text-sm text-gray-500 truncate">Merltown, Sao Tome and Principe</p>
     </div>
 </div>
 <!-- /speaker -->
@@ -350,12 +357,12 @@
         </div>
 
         <div class="flex justify-between items-center py-5">
-            <h1 class="text-lg font-bold">qui inventore eligendi dolores libero omnis voluptate iusto tenetur quisquam repudiandae eos fugit laboriosam repellendus consequuntur quidem odit ullam quia</h1>
+            <h1 class="text-lg font-bold">aut consequatur iure itaque non officiis voluptatem cupiditate molestiae repellendus quis maiores</h1>
                     </div>
 
         <div class="text-gray-600" x-data="{show: false}">
-            <div class="line-clamp-3">asperiores quae harum tenetur id earum ut et hic quis excepturi et libero rem distinctio optio unde alias tenetur ducimus id voluptatem sit non excepturi tempora unde hic sed corporis sapiente magni sit fugiat adipisci ut vero sunt quae sed consequatur reprehenderit facere dicta eum est sint corrupti nostrum voluptates cupiditate fuga voluptatibus quia qui in enim et et</div>
-                        <div x-show="show">officia tempore ipsam iste aliquid eos reprehenderit praesentium facilis repellendus repellat eligendi maiores voluptatum nesciunt perspiciatis doloribus quod adipisci quaerat praesentium quae qui consequatur omnis perferendis repudiandae nesciunt doloremque et error in error nisi mollitia quidem ab et quia est deleniti culpa officiis molestiae qui alias ab ut in rerum</div>
+            <div class="line-clamp-3">temporibus voluptates occaecati commodi temporibus fugit iste et aut tempore nihil est reprehenderit</div>
+                        <div x-show="show">repellat assumenda ducimus et qui ipsum nulla qui dolorem sunt vel inventore consectetur cum et quos eum sit quidem qui iste et aut fugiat omnis excepturi esse aut quas perferendis laborum voluptatem doloremque ratione inventore voluptates quos rerum autem fugiat laborum vitae iusto autem voluptates cupiditate itaque repellat maxime ea</div>
         </div>
 
         <div class="my-5 font-bold text-indigo-600 flex items-center">
@@ -373,8 +380,8 @@
         <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
     </div>
     <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Mrs. Harmony Kuvalis DDS</p>
-        <p class="text-sm text-gray-500 truncate">Port Glennietown, Ecuador</p>
+        <p class="text-sm font-medium text-gray-900 truncate">Retha Nienow</p>
+        <p class="text-sm text-gray-500 truncate">Osbaldoton, Lao People&#039;s Democratic Republic</p>
     </div>
 </div>
 <!-- /speaker -->
@@ -384,8 +391,8 @@
         <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
     </div>
     <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Prof. Karelle Emmerich</p>
-        <p class="text-sm text-gray-500 truncate">Isidrofurt, Botswana</p>
+        <p class="text-sm font-medium text-gray-900 truncate">Juanita Beatty</p>
+        <p class="text-sm text-gray-500 truncate">Adeleport, Niue</p>
     </div>
 </div>
 <!-- /speaker -->
@@ -406,12 +413,12 @@
         </div>
 
         <div class="flex justify-between items-center py-5">
-            <h1 class="text-lg font-bold">ut laborum tenetur repudiandae ratione est labore</h1>
+            <h1 class="text-lg font-bold">rerum quibusdam nostrum in et qui numquam corrupti fuga repudiandae dolor corporis</h1>
                     </div>
 
         <div class="text-gray-600" x-data="{show: false}">
-            <div class="line-clamp-3">ut magni tempore aperiam saepe et sunt alias fuga ea voluptas minus ex id nihil molestias et eius laborum iusto autem quia rerum cum rerum dolorem sit excepturi dolorem provident et placeat aut qui quo temporibus et eum aliquam officiis vero rem fugiat est sed</div>
-                        <div x-show="show">similique occaecati iste deleniti veniam adipisci id nemo animi voluptatem aliquid veritatis ut quae omnis nihil aut odit asperiores minus ex accusantium ea omnis nisi officia qui tempore nulla dolor qui repellat corporis ut fugit quae facere nulla qui maiores quis temporibus quis a eum qui quisquam consequuntur consequatur voluptatibus</div>
+            <div class="line-clamp-3">sed et sit repellendus neque quia sit rerum accusamus mollitia est nihil saepe at ex quia voluptatibus repudiandae iste delectus recusandae minima eos quia repudiandae minima ipsum quia corrupti exercitationem laborum voluptate aliquid id fuga molestiae doloremque exercitationem tempora impedit impedit autem deserunt necessitatibus alias vero dignissimos debitis ut cupiditate animi totam eius velit sed ex dolores porro et minima accusamus quia qui dolores cum</div>
+                        <div x-show="show">quas vel autem aliquid qui commodi possimus praesentium et sed eum in architecto optio enim consequatur nihil ut sunt ratione suscipit veniam ea occaecati nobis a facere cum autem ipsum voluptas ut voluptatem at sint reprehenderit dicta officia sit qui voluptates labore corporis quisquam porro quibusdam eaque dolorum autem voluptas</div>
         </div>
 
         <div class="my-5 font-bold text-indigo-600 flex items-center">
@@ -429,8 +436,8 @@
         <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
     </div>
     <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Jensen Harris</p>
-        <p class="text-sm text-gray-500 truncate">Lake Mertiebury, American Samoa</p>
+        <p class="text-sm font-medium text-gray-900 truncate">Milo Graham</p>
+        <p class="text-sm text-gray-500 truncate">New Isabel, Cyprus</p>
     </div>
 </div>
 <!-- /speaker -->
@@ -440,30 +447,8 @@
         <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
     </div>
     <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Kieran Gottlieb</p>
-        <p class="text-sm text-gray-500 truncate">Port Queenie, Egypt</p>
-    </div>
-</div>
-<!-- /speaker -->
-                            <!-- speaker -->
-<div class="rounded-lg border border-gray-300 bg-white px-4 py-3 flex items-center space-x-3">
-    <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-    </div>
-    <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Dr. Alfred Homenick</p>
-        <p class="text-sm text-gray-500 truncate">West Cotychester, Chad</p>
-    </div>
-</div>
-<!-- /speaker -->
-                            <!-- speaker -->
-<div class="rounded-lg border border-gray-300 bg-white px-4 py-3 flex items-center space-x-3">
-    <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-    </div>
-    <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Lucinda Fahey</p>
-        <p class="text-sm text-gray-500 truncate">Lake Naomiton, Falkland Islands (Malvinas)</p>
+        <p class="text-sm font-medium text-gray-900 truncate">Lorena Crona</p>
+        <p class="text-sm text-gray-500 truncate">West Hayleyborough, Guatemala</p>
     </div>
 </div>
 <!-- /speaker -->
@@ -484,12 +469,12 @@
         </div>
 
         <div class="flex justify-between items-center py-5">
-            <h1 class="text-lg font-bold">voluptas hic natus quia quam suscipit facilis quidem qui sunt voluptatem</h1>
+            <h1 class="text-lg font-bold">assumenda deserunt quam qui laudantium nisi adipisci ea est esse maxime impedit exercitationem vel occaecati vel dolore hic voluptatem</h1>
                     </div>
 
         <div class="text-gray-600" x-data="{show: false}">
-            <div class="line-clamp-3">dolore quo aliquam culpa aut omnis dolorem rem quasi modi atque necessitatibus enim nihil necessitatibus tenetur optio rerum quia dolorum possimus temporibus odio error qui provident sed minima a sequi ea voluptate excepturi consectetur numquam nisi aut ea nulla consequatur repellendus quod illum consequatur eveniet quis quia laudantium id voluptates aliquam sed vel aut et quam repudiandae non nihil explicabo totam et sit voluptatem aut sit</div>
-                        <div x-show="show">in sint reiciendis velit reprehenderit ducimus possimus illo voluptatem tempore tempora nemo quia atque sed et qui architecto quisquam nihil in numquam quia maiores laborum qui nobis ut eligendi natus in beatae consectetur asperiores nihil deserunt blanditiis ea aut laboriosam minus eos sint qui inventore quo asperiores voluptas tempore voluptas</div>
+            <div class="line-clamp-3">dolore ut eum velit rerum non veniam odit rerum nobis consequatur rerum officiis accusantium temporibus sint itaque molestias et sint inventore dolorem possimus occaecati ea nobis occaecati vitae voluptate et consectetur commodi dicta repellat aspernatur quia exercitationem repellendus libero quo consequatur aut dolorem quidem expedita suscipit</div>
+                        <div x-show="show">qui molestiae nihil ratione ut occaecati autem voluptatem praesentium qui doloremque reprehenderit magnam doloribus et magnam qui sed eligendi voluptatem nobis similique saepe et pariatur velit odio consequatur soluta voluptatem iste voluptatum omnis est architecto similique sit aut officia itaque explicabo aut sed rem consequatur inventore necessitatibus sed distinctio asperiores</div>
         </div>
 
         <div class="my-5 font-bold text-indigo-600 flex items-center">
@@ -507,8 +492,19 @@
         <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
     </div>
     <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Johnny Bednar</p>
-        <p class="text-sm text-gray-500 truncate">Faybury, Vanuatu</p>
+        <p class="text-sm font-medium text-gray-900 truncate">Mitchel Fay</p>
+        <p class="text-sm text-gray-500 truncate">West Ally, Poland</p>
+    </div>
+</div>
+<!-- /speaker -->
+                            <!-- speaker -->
+<div class="rounded-lg border border-gray-300 bg-white px-4 py-3 flex items-center space-x-3">
+    <div class="flex-shrink-0">
+        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+    </div>
+    <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-900 truncate">Mr. Ashton Rippin V</p>
+        <p class="text-sm text-gray-500 truncate">Karliton, Cambodia</p>
     </div>
 </div>
 <!-- /speaker -->
@@ -529,12 +525,12 @@
         </div>
 
         <div class="flex justify-between items-center py-5">
-            <h1 class="text-lg font-bold">dolorem praesentium nemo voluptatem modi sunt alias</h1>
+            <h1 class="text-lg font-bold">maxime repellendus qui sed id quisquam fugiat qui sed maiores recusandae sapiente aut voluptatem reprehenderit dolores deleniti voluptatem illo hic</h1>
                     </div>
 
         <div class="text-gray-600" x-data="{show: false}">
-            <div class="line-clamp-3">sequi similique reiciendis et ea consequatur id voluptatem quidem aperiam illum nemo architecto iste fuga magni cumque quasi fugiat qui voluptatem omnis perspiciatis nihil necessitatibus esse porro vel repellendus voluptatem repudiandae rerum quibusdam ad voluptatem ex aut dolorem blanditiis ut dolorem qui est excepturi quis omnis officia non architecto aut nulla maxime eius quae labore ex vero quaerat rerum optio est earum assumenda voluptatem laboriosam minus</div>
-                        <div x-show="show">et sint quia perferendis at optio itaque ut architecto dolorum facere voluptate exercitationem et est ut repellendus est nam quam et dolore aut et maxime maxime sit quo voluptas eum dolor similique dolorem consectetur consequatur sit deleniti quia nemo aperiam voluptatem molestiae quam facilis veniam ut dolor at sed aliquam</div>
+            <div class="line-clamp-3">aut aliquam expedita ducimus corporis expedita nesciunt quod beatae magnam et nulla doloremque rerum dolores optio adipisci praesentium atque neque possimus dolor optio eos quas et quo necessitatibus non voluptate voluptate sunt qui et quae dolores repudiandae ut veniam ut nulla nemo reiciendis facilis exercitationem iure voluptas ea quam dignissimos exercitationem neque commodi error maxime aut magnam odio maxime aut iste laboriosam magnam enim cupiditate doloribus error</div>
+                        <div x-show="show">nostrum dolor eos quod qui earum reiciendis et mollitia dolore voluptas ut dolorem sit aliquam saepe qui est laudantium architecto ipsa debitis est qui amet sint natus unde explicabo possimus ut laborum assumenda et aliquid sed accusantium quis veniam ut et aut tempore quo dolores rerum dolore enim cumque ut</div>
         </div>
 
         <div class="my-5 font-bold text-indigo-600 flex items-center">
@@ -552,30 +548,8 @@
         <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
     </div>
     <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Prof. Zachery Hand</p>
-        <p class="text-sm text-gray-500 truncate">Port Edgarton, New Zealand</p>
-    </div>
-</div>
-<!-- /speaker -->
-                            <!-- speaker -->
-<div class="rounded-lg border border-gray-300 bg-white px-4 py-3 flex items-center space-x-3">
-    <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-    </div>
-    <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Augustine Ruecker DVM</p>
-        <p class="text-sm text-gray-500 truncate">Lake Cortez, Pitcairn Islands</p>
-    </div>
-</div>
-<!-- /speaker -->
-                            <!-- speaker -->
-<div class="rounded-lg border border-gray-300 bg-white px-4 py-3 flex items-center space-x-3">
-    <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-    </div>
-    <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate">Miss Roma Kautzer</p>
-        <p class="text-sm text-gray-500 truncate">Eudoramouth, Austria</p>
+        <p class="text-sm font-medium text-gray-900 truncate">Bret Prosacco PhD</p>
+        <p class="text-sm text-gray-500 truncate">Lueilwitzmouth, French Polynesia</p>
     </div>
 </div>
 <!-- /speaker -->
