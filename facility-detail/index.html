@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="canonical" href="/facility-detail">
+        <meta name="description" content="">
+        <title>Breezy</title>
+        <link rel="stylesheet" href="/assets/build/css/main.css">
+        <script defer src="/assets/build/js/main.js"></script>
+    </head>
+    <body class="h-full">
+        <div class="min-h-full">
+            <!-- navbar -->
+<nav class="bg-gray-800" x-data="{showMobileNavbar: false}">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                                                    <a href="/home" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                                Home
+                            </a>
+                                                    <a href="/halls" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                                Halls
+                            </a>
+                                                    <a href="/talks" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                                Talks
+                            </a>
+                                                    <a href="/facilities" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                                Facilities
+                            </a>
+                                            </div>
+                </div>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-4 flex items-center md:ml-6">
+                    <div class="relative inline-block">
+                        <button type="button" class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                            <span class="sr-only">View notifications</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                        </button>
+
+                        <!--
+                        <div class="absolute -right-36 z-20 mt-2">
+                        </div>
+                        -->
+                    </div>
+
+                    <!-- Profile dropdown -->
+                    <div class="ml-3 relative">
+                        <button type="button" class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true"
+                            x-on:click="showMobileNavbar = !showMobileNavbar">
+                            <span class="sr-only">Open user menu</span>
+                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        </button>
+
+                        <div class="origin-top-right absolute z-50 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
+                             x-show="showMobileNavbar"
+                             x-on:click.outside="showMobileNavbar = false"
+                             x-transition:enter="transition ease-out duration-100"
+                             x-transition:enter-start="transform opacity-0 scale-95"
+                             x-transition:enter-end="transform opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-75"
+                             x-transition:leave-start="transform opacity-100 scale-100"
+                             x-transition:leave-end="transform opacity-0 scale-95"
+                        >
+                                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">
+                                    Your Profile
+                                </a>
+                                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">
+                                    Settings
+                                </a>
+                                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">
+                                    Sign out
+                                </a>
+                                                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="-mr-2 flex md:hidden">
+                <!-- mobile menu button -->
+                <button type="button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false"
+                    x-on:click="showMobileNavbar = !showMobileNavbar">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <!-- /mobile menu button -->
+            </div>
+        </div>
+    </div>
+
+    <!-- mobile menu -->
+    <div class="md:hidden" id="mobile-menu" x-show="showMobileNavbar">
+        <div class="p-3">
+                            <a href="/home" class="px-3 py-2 rounded-md text-base font-medium block text-gray-300 hover:bg-gray-700 hover:text-white">
+                    Home
+                </a>
+                            <a href="/halls" class="px-3 py-2 rounded-md text-base font-medium block text-gray-300 hover:bg-gray-700 hover:text-white">
+                    Halls
+                </a>
+                            <a href="/talks" class="px-3 py-2 rounded-md text-base font-medium block text-gray-300 hover:bg-gray-700 hover:text-white">
+                    Talks
+                </a>
+                            <a href="/facilities" class="px-3 py-2 rounded-md text-base font-medium block text-gray-300 hover:bg-gray-700 hover:text-white">
+                    Facilities
+                </a>
+                    </div>
+        <div class="p-3 border-t border-gray-700">
+            <div class="flex items-center px-2">
+                <div class="flex-shrink-0">
+                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                </div>
+                <div class="ml-3">
+                    <div class="text-base font-medium leading-none text-white">Tom Cook</div>
+                    <div class="text-sm font-medium leading-none text-gray-400">tom@example.com</div>
+                </div>
+                <button type="button" class="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <span class="sr-only">View notifications</span>
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                </button>
+            </div>
+            <div class="mt-3 px-2 space-y-1">
+                                    <a href="#" class="block py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                        Your Profile
+                    </a>
+                                    <a href="#" class="block py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                        Settings
+                    </a>
+                                    <a href="#" class="block py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                        Sign out
+                    </a>
+                            </div>
+        </div>
+    </div>
+    <!-- /mobile menu -->
+</nav>
+<!-- /navbar -->
+
+            <main>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 sm:py-8 py-4">
+        <!--
+        <div class="md:grid md:grid-cols-4 xl:grid-cols-5 md:gap-4">
+            <div class="md:col-span-2">
+                <img src="/assets/images/facility.jpg" class="rounded-lg md:h-60 lg:h-80" alt="">
+            </div>
+            <div class="md:col-span-2 xl:col-span-3">
+                <h1 class="my-5 md:mt-0 text-3xl font-extrabold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-5xl">Facility</h1>
+                <div class="text-gray-600 line-clamp-6">est aut dolorem dolorum excepturi numquam iure laboriosam enim et laudantium omnis ut quia quasi voluptatem eveniet officia enim doloremque enim minima animi enim dolores similique voluptatum nisi aut omnis assumenda accusantium est eos amet velit corporis ipsum blanditiis eligendi repellat repellat ratione similique quos eum asperiores autem ut ipsam amet similique numquam enim est ipsam temporibus eaque consequatur necessitatibus ipsa illo voluptatem fugiat quam et accusantium natus dolorum et eos rerum error non animi quas aliquam vel quaerat maxime eaque in eaque eligendi cumque cum aut enim tenetur maxime rerum dignissimos soluta eius iste sunt cumque ducimus qui quo voluptate architecto qui nihil sed corrupti doloremque ab mollitia atque sit recusandae explicabo optio id molestiae ab quia ad dolore tenetur doloremque architecto molestiae libero dolorum eos dignissimos blanditiis repellendus omnis asperiores eius laboriosam est magni in pariatur beatae dicta ut fuga delectus voluptas excepturi aut nesciunt eaque et perferendis earum adipisci quis molestiae aut nostrum voluptas quas repudiandae esse rerum ex provident illum architecto aut suscipit facilis eius assumenda qui quas molestias minus sed ea modi et accusamus adipisci maxime nobis laborum sint autem quas architecto qui voluptas aut sint enim in perspiciatis voluptatem molestiae provident qui distinctio cupiditate quisquam sit error dicta eaque provident molestiae distinctio architecto quos doloribus itaque dignissimos culpa sunt non aut sunt occaecati quod ratione occaecati voluptatibus fugit deserunt possimus consequatur excepturi non culpa sint tempore ut voluptates quos voluptas amet voluptas quis ut explicabo dignissimos quis saepe quia molestiae eum qui nostrum maxime sint quam corporis totam deleniti aut ex illo voluptatem nesciunt eius ad voluptatem aliquam corrupti molestiae doloribus maxime consectetur aut adipisci aut quas et aut praesentium nam accusantium et libero iure possimus voluptatibus ipsam eum alias aut voluptatum doloribus corrupti ut eum iste cupiditate sunt harum laudantium autem aliquid quo</div>
+            </div>
+        </div>
+        -->
+
+        <h1 class="mb-5 text-3xl font-extrabold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-5xl">Facility</h1>
+        <div class="mb-5 text-gray-600">quaerat assumenda fugit nostrum cupiditate et possimus sunt iure incidunt minus explicabo culpa et aut ut quis fugiat perferendis minima harum expedita omnis consequatur est autem placeat et tempore non tenetur ea quas debitis praesentium animi tempore est iusto illo impedit sint quis deleniti qui esse fuga tempore sunt cupiditate blanditiis veritatis dolorem eos repellendus quasi sint alias voluptatem commodi at dicta quos officiis laudantium quia atque qui sit reprehenderit velit exercitationem omnis molestiae modi molestias hic labore at non assumenda molestiae excepturi aliquam est nam vitae commodi non laborum est voluptatem est quia voluptatum qui ad maxime aliquid quaerat reiciendis numquam recusandae laudantium praesentium dicta aliquid voluptas eveniet omnis facilis explicabo qui quia numquam quae veniam aut eaque quas consequatur voluptas qui fuga</div>
+
+        <div x-data="{activeTab: 0}">
+            <div class="mb-5">
+                <div class="sm:hidden">
+                    <label for="tabs" class="sr-only">Select a tab</label>
+                    <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+                    <select id="tabs" name="tabs" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <option>Photos</option>
+                        <option>360 Photos</option>
+                        <option>Videos</option>
+                        <option>Brochures</option>
+                    </select>
+                </div>
+                <div class="hidden sm:block">
+                    <div class="border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                            <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
+                                                            <a href="#"
+                                   class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                                   x-on:click="activeTab = 0"
+                                   :class="activeTab === 0 ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                                    Photos
+                                </a>
+                                                            <a href="#"
+                                   class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                                   x-on:click="activeTab = 1"
+                                   :class="activeTab === 1 ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                                    360 Photos
+                                </a>
+                                                            <a href="#"
+                                   class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                                   x-on:click="activeTab = 2"
+                                   :class="activeTab === 2 ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                                    Videos
+                                </a>
+                                                            <a href="#"
+                                   class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                                   x-on:click="activeTab = 3"
+                                   :class="activeTab === 3 ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                                    Brochures
+                                </a>
+                                                    </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div x-show="activeTab === 0">
+                <!-- photos -->
+<ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">ea totam voluptatem temporibus autem aut voluptatem molestias</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">dolor quia ut nostrum aut molestias et</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">enim sit sunt ex veritatis tempora voluptatibus possimus similique</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">rem est aspernatur et reprehenderit</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">voluptatem amet et voluptatum quae</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">ut temporibus omnis aliquam qui</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">autem eos aspernatur rerum dolor ullam optio excepturi</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">et molestiae et illum est voluptates corrupti quo eos</div>
+        </li>
+    </ul>
+<!-- /photos -->
+            </div>
+            <div x-show="activeTab === 1">
+                <!-- photos -->
+<ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">quaerat similique voluptate earum quibusdam dolores voluptatibus</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">et praesentium laboriosam quia quis quo et dolore</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">sint odit iste eaque repudiandae</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">hic eos est labore qui commodi quo id in</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">sequi et pariatur eligendi et id ducimus reprehenderit vero ea</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">blanditiis adipisci ut autem ex</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">accusantium numquam soluta error minus</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">alias a voluptates accusantium nobis</div>
+        </li>
+    </ul>
+<!-- /photos -->
+            </div>
+            <div x-show="activeTab === 2">
+                <!-- photos -->
+<ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">voluptas vel nulla voluptates ex quod magni sequi</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">ab excepturi ullam necessitatibus non soluta</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">ut ea consequuntur dolorem magni reiciendis tempore</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">quaerat sunt voluptates laboriosam temporibus nulla et</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">sunt officiis quos atque rerum est voluptatem doloribus aut</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">blanditiis dolores minima dolorum placeat doloribus impedit corrupti perspiciatis id</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">maiores consequatur suscipit iure vel voluptates aut velit quis sunt</div>
+        </li>
+            <li class="relative">
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none group-hover:opacity-75">
+                <button type="button" class="absolute inset-0 focus:outline-none">
+                    <span class="sr-only">View photo</span>
+                </button>
+            </div>
+            <div class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">sint aut est et facere rem quas accusamus</div>
+        </li>
+    </ul>
+<!-- /photos -->
+            </div>
+            <div x-show="activeTab === 3">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <tbody>
+                                                    <tr class="bg-white">
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500">
+                                    <span>tempora ad non quibusdam nemo laudantium</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                    </a>
+                                    <!--
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </a>
+                                    -->
+                                </td>
+                            </tr>
+                                                    <tr class="bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500">
+                                    <span>iste qui voluptatem voluptatum est laborum</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                    </a>
+                                    <!--
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </a>
+                                    -->
+                                </td>
+                            </tr>
+                                                    <tr class="bg-white">
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500">
+                                    <span>minima aut in doloremque quasi odio ad</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                    </a>
+                                    <!--
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </a>
+                                    -->
+                                </td>
+                            </tr>
+                                                    <tr class="bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500">
+                                    <span>assumenda veritatis tenetur qui commodi quia</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                    </a>
+                                    <!--
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </a>
+                                    -->
+                                </td>
+                            </tr>
+                                                    <tr class="bg-white">
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500">
+                                    <span>aspernatur ut expedita repellendus autem sunt non at modi</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                    </a>
+                                    <!--
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </a>
+                                    -->
+                                </td>
+                            </tr>
+                                                </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+            </main>
+
+            <footer class="bg-white">
+    <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+        <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+                            <div class="px-5 py-2">
+                    <a href="/home" class="text-base text-gray-500 hover:text-gray-900">
+                        Home
+                    </a>
+                </div>
+                            <div class="px-5 py-2">
+                    <a href="/halls" class="text-base text-gray-500 hover:text-gray-900">
+                        Halls
+                    </a>
+                </div>
+                            <div class="px-5 py-2">
+                    <a href="/talks" class="text-base text-gray-500 hover:text-gray-900">
+                        Talks
+                    </a>
+                </div>
+                            <div class="px-5 py-2">
+                    <a href="/facilities" class="text-base text-gray-500 hover:text-gray-900">
+                        Facilities
+                    </a>
+                </div>
+                    </nav>
+        <div class="mt-8 flex justify-center space-x-6">
+            <a href="#" class="text-gray-400 hover:text-gray-500">
+                <span class="sr-only">Facebook</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+                </svg>
+            </a>
+
+            <a href="#" class="text-gray-400 hover:text-gray-500">
+                <span class="sr-only">Instagram</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                </svg>
+            </a>
+
+            <a href="#" class="text-gray-400 hover:text-gray-500">
+                <span class="sr-only">Twitter</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                </svg>
+            </a>
+        </div>
+        <p class="mt-8 text-center text-base text-gray-400">
+            &copy; 2021 Breezy. All rights reserved.
+        </p>
+    </div>
+</footer>
+        </div>
+    </body>
+</html>
