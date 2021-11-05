@@ -17,35 +17,27 @@
 <!-- nav light -->
 <nav x-data="{
     notifications: {show: false},
+    sidebar: {show: false},
     dropdown: {
         Halls: false,
         Booths: false,
-        More: false
+        More: false,
+        _current: null
     }
-}" class="bg-white shadow relative">
+}" class="bg-white shadow fixed w-full z-50">
     <div class="max-w-screen-lg mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex justify-between h-16">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <!-- Mobile menu button -->
-                <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
+                <button
+                    x-on:click="sidebar.show = true"
+                    type="button"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                >
                     <span class="sr-only">Open main menu</span>
-                    <!--
-                      Icon when menu is closed.
-
-                      Heroicon name: outline/menu
-
-                      Menu open: "hidden", Menu closed: "block"
-                    -->
                     <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-                    <!--
-                      Icon when menu is open.
-
-                      Heroicon name: outline/x
-
-                      Menu open: "block", Menu closed: "hidden"
-                    -->
                     <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -91,26 +83,26 @@
 
             
         <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">dicta dolorem</p>
-                                    <p class="mt-1 text-sm text-gray-500">ullam blanditiis pariatur incidunt deserunt voluptates commodi asperiores et et cumque repellendus architecto odio</p>
+                                    <p class="text-base font-medium text-gray-900">quis unde</p>
+                                    <p class="mt-1 text-sm text-gray-500">sed molestiae tenetur ut sint perferendis quia autem illum sunt alias quia est</p>
                                 </a>
 
                                 
                                 <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">officia est rem</p>
-                                    <p class="mt-1 text-sm text-gray-500">ad aut fugiat mollitia est omnis vero quidem nesciunt non sit atque ratione necessitatibus accusamus</p>
+                                    <p class="text-base font-medium text-gray-900">voluptatem tempore</p>
+                                    <p class="mt-1 text-sm text-gray-500">fugiat et reprehenderit itaque qui iure omnis reiciendis nostrum ipsum ipsam voluptas quisquam nemo</p>
                                 </a>
 
                                 
                                 <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">temporibus aut</p>
-                                    <p class="mt-1 text-sm text-gray-500">accusamus quis saepe sunt ab aut consequatur id rerum accusamus eum</p>
+                                    <p class="text-base font-medium text-gray-900">modi facere quis</p>
+                                    <p class="mt-1 text-sm text-gray-500">iure magnam hic et quod quia dolorem veritatis maiores pariatur vitae quia nihil voluptas</p>
                                 </a>
 
                                 
                                 <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">in distinctio voluptatibus qui</p>
-                                    <p class="mt-1 text-sm text-gray-500">totam ad dolor quia officiis qui quia ex itaque ab</p>
+                                    <p class="text-base font-medium text-gray-900">inventore molestiae saepe</p>
+                                    <p class="mt-1 text-sm text-gray-500">laborum sit libero omnis temporibus iure voluptatem corporis itaque repellat</p>
                                 </a>
 
         </div>
@@ -144,39 +136,39 @@
         <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
 
             
-            <div>
-                <div class="relative rounded-full shadow-sm">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
-                    <input type="search" name="search" placeholder="Search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 bg-gray-100 rounded-full">
-                </div>
-            </div>
+            <!-- search -->
+<div class="relative rounded-lg">
+    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+    </div>
+    <input type="search" name="search" placeholder="Search" class="block w-full pl-10 md:text-sm border-gray-300 bg-gray-100 rounded-lg">
+</div>
+<!-- /search -->
 
             
         <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">fugit qui eos</p>
-                                    <p class="mt-1 text-sm text-gray-500">aperiam omnis et rerum voluptatem nobis molestias dolorem repudiandae vel doloribus laboriosam reiciendis</p>
+                                    <p class="text-base font-medium text-gray-900">officia aut quo</p>
+                                    <p class="mt-1 text-sm text-gray-500">molestiae laudantium nostrum distinctio neque voluptatem atque quasi earum vel vel cupiditate maiores est</p>
                                 </a>
 
                                 
                                 <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">magnam fuga assumenda aliquam</p>
-                                    <p class="mt-1 text-sm text-gray-500">sequi in voluptas quaerat voluptas cupiditate perferendis et animi voluptate labore</p>
+                                    <p class="text-base font-medium text-gray-900">cum inventore ipsa officia</p>
+                                    <p class="mt-1 text-sm text-gray-500">et voluptas voluptatibus autem minima architecto voluptatem ad voluptate non exercitationem quia qui assumenda</p>
                                 </a>
 
                                 
                                 <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">magnam ut debitis</p>
-                                    <p class="mt-1 text-sm text-gray-500">qui eum a qui dolores odit est voluptatum quia dolor</p>
+                                    <p class="text-base font-medium text-gray-900">assumenda voluptatibus ad</p>
+                                    <p class="mt-1 text-sm text-gray-500">deleniti quas pariatur vero aut et voluptas culpa provident molestias beatae</p>
                                 </a>
 
                                 
                                 <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">eos in</p>
-                                    <p class="mt-1 text-sm text-gray-500">ipsam qui unde quae ut nobis aut reprehenderit accusamus voluptatem non</p>
+                                    <p class="text-base font-medium text-gray-900">temporibus et est</p>
+                                    <p class="mt-1 text-sm text-gray-500">error deleniti similique ut et qui rerum laboriosam possimus officiis rerum</p>
                                 </a>
 
         </div>
@@ -233,26 +225,26 @@
 
             
         <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">ipsam quidem qui aut</p>
-                                    <p class="mt-1 text-sm text-gray-500">consequuntur commodi molestias dolorum natus ut ut qui ullam cum ea</p>
+                                    <p class="text-base font-medium text-gray-900">aliquid repellat consectetur nesciunt</p>
+                                    <p class="mt-1 text-sm text-gray-500">impedit reiciendis qui ipsum explicabo exercitationem laudantium assumenda et voluptate maiores maiores</p>
                                 </a>
 
                                 
                                 <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">et voluptatem nesciunt cupiditate</p>
-                                    <p class="mt-1 text-sm text-gray-500">sunt repudiandae laudantium natus possimus consequuntur ex excepturi maiores soluta voluptatem qui</p>
+                                    <p class="text-base font-medium text-gray-900">aut nihil veniam voluptatem</p>
+                                    <p class="mt-1 text-sm text-gray-500">et possimus et aut aut assumenda magni voluptas velit sint sunt repellat eveniet architecto</p>
                                 </a>
 
                                 
                                 <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">recusandae maxime quidem nihil</p>
-                                    <p class="mt-1 text-sm text-gray-500">blanditiis et facere et at ut dignissimos et voluptatum amet et</p>
+                                    <p class="text-base font-medium text-gray-900">vel suscipit alias</p>
+                                    <p class="mt-1 text-sm text-gray-500">reiciendis cupiditate reprehenderit consequatur distinctio consectetur sed voluptas perferendis nemo</p>
                                 </a>
 
                                 
                                 <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">ut eligendi distinctio</p>
-                                    <p class="mt-1 text-sm text-gray-500">labore praesentium impedit aliquid placeat nostrum sequi et qui aperiam veniam id in accusamus</p>
+                                    <p class="text-base font-medium text-gray-900">est voluptatem necessitatibus</p>
+                                    <p class="mt-1 text-sm text-gray-500">quo consequatur consectetur ut et est praesentium voluptates nulla earum</p>
                                 </a>
 
         </div>
@@ -291,7 +283,8 @@
     <div
         x-show="notifications.show"
         x-on:click.outside="notifications.show = false"
-        class="absolute bg-white border z-20 right-0 w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 max-h-screen overflow-y-auto shadow-xl">
+        class="absolute bg-white border z-20 right-0 w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 overflow-y-auto shadow-xl scrollbar-thin scrollbar-thumb-indigo-400 scrollbar-track-blue-100"
+        style="max-height: calc(100vh - 64px)">
         <div class="flex items-center justify-between p-6">
             <strong>Announcements</strong>
             <a href="#" class="text-sm text-blue-600">Marl all as read</a>
@@ -305,62 +298,62 @@
 
         
         <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-black">praesentium et nisi reprehenderit iure voluptatibus tempora natus rerum eos libero accusamus veniam ipsum ipsum illum sapiente consectetur sequi</div>
-            <div class="text-xs text-gray-400 mt-2">9 min ago</div>
-        </li>
-
-        
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">sunt fugiat itaque accusamus eaque aliquid ut sunt porro dignissimos cum eaque accusantium nihil et sunt atque</div>
-            <div class="text-xs text-gray-400 mt-2">7 min ago</div>
-        </li>
-
-        
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">officiis beatae nemo quia quidem eos laborum vitae veritatis vero et aliquid eius aliquid</div>
+            <div class="text-black">aperiam id incidunt voluptas adipisci repudiandae quibusdam numquam unde soluta atque</div>
             <div class="text-xs text-gray-400 mt-2">4 min ago</div>
         </li>
 
         
         <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">ut repellendus beatae dolorum rem recusandae sunt ipsum amet iure voluptas soluta quod neque</div>
-            <div class="text-xs text-gray-400 mt-2">9 min ago</div>
-        </li>
-
-        
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">deleniti eligendi tempore nemo sunt aut optio illum eum quas est exercitationem aspernatur qui provident consequatur eum</div>
+            <div class="text-gray-400">aut sit occaecati ipsa minima tenetur explicabo sunt sit delectus cum ea aperiam est et fuga</div>
             <div class="text-xs text-gray-400 mt-2">4 min ago</div>
         </li>
 
         
         <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">doloribus qui cumque earum quaerat non molestiae quia dolorem eos maiores minus rerum corporis ut</div>
-            <div class="text-xs text-gray-400 mt-2">3 min ago</div>
+            <div class="text-gray-400">voluptas animi perferendis deserunt a debitis pariatur est recusandae cum sint et architecto nihil officiis</div>
+            <div class="text-xs text-gray-400 mt-2">1 min ago</div>
         </li>
 
         
         <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">quod voluptate ad incidunt eveniet non consequatur ut autem delectus itaque modi</div>
-            <div class="text-xs text-gray-400 mt-2">3 min ago</div>
+            <div class="text-gray-400">sunt atque maiores dicta minima enim a assumenda delectus fuga sapiente tempora ut omnis</div>
+            <div class="text-xs text-gray-400 mt-2">2 min ago</div>
         </li>
 
         
         <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">repellendus est eum qui laudantium velit maxime fuga a molestias qui tempore earum</div>
+            <div class="text-gray-400">tempora tempora ut voluptatem dignissimos dicta aut dolores ab nesciunt velit et rerum voluptas omnis possimus quia saepe</div>
+            <div class="text-xs text-gray-400 mt-2">1 min ago</div>
+        </li>
+
+        
+        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+            <div class="text-gray-400">ea veniam eius officia voluptate sunt sint odit libero cum quod est enim dolore dolorem molestiae</div>
             <div class="text-xs text-gray-400 mt-2">10 min ago</div>
         </li>
 
         
         <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">assumenda sed qui distinctio enim et aliquid corrupti omnis quos libero sequi est et earum sit vel numquam repellendus</div>
+            <div class="text-gray-400">quia eveniet sit enim rem ipsam tempora iusto impedit quam</div>
             <div class="text-xs text-gray-400 mt-2">9 min ago</div>
         </li>
 
         
         <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">quis iusto nisi unde aliquid provident nulla molestias eveniet molestiae dolores ut</div>
-            <div class="text-xs text-gray-400 mt-2">3 min ago</div>
+            <div class="text-gray-400">nisi enim provident nostrum voluptatum nobis voluptas quam ea eos voluptatem sed</div>
+            <div class="text-xs text-gray-400 mt-2">6 min ago</div>
+        </li>
+
+        
+        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+            <div class="text-gray-400">fugit aut qui dolores sunt aliquam ut ad pariatur beatae vitae nihil tenetur consequatur doloribus</div>
+            <div class="text-xs text-gray-400 mt-2">9 min ago</div>
+        </li>
+
+        
+        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+            <div class="text-gray-400">sit laudantium possimus ut nihil hic eum quis eveniet numquam</div>
+            <div class="text-xs text-gray-400 mt-2">2 min ago</div>
         </li>
 
         
@@ -369,28 +362,529 @@
     </div>
     <!-- /notifications -->
 
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="hidden" id="mobile-menu">
-        <div class="pt-2 pb-4 space-y-1">
-            <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
-            <a href="#" class="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Dashboard</a>
-            <a href="#" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Team</a>
-            <a href="#" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Projects</a>
-            <a href="#" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Calendar</a>
+    <!-- nav sidebar -->
+<div
+    x-show="sidebar.show"
+    id="nav-sidebar"
+    class="fixed inset-0 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div class="absolute inset-0 overflow-hidden">
+        <!-- Background overlay, show/hide based on slide-over state. -->
+        <div class="absolute inset-0 bg-gray-800 bg-opacity-50" aria-hidden="true">
+            <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+                <div
+                    x-show="sidebar.show"
+                    x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700"
+                    x-transition:enter-start="translate-x-full"
+                    x-transition:enter-end="translate-x-0"
+                    x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
+                    x-transition:leave-start="translate-x-0"
+                    x-transition:leave-end="translate-x-full"
+                    class="w-screen max-w-md"
+                >
+                    <div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <!--
+                                    <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">
+                                    -->
+                                </div>
+                                <div>
+                                    <button
+                                        x-on:click="sidebar.show = false"
+                                        type="button"
+                                        class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    >
+                                        <span class="sr-only">Close panel</span>
+                                        <!-- Heroicon name: outline/x -->
+                                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative flex-1">
+                            <!-- Replace with your content -->
+                            <div class="absolute inset-0 p-6 pt-0">
+                                <div x-bind:class="dropdown._current ? 'space-y-0' : 'space-y-7' " class="flex-1 bg-white">
+
+                                    <div class="text-gray-900 p-2 font-bold text-xl">Home</div>
+
+                                    
+                                    <div class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+
+                                        
+                                        <a href="/lobby">Lobby</a>
+
+                                                                            </div>
+
+                                    
+                                    
+                                    <div class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+
+                                        
+                                        <span
+                                            x-on:click.prevent="handleClick(dropdown, 'Halls')"
+                                            role="button"
+                                            class="flex-1"
+                                        >Halls</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                        </svg>
+
+                                                                            </div>
+
+                                    
+                                    <div x-show="dropdown.Halls" class="absolute inset-0 p-6 pt-0 bg-white flex-1 space-y-7">
+                                        <div
+                                            x-on:click.prevent="dropdown[dropdown._current] = false; dropdown._current = null"
+                                            role="button"
+                                            class="text-gray-900 p-2 text-sm flex items-center"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                            <span>All</span>
+                                        </div>
+
+                                        <div class="text-gray-900 p-2 font-bold text-xl">Halls</div>
+
+                                        
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>placeat voluptas libero</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>vel ea aperiam deleniti</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>quis molestiae</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>nam quia voluptas</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>consequatur corrupti aut</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>non consequatur qui</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>quibusdam enim reiciendis aperiam</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>tempora rerum</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>vel fugit</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>sed consequatur ut</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>incidunt nam explicabo</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>corrupti sed</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>temporibus minima ut</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>omnis id</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>ipsum sit aliquid eligendi</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>culpa distinctio officiis sapiente</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>molestiae cum aut consectetur</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>quis quia</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>est modi</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>quas placeat commodi</span>
+                                        </a>
+
+                                        
+                                    </div>
+
+                                    
+                                    
+                                    <div class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+
+                                        
+                                        <span
+                                            x-on:click.prevent="handleClick(dropdown, 'Booths')"
+                                            role="button"
+                                            class="flex-1"
+                                        >Booths</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                        </svg>
+
+                                                                            </div>
+
+                                    
+                                    <div x-show="dropdown.Booths" class="absolute inset-0 p-6 pt-0 bg-white flex-1 space-y-7">
+                                        <div
+                                            x-on:click.prevent="dropdown[dropdown._current] = false; dropdown._current = null"
+                                            role="button"
+                                            class="text-gray-900 p-2 text-sm flex items-center"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                            <span>All</span>
+                                        </div>
+
+                                        <div class="text-gray-900 p-2 font-bold text-xl">Booths</div>
+
+                                        
+                                        <div class="p-2">
+
+                                        <!-- search -->
+<div class="relative rounded-lg">
+    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+    </div>
+    <input type="search" name="search" placeholder="Search" class="block w-full pl-10 md:text-sm border-gray-300 bg-gray-100 rounded-lg">
+</div>
+<!-- /search -->
+
+                                        </div>
+
+                                        
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>magnam voluptatem nulla</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>consequuntur architecto</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>molestiae expedita in sit</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>enim ut facere</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>et dolor nemo adipisci</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>eum ipsam</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>totam in</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>perspiciatis ex</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>possimus quam</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>dolorem expedita ut laudantium</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>in modi est officia</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>dolorum voluptate enim alias</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>saepe quia tenetur optio</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>non doloremque</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>quas dolor magni iure</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>ipsam praesentium quisquam</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>in voluptatem</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>illo est temporibus quia</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>dicta laudantium</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>sed reiciendis</span>
+                                        </a>
+
+                                        
+                                    </div>
+
+                                    
+                                    
+                                    <div class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+
+                                        
+                                        <a href="/talks">Talks</a>
+
+                                                                            </div>
+
+                                    
+                                    
+                                    <div class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+
+                                        
+                                        <a href="/facilities">Facilities</a>
+
+                                                                            </div>
+
+                                    
+                                    
+                                    <div class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+
+                                        
+                                        <span
+                                            x-on:click.prevent="handleClick(dropdown, 'More')"
+                                            role="button"
+                                            class="flex-1"
+                                        >More</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                        </svg>
+
+                                                                            </div>
+
+                                    
+                                    <div x-show="dropdown.More" class="absolute inset-0 p-6 pt-0 bg-white flex-1 space-y-7">
+                                        <div
+                                            x-on:click.prevent="dropdown[dropdown._current] = false; dropdown._current = null"
+                                            role="button"
+                                            class="text-gray-900 p-2 text-sm flex items-center"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                            <span>All</span>
+                                        </div>
+
+                                        <div class="text-gray-900 p-2 font-bold text-xl">More</div>
+
+                                        
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>id nostrum</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>facere occaecati libero</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>provident reiciendis hic optio</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>sed aut rerum</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>nobis consequatur adipisci</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>inventore qui numquam</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>dolore quia</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>esse voluptatem voluptatem</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>dolores et dolores aperiam</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>quas vitae est est</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>minima unde</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>ducimus soluta ipsum</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>vitae et</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>nulla commodi</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>odit dolore dolor quo</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>totam et optio et</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>voluptate sunt</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>velit eaque et</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>vitae possimus est</span>
+                                        </a>
+
+                                        
+                                        <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
+                                            <span>est dolorum pariatur eligendi</span>
+                                        </a>
+
+                                        
+                                    </div>
+
+                                    
+                                    
+                                </div>
+                            </div>
+                            <!-- /End replace -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+<!-- /nav sidebar -->
+
 </nav>
 <!-- nav light -->
 
 <script>
     function handleClick(dropdown, label) {
         dropdown[label] = !dropdown[label];
+        dropdown._current = label;
     }
 </script>
 
 <!-- /header -->
 
-        <div class="max-w-screen-lg mx-auto bg-white">
+        <div class="max-w-screen-lg mx-auto bg-white pt-16">
             <main>
 
             
@@ -437,9 +931,9 @@
 
         <div class="p-6 lg:p-16">
             <h2 class="font-bold text-lg mb-3">About Event</h2>
-            <p class="mb-3">aut consequatur nihil ut et temporibus asperiores sit veritatis omnis quidem et velit dicta magni facere nostrum in error eos facere tenetur similique laudantium accusamus aut voluptas consequatur natus similique ut sed non ipsum voluptatem totam quos et laboriosam ut reiciendis quos corrupti cupiditate quia veritatis ipsam rerum ex illum</p>
-            <p class="mb-3">est vel ipsum iure ipsam ipsum quia aspernatur consequatur laborum enim ut libero veniam et voluptatem doloremque ea illum ut velit iure et velit suscipit neque ut quidem nulla expedita omnis voluptatem aut tempore est assumenda delectus nemo possimus cumque et tempore nemo dolorem facere porro voluptatibus eos illum voluptatem</p>
-            <p class="mb-0">possimus consequatur odio est et consequatur cum odio distinctio minus facilis atque sit velit dolor nemo officia quis numquam neque fugit fugit modi a animi cum iure sit corporis exercitationem rerum non laboriosam reiciendis ex adipisci error non ratione quae quia voluptatem aperiam deleniti at ut cupiditate commodi ea at</p>
+            <p class="mb-3">vel culpa voluptatem non est non non velit illo est porro veritatis non est enim facere illo accusamus sapiente quos et omnis dicta qui eos quasi illo quia sed assumenda vitae sunt sit sint officiis optio non vel qui modi ad et magni quidem ex esse ad rerum temporibus et</p>
+            <p class="mb-3">voluptas vel nihil veritatis sit quo molestiae est et beatae amet impedit nihil veniam est id et natus quasi quo consequatur deserunt rerum ipsam corporis repellendus numquam sed possimus iure quod dolorem voluptas cupiditate quasi repellendus beatae vero aut sapiente nesciunt aliquid distinctio reiciendis error omnis est et maxime voluptas</p>
+            <p class="mb-0">et quia nulla ea sit porro aut voluptas voluptatibus modi nihil sit iste magni ad illo enim delectus dolores quia exercitationem eaque aut sed mollitia numquam dignissimos odio id reiciendis et exercitationem doloremque iure qui est voluptatem ex incidunt impedit deserunt minus vero et neque unde dolor aliquam nam ut</p>
         </div>
 
         <div class="p-6 lg:p-16">
@@ -450,7 +944,7 @@
                 <li class="mb-6 last:mb-0 opacity-100">
                     <div class="relative flex items-center space-x-3">
                         <div>
-                            <span class="h-10 w-10 rounded-full bg-indigo-400 flex items-center justify-center">
+                            <span class="h-10 w-10 rounded-full bg-red-400 flex items-center justify-center">
                                 <!-- Heroicon name: solid/user -->
                                 <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
@@ -459,11 +953,80 @@
                         </div>
                         <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
                             <div>
-                                <span>Angeline Murazik joined from</span>
-                                <span class="font-medium text-gray-900">New Charles, Saint Pierre and Miquelon</span>
+                                <span>Rosanna Brekke joined from</span>
+                                <span class="font-medium text-gray-900">Lake Jerry, United States Virgin Islands</span>
+                            </div>
+                            <div class="text-right whitespace-nowrap">
+                                <time datetime="2020-09-20">just now</time>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                
+                <li class="mb-6 last:mb-0 opacity-100">
+                    <div class="relative flex items-center space-x-3">
+                        <div>
+                            <span class="h-10 w-10 rounded-full bg-green-400 flex items-center justify-center">
+                                <!-- Heroicon name: solid/user -->
+                                <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
+                            <div>
+                                <span>Prof. Norbert Bartoletti joined from</span>
+                                <span class="font-medium text-gray-900">Ikestad, Madagascar</span>
+                            </div>
+                            <div class="text-right whitespace-nowrap">
+                                <time datetime="2020-09-20">1 hr. ago</time>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                
+                <li class="mb-6 last:mb-0 opacity-100">
+                    <div class="relative flex items-center space-x-3">
+                        <div>
+                            <span class="h-10 w-10 rounded-full bg-green-400 flex items-center justify-center">
+                                <!-- Heroicon name: solid/user -->
+                                <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
+                            <div>
+                                <span>Dr. Garnett Smith II joined from</span>
+                                <span class="font-medium text-gray-900">New Barney, Mexico</span>
                             </div>
                             <div class="text-right whitespace-nowrap">
                                 <time datetime="2020-09-20">2 min. ago</time>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                
+                <li class="mb-6 last:mb-0 opacity-100">
+                    <div class="relative flex items-center space-x-3">
+                        <div>
+                            <span class="h-10 w-10 rounded-full bg-red-400 flex items-center justify-center">
+                                <!-- Heroicon name: solid/user -->
+                                <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
+                            <div>
+                                <span>Ms. Kelli Ondricka Jr. joined from</span>
+                                <span class="font-medium text-gray-900">Starkchester, France</span>
+                            </div>
+                            <div class="text-right whitespace-nowrap">
+                                <time datetime="2020-09-20">just now</time>
                             </div>
                         </div>
                     </div>
@@ -482,31 +1045,8 @@
                         </div>
                         <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
                             <div>
-                                <span>Ms. Kathleen Dicki IV joined from</span>
-                                <span class="font-medium text-gray-900">Carmelfort, Montserrat</span>
-                            </div>
-                            <div class="text-right whitespace-nowrap">
-                                <time datetime="2020-09-20">1 min. ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                
-                <li class="mb-6 last:mb-0 opacity-100">
-                    <div class="relative flex items-center space-x-3">
-                        <div>
-                            <span class="h-10 w-10 rounded-full bg-green-400 flex items-center justify-center">
-                                <!-- Heroicon name: solid/user -->
-                                <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
-                            <div>
-                                <span>Nikita Barrows joined from</span>
-                                <span class="font-medium text-gray-900">Port Floyhaven, Brazil</span>
+                                <span>Hyman Green III joined from</span>
+                                <span class="font-medium text-gray-900">New Juniusburgh, Togo</span>
                             </div>
                             <div class="text-right whitespace-nowrap">
                                 <time datetime="2020-09-20">just now</time>
@@ -519,7 +1059,7 @@
                 <li class="mb-6 last:mb-0 opacity-100">
                     <div class="relative flex items-center space-x-3">
                         <div>
-                            <span class="h-10 w-10 rounded-full bg-blue-400 flex items-center justify-center">
+                            <span class="h-10 w-10 rounded-full bg-indigo-400 flex items-center justify-center">
                                 <!-- Heroicon name: solid/user -->
                                 <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
@@ -528,57 +1068,11 @@
                         </div>
                         <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
                             <div>
-                                <span>Jarod Reichel joined from</span>
-                                <span class="font-medium text-gray-900">South Carlo, Macao</span>
+                                <span>Margie Orn joined from</span>
+                                <span class="font-medium text-gray-900">Lake Janick, Zimbabwe</span>
                             </div>
                             <div class="text-right whitespace-nowrap">
                                 <time datetime="2020-09-20">2 hrs. ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                
-                <li class="mb-6 last:mb-0 opacity-100">
-                    <div class="relative flex items-center space-x-3">
-                        <div>
-                            <span class="h-10 w-10 rounded-full bg-green-400 flex items-center justify-center">
-                                <!-- Heroicon name: solid/user -->
-                                <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
-                            <div>
-                                <span>Prof. Tristin Hane joined from</span>
-                                <span class="font-medium text-gray-900">Kozeyton, Christmas Island</span>
-                            </div>
-                            <div class="text-right whitespace-nowrap">
-                                <time datetime="2020-09-20">1 hr. ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                
-                <li class="mb-6 last:mb-0 opacity-100">
-                    <div class="relative flex items-center space-x-3">
-                        <div>
-                            <span class="h-10 w-10 rounded-full bg-green-400 flex items-center justify-center">
-                                <!-- Heroicon name: solid/user -->
-                                <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
-                            <div>
-                                <span>Bertha Hamill joined from</span>
-                                <span class="font-medium text-gray-900">North Anabury, Mauritania</span>
-                            </div>
-                            <div class="text-right whitespace-nowrap">
-                                <time datetime="2020-09-20">1 hr. ago</time>
                             </div>
                         </div>
                     </div>
@@ -588,7 +1082,7 @@
                 <li class="mb-6 last:mb-0 opacity-50">
                     <div class="relative flex items-center space-x-3">
                         <div>
-                            <span class="h-10 w-10 rounded-full bg-blue-400 flex items-center justify-center">
+                            <span class="h-10 w-10 rounded-full bg-indigo-400 flex items-center justify-center">
                                 <!-- Heroicon name: solid/user -->
                                 <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
@@ -597,11 +1091,11 @@
                         </div>
                         <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
                             <div>
-                                <span>Guiseppe Purdy joined from</span>
-                                <span class="font-medium text-gray-900">Johnsonshire, Fiji</span>
+                                <span>Vernie Considine joined from</span>
+                                <span class="font-medium text-gray-900">New Summer, Tuvalu</span>
                             </div>
                             <div class="text-right whitespace-nowrap">
-                                <time datetime="2020-09-20">2 hrs. ago</time>
+                                <time datetime="2020-09-20">2 min. ago</time>
                             </div>
                         </div>
                     </div>
@@ -620,11 +1114,11 @@
                         </div>
                         <div class="min-w-0 flex-1 flex justify-between space-x-4 text-xs lg:text-sm text-gray-500">
                             <div>
-                                <span>Mr. Mackenzie Smith joined from</span>
-                                <span class="font-medium text-gray-900">Maximustown, Tuvalu</span>
+                                <span>Judge Lubowitz joined from</span>
+                                <span class="font-medium text-gray-900">West Tamaraburgh, Mauritania</span>
                             </div>
                             <div class="text-right whitespace-nowrap">
-                                <time datetime="2020-09-20">1 hr. ago</time>
+                                <time datetime="2020-09-20">just now</time>
                             </div>
                         </div>
                     </div>
@@ -647,25 +1141,25 @@
             
                 <a href="/hall" class="block bg-white rounded-lg border overflow-hidden">
                     <div class="h-72 sm:h-64 md:h-52 lg:h-52 bg-cover bg-center hover:opacity-70" style="background-image: url(/assets/images/hall-1.png)"></div>
-                    <div class="block text-sm font-medium text-gray-800 p-4">qui perspiciatis veritatis</div>
+                    <div class="block text-sm font-medium text-gray-800 p-4">consequatur dicta dignissimos ut</div>
                 </a>
 
             
                 <a href="/hall" class="block bg-white rounded-lg border overflow-hidden">
                     <div class="h-72 sm:h-64 md:h-52 lg:h-52 bg-cover bg-center hover:opacity-70" style="background-image: url(/assets/images/hall-2.png)"></div>
-                    <div class="block text-sm font-medium text-gray-800 p-4">consequatur sint nobis</div>
+                    <div class="block text-sm font-medium text-gray-800 p-4">voluptas fugit sit pariatur</div>
                 </a>
 
             
                 <a href="/hall" class="block bg-white rounded-lg border overflow-hidden">
                     <div class="h-72 sm:h-64 md:h-52 lg:h-52 bg-cover bg-center hover:opacity-70" style="background-image: url(/assets/images/hall-3.png)"></div>
-                    <div class="block text-sm font-medium text-gray-800 p-4">consequatur eum debitis et</div>
+                    <div class="block text-sm font-medium text-gray-800 p-4">voluptatibus omnis ut nam</div>
                 </a>
 
             
                 <a href="/hall" class="block bg-white rounded-lg border overflow-hidden">
                     <div class="h-72 sm:h-64 md:h-52 lg:h-52 bg-cover bg-center hover:opacity-70" style="background-image: url(/assets/images/hall-4.png)"></div>
-                    <div class="block text-sm font-medium text-gray-800 p-4">inventore autem facilis</div>
+                    <div class="block text-sm font-medium text-gray-800 p-4">cumque non rerum repellat dolorem</div>
                 </a>
 
             
@@ -683,7 +1177,7 @@
 
             
             <a href="#" class="flex flex-col justify-between rounded-lg border border-gray-300 bg-white px-6 py-5 hover:border-gray-400">
-                <div class="font-medium text-gray-800">ea nisi recusandae dolor id</div>
+                <div class="font-medium text-gray-800">adipisci aut occaecati tenetur ut soluta doloremque</div>
 
                 <div>
                     <div class="mt-3 flex items-center">
@@ -711,7 +1205,7 @@
 
             
             <a href="#" class="flex flex-col justify-between rounded-lg border border-gray-300 bg-white px-6 py-5 hover:border-gray-400">
-                <div class="font-medium text-gray-800">aliquam dolores non consequatur consequatur et</div>
+                <div class="font-medium text-gray-800">voluptatem cupiditate tenetur ex</div>
 
                 <div>
                     <div class="mt-3 flex items-center">
@@ -748,7 +1242,7 @@
 
             
             <a href="#" class="flex flex-col justify-between rounded-lg border border-gray-300 bg-white px-6 py-5 hover:border-gray-400">
-                <div class="font-medium text-gray-800">nostrum voluptatum quis non dolorem aut qui</div>
+                <div class="font-medium text-gray-800">cupiditate qui vero dolores modi rerum harum</div>
 
                 <div>
                     <div class="mt-3 flex items-center">
@@ -802,7 +1296,7 @@
         </div>
 
         <!-- toast -->
-<div aria-live="assertive" class="max-w-screen-lg mx-auto fixed inset-0 sm:top-16 z-20 flex pointer-events-none sm:items-start p-4">
+<div aria-live="assertive" class="max-w-screen-lg mx-auto fixed inset-0 top-16 z-20 flex pointer-events-none sm:items-start p-4">
     <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
         <div
             x-show="toast.show"
