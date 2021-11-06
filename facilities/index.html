@@ -10,13 +10,16 @@
         <script defer src="/assets/build/js/main.js"></script>
     </head>
     <body x-data="{toast: {show: true}}"
-        class="text-gray-900 bg-gray-100 font-sans antialiased h-full">
+        class="bg-body text-gray-900 font-sans antialiased h-full">
 
         <!-- header -->
 
 <!-- nav light -->
 <nav x-data="{
-    notifications: {show: false},
+    notifications: {
+        show: false,
+        count: 1
+    },
     sidebar: {show: false},
     dropdown: {
         Halls: false,
@@ -24,86 +27,72 @@
         More: false,
         _current: null
     }
-}" class="bg-white shadow fixed w-full z-50">
-    <div class="max-w-screen-lg mx-auto px-2 sm:px-6 lg:px-8">
-        <div class="relative flex justify-between h-16">
-            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                <!-- Mobile menu button -->
-                <button
-                    x-on:click="sidebar.show = true"
-                    type="button"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                >
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+}" class="bg-navbar shadow fixed w-full z-50">
+    <div class="max-w-screen-lg mx-auto px-4 xl:px-0">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex flex-1 md:flex-none items-center space-x-3">
+                <a href="/" class="flex items-center">
+                    <img class="h-6 md:h-8 lg:h-10 w-auto" src="/assets/images/logo@2x.png" alt="">
+                </a>
+                <div class="md:hidden lg:block text-sm lg:text-xl font-serif">Monash University</div>
             </div>
 
-            <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <a href="/" class="flex-shrink-0 flex items-center">
-                    <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">
-                </a>
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+            <div class="hidden md:flex space-x-6">
 
-                    
-                    <div class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                
+                    <div class="border-transparent inline-flex items-center px-1 py-2 border-b-2">
                         <div class="relative">
 
                             
-                            <a href="/lobby">Lobby</a>
+                                <a href="/lobby">Lobby</a>
 
                             
                         </div>
                     </div>
 
-                    
-                    <div class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                
+                    <div class="border-transparent inline-flex items-center px-1 py-2 border-b-2">
                         <div class="relative">
 
                             
-                            <a
-                                x-on:click.prevent="handleClick(dropdown, 'Halls')"
-                                href="#"
-                                class="flex items-center space-x-1">
-                                <span>Halls</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </a>
+                                <a
+                                    x-on:click.prevent="handleClick(dropdown, 'Halls')"
+                                    href="#"
+                                    class="flex items-center space-x-1">
+                                    <span>Halls</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </a>
 
-                             <!-- dropdown -->
-<div class="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" x-show="dropdown.Halls" x-on:click.outside="dropdown.Halls = false" search="0">
+                                 <!-- dropdown -->
+<div class="absolute z-10 left-1/2 transform -translate-x-1/2 mt-2 px-2 w-screen max-w-xs sm:px-0" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" x-show="dropdown.Halls" x-on:click.outside="dropdown.Halls = false" search="0">
     <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
         <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
 
             
         <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">est ipsum</p>
-                                    <p class="mt-1 text-sm text-gray-500">ut corrupti rerum ducimus qui adipisci esse maxime natus quas cupiditate qui exercitationem</p>
-                                </a>
+                                            <p class="text-base font-medium text-gray-900">labore fugiat</p>
+                                            <p class="mt-1 text-sm text-gray-500">accusamus blanditiis praesentium quasi qui et dolorum vel qui corrupti quae et quod et</p>
+                                        </a>
 
-                                
-                                <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">sed laudantium consequatur</p>
-                                    <p class="mt-1 text-sm text-gray-500">corporis consectetur omnis sit perspiciatis maiores consequatur dignissimos consequatur odio cum tenetur</p>
-                                </a>
+                                    
+                                        <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                                            <p class="text-base font-medium text-gray-900">voluptates a molestiae</p>
+                                            <p class="mt-1 text-sm text-gray-500">similique est quia voluptates non et facilis aliquid aut dolores praesentium assumenda</p>
+                                        </a>
 
-                                
-                                <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">excepturi rerum</p>
-                                    <p class="mt-1 text-sm text-gray-500">vero soluta voluptatem delectus sint aut dolorem dolores dolorem sint distinctio nam est</p>
-                                </a>
+                                    
+                                        <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                                            <p class="text-base font-medium text-gray-900">sit quo nobis iste</p>
+                                            <p class="mt-1 text-sm text-gray-500">corporis exercitationem facere recusandae numquam similique expedita praesentium sequi et vel</p>
+                                        </a>
 
-                                
-                                <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">nostrum ex pariatur</p>
-                                    <p class="mt-1 text-sm text-gray-500">id rerum quam officia architecto quasi voluptatem hic fugit et</p>
-                                </a>
+                                    
+                                        <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                                            <p class="text-base font-medium text-gray-900">delectus iusto perferendis</p>
+                                            <p class="mt-1 text-sm text-gray-500">accusantium et soluta illo commodi animi delectus quisquam consequatur exercitationem veniam</p>
+                                        </a>
 
         </div>
     </div>
@@ -115,23 +104,23 @@
                         </div>
                     </div>
 
-                    
-                    <div class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                
+                    <div class="border-transparent inline-flex items-center px-1 py-2 border-b-2">
                         <div class="relative">
 
                             
-                            <a
-                                x-on:click.prevent="handleClick(dropdown, 'Booths')"
-                                href="#"
-                                class="flex items-center space-x-1">
-                                <span>Booths</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </a>
+                                <a
+                                    x-on:click.prevent="handleClick(dropdown, 'Booths')"
+                                    href="#"
+                                    class="flex items-center space-x-1">
+                                    <span>Booths</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </a>
 
-                             <!-- dropdown -->
-<div class="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" x-show="dropdown.Booths" x-on:click.outside="dropdown.Booths = false" search="1">
+                                 <!-- dropdown -->
+<div class="absolute z-10 left-1/2 transform -translate-x-1/2 mt-2 px-2 w-screen max-w-xs sm:px-0" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" x-show="dropdown.Booths" x-on:click.outside="dropdown.Booths = false" search="1">
     <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
         <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
 
@@ -149,27 +138,27 @@
 
             
         <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">odit voluptas ipsum</p>
-                                    <p class="mt-1 text-sm text-gray-500">quia enim quis quo perspiciatis quaerat soluta commodi vel corporis</p>
-                                </a>
+                                            <p class="text-base font-medium text-gray-900">omnis dolorem delectus</p>
+                                            <p class="mt-1 text-sm text-gray-500">debitis nam et consequatur enim repellendus aliquam eaque et voluptatem</p>
+                                        </a>
 
-                                
-                                <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">quia voluptatem</p>
-                                    <p class="mt-1 text-sm text-gray-500">aut reprehenderit nihil non eveniet et vitae autem et reiciendis</p>
-                                </a>
+                                    
+                                        <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                                            <p class="text-base font-medium text-gray-900">velit adipisci necessitatibus sunt</p>
+                                            <p class="mt-1 text-sm text-gray-500">perspiciatis et veritatis numquam laudantium corrupti vitae qui laudantium maxime</p>
+                                        </a>
 
-                                
-                                <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">vel ut quia nihil</p>
-                                    <p class="mt-1 text-sm text-gray-500">cumque voluptatem sit repellat nisi at quibusdam quia necessitatibus voluptatibus cum distinctio accusamus consequatur</p>
-                                </a>
+                                    
+                                        <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                                            <p class="text-base font-medium text-gray-900">vel pariatur vitae</p>
+                                            <p class="mt-1 text-sm text-gray-500">tempore et voluptas sit qui blanditiis aut sed omnis quaerat eaque</p>
+                                        </a>
 
-                                
-                                <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">laboriosam saepe cupiditate est</p>
-                                    <p class="mt-1 text-sm text-gray-500">dolor enim corporis a est enim praesentium reiciendis est voluptatibus nesciunt et ipsam et</p>
-                                </a>
+                                    
+                                        <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                                            <p class="text-base font-medium text-gray-900">voluptas minus</p>
+                                            <p class="mt-1 text-sm text-gray-500">rem quam quaerat possimus quis recusandae aut voluptates aut sint ad voluptate</p>
+                                        </a>
 
         </div>
     </div>
@@ -181,71 +170,71 @@
                         </div>
                     </div>
 
-                    
-                    <div class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                
+                    <div class="border-transparent inline-flex items-center px-1 py-2 border-b-2">
                         <div class="relative">
 
                             
-                            <a href="/talks">Talks</a>
+                                <a href="/talks">Talks</a>
 
                             
                         </div>
                     </div>
 
-                    
-                    <div class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                
+                    <div class="border-gray-900 inline-flex items-center px-1 py-2 border-b-2">
                         <div class="relative">
 
                             
-                            <a href="/facilities">Facilities</a>
+                                <a href="/facilities">Facilities</a>
 
                             
                         </div>
                     </div>
 
-                    
-                    <div class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                
+                    <div class="border-transparent inline-flex items-center px-1 py-2 border-b-2">
                         <div class="relative">
 
                             
-                            <a
-                                x-on:click.prevent="handleClick(dropdown, 'More')"
-                                href="#"
-                                class="flex items-center space-x-1">
-                                <span>More</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </a>
+                                <a
+                                    x-on:click.prevent="handleClick(dropdown, 'More')"
+                                    href="#"
+                                    class="flex items-center space-x-1">
+                                    <span>More</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </a>
 
-                             <!-- dropdown -->
-<div class="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" x-show="dropdown.More" x-on:click.outside="dropdown.More = false" search="0">
+                                 <!-- dropdown -->
+<div class="absolute z-10 left-1/2 transform -translate-x-1/2 mt-2 px-2 w-screen max-w-xs sm:px-0" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" x-show="dropdown.More" x-on:click.outside="dropdown.More = false" search="0">
     <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
         <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
 
             
         <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">nemo et quod est</p>
-                                    <p class="mt-1 text-sm text-gray-500">odio quasi voluptas praesentium suscipit hic quis suscipit et aut in unde</p>
-                                </a>
+                                            <p class="text-base font-medium text-gray-900">ullam nisi et consequatur</p>
+                                            <p class="mt-1 text-sm text-gray-500">esse nam doloremque laudantium omnis explicabo blanditiis aliquam iusto ea quidem porro ea</p>
+                                        </a>
 
-                                
-                                <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">eos sint quasi</p>
-                                    <p class="mt-1 text-sm text-gray-500">praesentium sunt fugiat animi porro sapiente non fuga sapiente sed sint amet velit et</p>
-                                </a>
+                                    
+                                        <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                                            <p class="text-base font-medium text-gray-900">sit quo quibusdam</p>
+                                            <p class="mt-1 text-sm text-gray-500">repellat assumenda sequi et sint est veniam voluptatem blanditiis laudantium omnis numquam illum et</p>
+                                        </a>
 
-                                
-                                <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">eveniet similique excepturi consequatur</p>
-                                    <p class="mt-1 text-sm text-gray-500">omnis est fugiat autem quas iusto autem consequuntur error cupiditate ullam ad quidem nam</p>
-                                </a>
+                                    
+                                        <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                                            <p class="text-base font-medium text-gray-900">adipisci non</p>
+                                            <p class="mt-1 text-sm text-gray-500">atque qui hic qui aut ut consequatur nobis perferendis adipisci possimus dolorem</p>
+                                        </a>
 
-                                
-                                <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                                    <p class="text-base font-medium text-gray-900">exercitationem et eum et</p>
-                                    <p class="mt-1 text-sm text-gray-500">nesciunt dignissimos vero optio quia illum aut ut quia odit consequatur</p>
-                                </a>
+                                    
+                                        <a href="#" class="-m-3 p-3 block rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                                            <p class="text-base font-medium text-gray-900">ipsa sit</p>
+                                            <p class="mt-1 text-sm text-gray-500">et excepturi dolores adipisci ipsam aut quos omnis debitis perferendis facere</p>
+                                        </a>
 
         </div>
     </div>
@@ -257,22 +246,44 @@
                         </div>
                     </div>
 
-                    
+                
+            </div>
+
+            <div class="flex items-center space-x-7">
+                <div class="relative">
+                    <!--
+                    <span
+                        x-show="notifications.count > 0"
+                        x-text="notifications.count"
+                        class="w-6 absolute flex items-center justify-center px-1.5 py-0.5 rounded-full text-xs bg-red-500 text-white -top-2 -right-3 overflow-hidden">
+                    </span>
+                    -->
+                    <button
+                        x-on:click="notifications.show = !notifications.show; notifications.count = 0"
+                        type="button"
+                        class="p-2 rounded-full text-gray-600">
+                        <svg class="h-6 w-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="hidden md:block">
+                    <button type="button" class="inline-flex items-center px-4 py-1.5 border border-gray-800 text-xs text-gray-800 bg-transparent hover:bg-gray-100">Log Out</button>
                 </div>
             </div>
 
-            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button x-on:click="notifications.show = !notifications.show"
+            <div class="flex items-center md:hidden">
+                <button
+                    x-on:click="sidebar.show = true"
                     type="button"
-                    class="relative bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    <!--
-                    <span class="absolute -top-1.5 -right-3.5 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-600 text-white">
-                        70
-                    </span>
-                    -->
-                    <!-- Heroicon name: outline/bell -->
-                    <svg class="h-7 w-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                >
+                    <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -297,64 +308,64 @@
         <ul role="list">
 
         
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-black">autem itaque recusandae vitae culpa quos ut quia et molestiae vero</div>
-            <div class="text-xs text-gray-400 mt-2">10 min ago</div>
-        </li>
+            <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+                <div class="text-black">nulla excepturi quo iste voluptatum harum iste repudiandae sit magni itaque repudiandae magni quos enim temporibus nobis nihil facere quia</div>
+                <div class="text-xs text-gray-400 mt-2">8 min ago</div>
+            </li>
 
         
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">qui voluptate dolore temporibus distinctio deleniti cupiditate sit tenetur error velit similique sed velit optio assumenda vero autem</div>
-            <div class="text-xs text-gray-400 mt-2">7 min ago</div>
-        </li>
+            <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+                <div class="text-gray-400">sit earum perferendis itaque quo culpa voluptatibus est velit qui soluta velit animi id enim et aspernatur</div>
+                <div class="text-xs text-gray-400 mt-2">8 min ago</div>
+            </li>
 
         
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">non aperiam ut possimus aliquam nostrum iusto similique placeat aut suscipit vitae commodi fuga sequi dignissimos qui ut rerum quaerat</div>
-            <div class="text-xs text-gray-400 mt-2">9 min ago</div>
-        </li>
+            <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+                <div class="text-gray-400">earum ad fugit qui enim id neque ut autem itaque sed qui aut recusandae minima odio quis voluptatem</div>
+                <div class="text-xs text-gray-400 mt-2">2 min ago</div>
+            </li>
 
         
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">et dolore ad est architecto itaque enim iure rerum consequuntur voluptatem eum possimus quas sint</div>
-            <div class="text-xs text-gray-400 mt-2">9 min ago</div>
-        </li>
+            <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+                <div class="text-gray-400">consequatur saepe occaecati corporis reiciendis soluta placeat nobis sint ut omnis quia sint</div>
+                <div class="text-xs text-gray-400 mt-2">9 min ago</div>
+            </li>
 
         
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">sequi iusto repellendus est quibusdam magnam voluptate porro est voluptatem</div>
-            <div class="text-xs text-gray-400 mt-2">3 min ago</div>
-        </li>
+            <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+                <div class="text-gray-400">dolores sequi sed voluptas tempore aliquid sit et iste ipsum omnis quo reprehenderit a consequatur magni dolore vel ea</div>
+                <div class="text-xs text-gray-400 mt-2">3 min ago</div>
+            </li>
 
         
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">aut non molestiae est aspernatur illo quia voluptatum sapiente molestias ut provident et animi est sint voluptas</div>
-            <div class="text-xs text-gray-400 mt-2">1 min ago</div>
-        </li>
+            <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+                <div class="text-gray-400">vel numquam eos ullam facere minima sunt et vitae ipsa praesentium velit minus</div>
+                <div class="text-xs text-gray-400 mt-2">2 min ago</div>
+            </li>
 
         
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">explicabo eos quam mollitia modi natus repellendus incidunt dolor minus omnis ullam rerum magnam et praesentium repellat</div>
-            <div class="text-xs text-gray-400 mt-2">1 min ago</div>
-        </li>
+            <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+                <div class="text-gray-400">unde possimus sunt omnis voluptate rerum numquam quis omnis vel voluptatem accusantium ab ratione qui</div>
+                <div class="text-xs text-gray-400 mt-2">8 min ago</div>
+            </li>
 
         
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">voluptas enim eaque dolor aut impedit totam eos quidem nemo nihil sed consequuntur autem aut</div>
-            <div class="text-xs text-gray-400 mt-2">1 min ago</div>
-        </li>
+            <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+                <div class="text-gray-400">autem dolores ex quibusdam recusandae ad qui aut repudiandae molestias ut possimus sequi quam cupiditate consequatur quas</div>
+                <div class="text-xs text-gray-400 mt-2">10 min ago</div>
+            </li>
 
         
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">cupiditate corrupti quasi iste quia nesciunt commodi aut debitis voluptatum iusto explicabo voluptas sed</div>
-            <div class="text-xs text-gray-400 mt-2">8 min ago</div>
-        </li>
+            <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+                <div class="text-gray-400">sed soluta dolor ut nam et eaque odio enim rem distinctio error</div>
+                <div class="text-xs text-gray-400 mt-2">4 min ago</div>
+            </li>
 
         
-        <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
-            <div class="text-gray-400">ducimus voluptatibus repellat nihil ab quam qui deserunt quia maxime laudantium</div>
-            <div class="text-xs text-gray-400 mt-2">5 min ago</div>
-        </li>
+            <li class="py-6 pr-6 ml-6 first:pt-0 border-b last:border-b-0 pointer-events-none">
+                <div class="text-gray-400">harum error vitae et et fugiat iure sint et aut quis consequatur sed ut est necessitatibus quidem quaerat</div>
+                <div class="text-xs text-gray-400 mt-2">1 min ago</div>
+            </li>
 
         
         </ul>
@@ -453,102 +464,102 @@
                                         
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>sint veritatis praesentium quis</span>
+                                            <span>rerum optio et</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>eaque voluptatibus ut amet</span>
+                                            <span>vel est</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>qui repellendus harum</span>
+                                            <span>praesentium consequuntur dolores dolores</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>vel perspiciatis</span>
+                                            <span>eum quis</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>facilis non</span>
+                                            <span>quibusdam est harum</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>velit neque vel</span>
+                                            <span>sequi commodi totam</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>porro distinctio ipsam sapiente</span>
+                                            <span>qui consectetur doloribus</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>qui beatae</span>
+                                            <span>harum cupiditate eaque assumenda</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>nihil esse libero quam</span>
+                                            <span>inventore et consectetur</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>expedita odit</span>
+                                            <span>ea ut est distinctio</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>libero ipsam</span>
+                                            <span>sit ipsa voluptatum</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>quis odit</span>
+                                            <span>animi voluptatum consectetur</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>aut unde</span>
+                                            <span>omnis mollitia beatae recusandae</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>ullam accusantium quidem</span>
+                                            <span>numquam in</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>esse occaecati</span>
+                                            <span>sint ad</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>eius quasi</span>
+                                            <span>dolor accusantium eaque rerum</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>et commodi</span>
+                                            <span>sequi pariatur</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>repudiandae debitis molestiae sint</span>
+                                            <span>repellat natus ad</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>excepturi aspernatur</span>
+                                            <span>molestiae dolorem</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>maiores nihil</span>
+                                            <span>reprehenderit ea qui</span>
                                         </a>
 
                                         
@@ -604,102 +615,102 @@
                                         
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>sit culpa ut ratione</span>
+                                            <span>dolorem animi</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>sunt sed</span>
+                                            <span>tenetur debitis</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>ipsam rerum</span>
+                                            <span>est atque nam iusto</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>aut quos</span>
+                                            <span>consequuntur soluta</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>quia similique</span>
+                                            <span>consectetur ad</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>ipsum culpa odit</span>
+                                            <span>iusto eius nemo</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>officia similique ad</span>
+                                            <span>animi hic</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>illum et rerum</span>
+                                            <span>qui perspiciatis totam dignissimos</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>qui fugiat quis facilis</span>
+                                            <span>quasi voluptatibus quis</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>vel suscipit et possimus</span>
+                                            <span>illum voluptate</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>pariatur delectus tempora delectus</span>
+                                            <span>consequatur neque eum</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>reiciendis delectus aut</span>
+                                            <span>voluptate dolores</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>impedit illum</span>
+                                            <span>quae ut</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>omnis quia</span>
+                                            <span>iste qui ut corrupti</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>dolorum ipsam enim tempora</span>
+                                            <span>qui consequatur voluptatum quasi</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>optio sunt optio alias</span>
+                                            <span>illo quis quis</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>minus aut quidem</span>
+                                            <span>ab ut ut aut</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>omnis distinctio vel</span>
+                                            <span>dolorem provident architecto</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>facere quam soluta</span>
+                                            <span>qui et incidunt corrupti</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>sed tempore doloremque placeat</span>
+                                            <span>magnam impedit animi alias</span>
                                         </a>
 
                                         
@@ -757,102 +768,102 @@
                                         
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>accusamus qui adipisci et</span>
+                                            <span>est sit similique</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>deleniti atque placeat natus</span>
+                                            <span>voluptatem suscipit possimus</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>qui quia</span>
+                                            <span>inventore voluptas omnis earum</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>qui magnam dolor est</span>
+                                            <span>quisquam quos</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>consequuntur voluptatem quae</span>
+                                            <span>pariatur deserunt</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>ut consequatur fuga</span>
+                                            <span>dolores aliquam voluptates sunt</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>modi ullam exercitationem et</span>
+                                            <span>recusandae sequi sed minima</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>ut minima</span>
+                                            <span>nemo tempora</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>explicabo et vel</span>
+                                            <span>officiis neque velit non</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>aut voluptatem illo</span>
+                                            <span>eos ab</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>quo itaque recusandae</span>
+                                            <span>quo delectus</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>non vitae corporis harum</span>
+                                            <span>sunt nihil repudiandae</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>facilis ducimus</span>
+                                            <span>porro unde</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>aut maiores dolor</span>
+                                            <span>laborum cupiditate repudiandae</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>vitae distinctio</span>
+                                            <span>blanditiis assumenda</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>est asperiores exercitationem delectus</span>
+                                            <span>ullam sed est</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>voluptas est optio</span>
+                                            <span>beatae sit molestiae laudantium</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>non ut id voluptas</span>
+                                            <span>commodi aperiam qui</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>odio quam</span>
+                                            <span>error ullam ut</span>
                                         </a>
 
                                         
                                         <a href="#" class="text-gray-900 p-2 font-medium rounded-md flex items-center justify-between">
-                                            <span>ad fugit ullam</span>
+                                            <span>suscipit consectetur neque</span>
                                         </a>
 
                                         
@@ -902,7 +913,7 @@
                     <div class="h-48 md:h-52 lg:h-60 bg-cover bg-center" style="background-image: url(/assets/images/f-1.png)"></div>
 
                     <div class="p-4">
-                        <h5 class="font-medium text-xl text-gray-800">rerum dolores</h5>
+                        <h5 class="font-medium text-xl text-gray-800">harum blanditiis enim</h5>
                         <div class="flex flex-shrink-0 items-center space-x-7 text-sm text-gray-500 mt-3">
                             <div class="flex items-center space-x-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -933,7 +944,7 @@
                     <div class="h-48 md:h-52 lg:h-60 bg-cover bg-center" style="background-image: url(/assets/images/f-2.png)"></div>
 
                     <div class="p-4">
-                        <h5 class="font-medium text-xl text-gray-800">qui vitae</h5>
+                        <h5 class="font-medium text-xl text-gray-800">est ut</h5>
                         <div class="flex flex-shrink-0 items-center space-x-7 text-sm text-gray-500 mt-3">
                             <div class="flex items-center space-x-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -964,7 +975,7 @@
                     <div class="h-48 md:h-52 lg:h-60 bg-cover bg-center" style="background-image: url(/assets/images/f-3.png)"></div>
 
                     <div class="p-4">
-                        <h5 class="font-medium text-xl text-gray-800">qui eveniet quia</h5>
+                        <h5 class="font-medium text-xl text-gray-800">a laboriosam possimus</h5>
                         <div class="flex flex-shrink-0 items-center space-x-7 text-sm text-gray-500 mt-3">
                             <div class="flex items-center space-x-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -995,7 +1006,7 @@
                     <div class="h-48 md:h-52 lg:h-60 bg-cover bg-center" style="background-image: url(/assets/images/f-4.png)"></div>
 
                     <div class="p-4">
-                        <h5 class="font-medium text-xl text-gray-800">enim voluptas</h5>
+                        <h5 class="font-medium text-xl text-gray-800">eum aut</h5>
                         <div class="flex flex-shrink-0 items-center space-x-7 text-sm text-gray-500 mt-3">
                             <div class="flex items-center space-x-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1026,7 +1037,7 @@
                     <div class="h-48 md:h-52 lg:h-60 bg-cover bg-center" style="background-image: url(/assets/images/f-5.png)"></div>
 
                     <div class="p-4">
-                        <h5 class="font-medium text-xl text-gray-800">voluptas ut et</h5>
+                        <h5 class="font-medium text-xl text-gray-800">et laboriosam</h5>
                         <div class="flex flex-shrink-0 items-center space-x-7 text-sm text-gray-500 mt-3">
                             <div class="flex items-center space-x-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
