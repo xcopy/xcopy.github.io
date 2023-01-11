@@ -8,15 +8,19 @@
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body
-    x-data="{slideOver: false, searchNav: false}"
+    x-data="{slideOver: false, searchNav: false, searchMobile: false, navAtTop: true}"
     :class="{'overflow-hidden': slideOver}"
-    class="flex h-full flex-col bg-top bg-no-repeat bg-cover"
-    style="background-image: url(./assets/img/gradient-1.png)"
+    class="flex h-full flex-col"
 >
-    <header>
+    <header
+        x-ref="navbar"
+        @scroll.window="navAtTop = window.scrollY < $refs.navbar.offsetHeight"
+        :class="{'bg-transparent': navAtTop, 'bg-white border-b border-slate-200': !navAtTop}"
+        class="fixed top-0 inset-x-0 z-40"
+    >
         <div class="container">
             <div class="flex items-center py-5 space-x-14">
-                <a href="#" class="block">
+                <a href="/" class="block">
                     
 <!-- logo -->
 <div class="text-2xl lg:text-4xl tracking-tighter font-logo text-black select-none">e<span class="text-indigo-500">a</span>syuni</div>
@@ -58,24 +62,29 @@
                         >
                             
 <!-- search form -->
-<form
-    x-data="{dropdown1: false, dropdown2: false, country: null, studyLevel: null}"
-    class="relative w-full lg:w-auto"
->
-    <!-- dropdown 1 -->
-    <div
-        x-cloak=""
-        x-show="dropdown1"
-        @click.away="dropdown1 = false; slideOver = searchNav"
-        class="absolute z-20 bg-white p-5 border drop-shadow-xl w-full lg:w-auto top-[85px] bottom-0 bottom-auto rounded-b-2xl rounded-tr-2xl"
-    >
-        <div class="space-y-4">
-            <h5 class="text-xl font-semibold">Select Region</h5>
-            <div class="grid grid-cols-2 gap-4">
-                
+<div x-data="{dropdown1: false, dropdown2: false, country: null, studyLevel: null}">
+    <!-- desktop -->
+    <form class="hidden lg:block relative w-auto">
+        <!-- dropdown 1 -->
+        <div
+            x-cloak=""
+            x-show="dropdown1"
+            @click.away="dropdown1 = false; slideOver = searchNav"
+            :class="{
+                'top-[85px] bottom-auto rounded-b-2xl rounded-tr-2xl': !navAtTop,
+                'top-[85px] bottom-auto rounded-b-2xl rounded-tr-2xl': navAtTop
+            }"
+            class="absolute z-20 bg-white p-5 border drop-shadow-xl w-auto"
+        >
+            
+<!-- countries -->
+<div class="space-y-4">
+    <h5 class="text-xl font-semibold">Select Region</h5>
+    <div class="grid grid-cols-2 gap-4">
+        
 <!-- country: Everywhere -->
 <div
-    @click="country = {label: 'Everywhere', code: ''}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Everywhere', code: ''}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === ''}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -87,11 +96,11 @@
 </div>
 <!-- /country: Everywhere -->
 
-                
-                    
+        
+        
 <!-- country: Brunei -->
 <div
-    @click="country = {label: 'Brunei', code: 'bn'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Brunei', code: 'bn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'bn'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -103,11 +112,11 @@
 </div>
 <!-- /country: Brunei -->
 
-                
-                    
+        
+        
 <!-- country: India -->
 <div
-    @click="country = {label: 'India', code: 'in'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'India', code: 'in'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'in'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -119,11 +128,11 @@
 </div>
 <!-- /country: India -->
 
-                
-                    
+        
+        
 <!-- country: Indonesia -->
 <div
-    @click="country = {label: 'Indonesia', code: 'id'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Indonesia', code: 'id'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'id'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -135,11 +144,11 @@
 </div>
 <!-- /country: Indonesia -->
 
-                
-                    
+        
+        
 <!-- country: Malaysia -->
 <div
-    @click="country = {label: 'Malaysia', code: 'my'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Malaysia', code: 'my'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'my'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -151,11 +160,11 @@
 </div>
 <!-- /country: Malaysia -->
 
-                
-                    
+        
+        
 <!-- country: Mauritius -->
 <div
-    @click="country = {label: 'Mauritius', code: 'mu'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Mauritius', code: 'mu'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'mu'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -167,11 +176,11 @@
 </div>
 <!-- /country: Mauritius -->
 
-                
-                    
+        
+        
 <!-- country: Middle East -->
 <div
-    @click="country = {label: 'Middle East', code: 'sa'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Middle East', code: 'sa'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'sa'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -183,11 +192,11 @@
 </div>
 <!-- /country: Middle East -->
 
-                
-                    
+        
+        
 <!-- country: Philippines -->
 <div
-    @click="country = {label: 'Philippines', code: 'ph'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Philippines', code: 'ph'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'ph'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -199,11 +208,11 @@
 </div>
 <!-- /country: Philippines -->
 
-                
-                    
+        
+        
 <!-- country: Singapore -->
 <div
-    @click="country = {label: 'Singapore', code: 'sg'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Singapore', code: 'sg'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'sg'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -215,11 +224,11 @@
 </div>
 <!-- /country: Singapore -->
 
-                
-                    
+        
+        
 <!-- country: Sri-Lanka -->
 <div
-    @click="country = {label: 'Sri-Lanka', code: 'lk'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Sri-Lanka', code: 'lk'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'lk'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -231,11 +240,11 @@
 </div>
 <!-- /country: Sri-Lanka -->
 
-                
-                    
+        
+        
 <!-- country: Vietnam -->
 <div
-    @click="country = {label: 'Vietnam', code: 'vn'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Vietnam', code: 'vn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'vn'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -247,95 +256,462 @@
 </div>
 <!-- /country: Vietnam -->
 
+        
+    </div>
+</div>
+<!-- /countries -->
+
+        </div>
+        <!-- /dropdown 1 -->
+
+        <!-- dropdown 2 -->
+        <div
+            x-cloak=""
+            x-show="dropdown2"
+            @click.away="dropdown2 = false; slideOver = searchNav"
+            :class="{
+                'top-[85px] bottom-auto rounded-b-2xl rounded-tr-2xl': !navAtTop,
+                'top-[85px] bottom-auto rounded-b-2xl rounded-tr-2xl': navAtTop
+            }"
+            class="absolute z-20 bg-white p-5 border drop-shadow-xl w-auto left-[260px]"
+        >
+            
+<!-- study levels -->
+<div class="space-y-4">
+    <h5 class="text-xl font-semibold">Study Level</h5>
+    <div class="grid grid-cols-2 gap-4">
+        
+<!-- study level: Bachelor -->
+<div
+    @click="studyLevel = {label: 'Bachelor\'s', code: 'bachelor'}; dropdown2 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'bachelor'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    <img src="./assets/img/study-level-bachelor.svg" class="w-8 h-8" alt="">
+    <div>Bachelor's</div>
+</div>
+<!-- /study level: Bachelor -->
+
+        
+<!-- study level: Master -->
+<div
+    @click="studyLevel = {label: 'Master\'s', code: 'master'}; dropdown2 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'master'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    <img src="./assets/img/study-level-master.svg" class="w-8 h-8" alt="">
+    <div>Master's</div>
+</div>
+<!-- /study level: Master -->
+
+    </div>
+</div>
+<!-- /study levels -->
+
+        </div>
+        <!-- /dropdown 2 -->
+
+        <div
+            :class="{'z-10': !searchNav}"
+            class="relative flex items-center p-4 border border-gray-300 rounded-2xl bg-white select-none"
+        >
+            <div
+                @click="dropdown1 = true; slideOver = true"
+                role="button"
+                class="py-1.5 pr-5"
+            >
                 
-            </div>
-        </div>
-    </div>
-    <!-- /dropdown 1 -->
-
-    <!-- dropdown 2 -->
-    <div
-        x-cloak=""
-        x-show="dropdown2"
-        @click.away="dropdown2 = false; slideOver = searchNav"
-        class="absolute z-20 bg-white p-5 border drop-shadow-xl w-full lg:w-auto top-[85px] bottom-0 bottom-auto rounded-b-2xl rounded-tr-2xl lg:left-[260px]"
-    >
-        <div class="space-y-4">
-            <h5 class="text-xl font-semibold">Study Level</h5>
-            <div class="grid grid-cols-2 gap-4">
-                <div
-                    @click="studyLevel = {label: 'Bachelor\'s', code: 'bachelor'}; dropdown2 = false; slideOver = searchNav"
-                    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'bachelor'}"
-                    role="button"
-                    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
-                >
-                    <img src="./assets/img/study-level-bachelor.svg" class="w-8 h-8" alt="">
-                    <div>Bachelor's</div>
-                </div>
-                <div
-                    @click="studyLevel = {label: 'Master\'s', code: 'master'}; dropdown2 = false; slideOver = searchNav"
-                    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'master'}"
-                    role="button"
-                    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
-                >
-                    <img src="./assets/img/study-level-master.svg" class="w-8 h-8" alt="">
-                    <div>Master's</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /dropdown 2 -->
-
-    <div
-        :class="{'lg:z-10': !searchNav}"
-        class="relative lg:flex lg:items-center space-y-8 lg:space-y-0 p-4 border border-gray-300 rounded-xl lg:rounded-2xl bg-white"
-    >
-        <div
-            @click="dropdown1 = true; slideOver = true"
-            role="button"
-            class="inline-flex items-center lg:py-1.5 lg:pr-5 w-full"
+<!-- select country -->
+<div class="flex items-center justify-between">
+    <div class="flex items-center grow lg:w-52">
+        <span
+            x-cloak=""
+            x-show="country && country.code"
+            :class="country ? 'fi-' + country.code : ''"
+            class="fi fis w-6 h-6 rounded border mr-2">
+        </span>
+        <img
+            x-cloak=""
+            x-show="country && !country.code"
+            src="./assets/img/globe.png" class="w-6 h-6 mr-2"
+            alt=""
         >
-            <div class="flex items-center grow lg:w-52">
-                <span
-                    x-cloak=""
-                    x-show="country && country.code"
-                    :class="country ? 'fi-' + country.code : ''"
-                    class="fi fis w-6 h-6 rounded border mr-2">
-                </span>
-                <img
-                    x-cloak=""
-                    x-show="country && !country.code"
-                    src="./assets/img/globe.png" class="w-6 h-6 mr-2"
-                    alt=""
-                >
-                <div
-                    x-text="country ? country.label : 'Country'"
-                    class="text-gray-400 font-semibold">
-                </div>
+        <div
+            x-text="country ? country.label : 'Country'"
+            class="text-gray-400 font-semibold">
+        </div>
+    </div>
+    <i class="fa-solid fa-angle-down"></i>
+</div>
+<!-- /select country -->
+
             </div>
-            <i class="fa-solid fa-angle-down"></i>
+
+            <div
+                @click="dropdown2 = true; slideOver = true"
+                role="button"
+                class="py-1.5 px-5 border-l"
+            >
+                
+<!-- select study level -->
+<div class="flex items-center justify-between">
+    <div class="flex items-center grow lg:w-52">
+        <template x-if="studyLevel">
+            <img :src="'./assets/img/study-level-' + studyLevel.code + '.svg'" class="w-6 h-6 mr-2" alt="">
+        </template>
+        <div x-text="studyLevel ? studyLevel.label : 'Study Level'" class="text-gray-400 font-semibold"></div>
+    </div>
+    <i class="fa-solid fa-angle-down"></i>
+</div>
+<!-- /select study level -->
+
+            </div>
+
+            
+<!-- search submit button -->
+<button type="submit" class="button font-semibold flex items-center justify-center space-x-2 w-full">
+    <span class="whitespace-nowrap">Get Started</span>
+    <i class="fa-solid fa-arrow-right"></i>
+</button>
+<!-- /search submit button -->
+
+        </div>
+    </form>
+    <!-- /desktop -->
+
+    <!-- mobile -->
+    <form class="lg:hidden">
+        <div
+            @click="searchMobile = true; slideOver = true; dropdown1 = true"
+            class="flex items-center justify-between border rounded-xl py-2 px-3 bg-white w-full select-none"
+        >
+            <span class="text-sm text-gray-400 w-52">Find University</span>
+            <div class="button p-2">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
         </div>
 
         <div
-            @click="dropdown2 = true; slideOver = true"
-            role="button"
-            class="flex items-center lg:py-1.5 lg:border-l lg:px-5"
+            x-cloak=""
+            x-show="searchMobile"
+            @click.away="searchMobile = false"
+            class="fixed bottom-0 inset-x-0 z-20"
         >
-            <div class="flex items-center grow lg:w-52">
-                <template x-if="studyLevel">
-                    <img :src="'./assets/img/study-level-' + studyLevel.code + '.svg'" class="w-6 h-6 mr-2" alt="">
-                </template>
-                <div x-text="studyLevel ? studyLevel.label : 'Study Level'" class="text-gray-400 font-semibold"></div>
+            <div class="flex items-center justify-between p-7 border-t rounded-t-3xl border-b bg-white">
+                <h3 class="text-2xl">Find University</h3>
+                <div
+                    @click="searchMobile = false; slideOver = false"
+                    class="text-2xl"
+                    role="button"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
             </div>
-            <i class="fa-solid fa-angle-down"></i>
-        </div>
 
-        <button type="submit" class="button font-semibold flex items-center justify-center space-x-2 w-full lg:w-auto">
-            <span class="whitespace-nowrap">Get Started</span>
-            <i class="fa-solid fa-arrow-right"></i>
-        </button>
+            <div class="p-7 bg-white space-y-5">
+                <div
+                    x-cloak=""
+                    x-show="dropdown1"
+                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                >
+                    
+<!-- countries -->
+<div class="space-y-4">
+    <h5 class="text-xl font-semibold">Select Region</h5>
+    <div class="grid grid-cols-2 gap-4">
+        
+<!-- country: Everywhere -->
+<div
+    @click="country = {label: 'Everywhere', code: ''}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === ''}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <img src="./assets/img/globe.png" class="w-8 h-8" alt="">
+    
+    <div>Everywhere</div>
+</div>
+<!-- /country: Everywhere -->
+
+        
+        
+<!-- country: Brunei -->
+<div
+    @click="country = {label: 'Brunei', code: 'bn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'bn'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-bn fis w-8 h-8 rounded border"></span>
+    
+    <div>Brunei</div>
+</div>
+<!-- /country: Brunei -->
+
+        
+        
+<!-- country: India -->
+<div
+    @click="country = {label: 'India', code: 'in'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'in'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-in fis w-8 h-8 rounded border"></span>
+    
+    <div>India</div>
+</div>
+<!-- /country: India -->
+
+        
+        
+<!-- country: Indonesia -->
+<div
+    @click="country = {label: 'Indonesia', code: 'id'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'id'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-id fis w-8 h-8 rounded border"></span>
+    
+    <div>Indonesia</div>
+</div>
+<!-- /country: Indonesia -->
+
+        
+        
+<!-- country: Malaysia -->
+<div
+    @click="country = {label: 'Malaysia', code: 'my'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'my'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-my fis w-8 h-8 rounded border"></span>
+    
+    <div>Malaysia</div>
+</div>
+<!-- /country: Malaysia -->
+
+        
+        
+<!-- country: Mauritius -->
+<div
+    @click="country = {label: 'Mauritius', code: 'mu'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'mu'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-mu fis w-8 h-8 rounded border"></span>
+    
+    <div>Mauritius</div>
+</div>
+<!-- /country: Mauritius -->
+
+        
+        
+<!-- country: Middle East -->
+<div
+    @click="country = {label: 'Middle East', code: 'sa'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'sa'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-sa fis w-8 h-8 rounded border"></span>
+    
+    <div>Middle East</div>
+</div>
+<!-- /country: Middle East -->
+
+        
+        
+<!-- country: Philippines -->
+<div
+    @click="country = {label: 'Philippines', code: 'ph'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'ph'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-ph fis w-8 h-8 rounded border"></span>
+    
+    <div>Philippines</div>
+</div>
+<!-- /country: Philippines -->
+
+        
+        
+<!-- country: Singapore -->
+<div
+    @click="country = {label: 'Singapore', code: 'sg'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'sg'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-sg fis w-8 h-8 rounded border"></span>
+    
+    <div>Singapore</div>
+</div>
+<!-- /country: Singapore -->
+
+        
+        
+<!-- country: Sri-Lanka -->
+<div
+    @click="country = {label: 'Sri-Lanka', code: 'lk'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'lk'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-lk fis w-8 h-8 rounded border"></span>
+    
+    <div>Sri-Lanka</div>
+</div>
+<!-- /country: Sri-Lanka -->
+
+        
+        
+<!-- country: Vietnam -->
+<div
+    @click="country = {label: 'Vietnam', code: 'vn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'vn'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-vn fis w-8 h-8 rounded border"></span>
+    
+    <div>Vietnam</div>
+</div>
+<!-- /country: Vietnam -->
+
+        
     </div>
-</form>
+</div>
+<!-- /countries -->
+
+                </div>
+                <div
+                    x-cloak=""
+                    x-show="!dropdown1"
+                    @click="dropdown1 = true"
+                    role="button"
+                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                >
+                    
+<!-- select country -->
+<div class="flex items-center justify-between">
+    <div class="flex items-center grow lg:w-52">
+        <span
+            x-cloak=""
+            x-show="country && country.code"
+            :class="country ? 'fi-' + country.code : ''"
+            class="fi fis w-6 h-6 rounded border mr-2">
+        </span>
+        <img
+            x-cloak=""
+            x-show="country && !country.code"
+            src="./assets/img/globe.png" class="w-6 h-6 mr-2"
+            alt=""
+        >
+        <div
+            x-text="country ? country.label : 'Country'"
+            class="text-gray-400 font-semibold">
+        </div>
+    </div>
+    <i class="fa-solid fa-angle-down"></i>
+</div>
+<!-- /select country -->
+
+                </div>
+
+                <div
+                    x-cloak=""
+                    x-show="dropdown2"
+                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                >
+                    
+<!-- study levels -->
+<div class="space-y-4">
+    <h5 class="text-xl font-semibold">Study Level</h5>
+    <div class="grid grid-cols-2 gap-4">
+        
+<!-- study level: Bachelor -->
+<div
+    @click="studyLevel = {label: 'Bachelor\'s', code: 'bachelor'}; dropdown2 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'bachelor'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    <img src="./assets/img/study-level-bachelor.svg" class="w-8 h-8" alt="">
+    <div>Bachelor's</div>
+</div>
+<!-- /study level: Bachelor -->
+
+        
+<!-- study level: Master -->
+<div
+    @click="studyLevel = {label: 'Master\'s', code: 'master'}; dropdown2 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'master'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    <img src="./assets/img/study-level-master.svg" class="w-8 h-8" alt="">
+    <div>Master's</div>
+</div>
+<!-- /study level: Master -->
+
+    </div>
+</div>
+<!-- /study levels -->
+
+                </div>
+                <div
+                    x-cloak=""
+                    x-show="!dropdown2"
+                    @click="dropdown2 = true"
+                    role="button"
+                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                >
+                    
+<!-- select study level -->
+<div class="flex items-center justify-between">
+    <div class="flex items-center grow lg:w-52">
+        <template x-if="studyLevel">
+            <img :src="'./assets/img/study-level-' + studyLevel.code + '.svg'" class="w-6 h-6 mr-2" alt="">
+        </template>
+        <div x-text="studyLevel ? studyLevel.label : 'Study Level'" class="text-gray-400 font-semibold"></div>
+    </div>
+    <i class="fa-solid fa-angle-down"></i>
+</div>
+<!-- /select study level -->
+
+                </div>
+
+                
+<!-- search submit button -->
+<button type="submit" class="button font-semibold flex items-center justify-center space-x-2 w-full">
+    <span class="whitespace-nowrap">Get Started</span>
+    <i class="fa-solid fa-arrow-right"></i>
+</button>
+<!-- /search submit button -->
+
+            </div>
+        </div>
+    </form>
+    <!-- /mobile -->
+</div>
 <!-- /search form -->
 
                         </div>
@@ -431,7 +807,7 @@
     </header>
 
     <main>
-        <div class="py-10 lg:py-32">
+        <div class="pt-20 pb-12 lg:pt-40 lg:pb-32 bg-top bg-cover bg-no-repeat" style="background-image: url(./assets/img/gradient-1.png);">
     <div class="container" x-data="{selected: 'search'}">
         <div class="text-center space-x-8 mb-10">
             
@@ -459,27 +835,32 @@
                 <h1 class="font-heading text-4xl lg:text-8xl">For You</h1>
             </div>
 
-            <div class="flex justify-center mt-10">
+            <div class="lg:flex lg:justify-center mt-10">
                 
 <!-- search form -->
-<form
-    x-data="{dropdown1: false, dropdown2: false, country: null, studyLevel: null}"
-    class="relative w-full lg:w-auto"
->
-    <!-- dropdown 1 -->
-    <div
-        x-cloak=""
-        x-show="dropdown1"
-        @click.away="dropdown1 = false; slideOver = searchNav"
-        class="absolute z-20 bg-white p-5 border drop-shadow-xl w-full lg:w-auto top-auto bottom-0 lg:bottom-[85px] rounded-t-2xl rounded-br-2xl"
-    >
-        <div class="space-y-4">
-            <h5 class="text-xl font-semibold">Select Region</h5>
-            <div class="grid grid-cols-2 gap-4">
-                
+<div x-data="{dropdown1: false, dropdown2: false, country: null, studyLevel: null}">
+    <!-- desktop -->
+    <form class="hidden lg:block relative w-auto">
+        <!-- dropdown 1 -->
+        <div
+            x-cloak=""
+            x-show="dropdown1"
+            @click.away="dropdown1 = false; slideOver = searchNav"
+            :class="{
+                'top-[85px] bottom-auto rounded-b-2xl rounded-tr-2xl': !navAtTop,
+                'top-auto lg:bottom-[85px] rounded-t-2xl rounded-br-2xl': navAtTop
+            }"
+            class="absolute z-20 bg-white p-5 border drop-shadow-xl w-auto"
+        >
+            
+<!-- countries -->
+<div class="space-y-4">
+    <h5 class="text-xl font-semibold">Select Region</h5>
+    <div class="grid grid-cols-2 gap-4">
+        
 <!-- country: Everywhere -->
 <div
-    @click="country = {label: 'Everywhere', code: ''}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Everywhere', code: ''}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === ''}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -491,11 +872,11 @@
 </div>
 <!-- /country: Everywhere -->
 
-                
-                    
+        
+        
 <!-- country: Brunei -->
 <div
-    @click="country = {label: 'Brunei', code: 'bn'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Brunei', code: 'bn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'bn'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -507,11 +888,11 @@
 </div>
 <!-- /country: Brunei -->
 
-                
-                    
+        
+        
 <!-- country: India -->
 <div
-    @click="country = {label: 'India', code: 'in'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'India', code: 'in'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'in'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -523,11 +904,11 @@
 </div>
 <!-- /country: India -->
 
-                
-                    
+        
+        
 <!-- country: Indonesia -->
 <div
-    @click="country = {label: 'Indonesia', code: 'id'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Indonesia', code: 'id'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'id'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -539,11 +920,11 @@
 </div>
 <!-- /country: Indonesia -->
 
-                
-                    
+        
+        
 <!-- country: Malaysia -->
 <div
-    @click="country = {label: 'Malaysia', code: 'my'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Malaysia', code: 'my'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'my'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -555,11 +936,11 @@
 </div>
 <!-- /country: Malaysia -->
 
-                
-                    
+        
+        
 <!-- country: Mauritius -->
 <div
-    @click="country = {label: 'Mauritius', code: 'mu'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Mauritius', code: 'mu'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'mu'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -571,11 +952,11 @@
 </div>
 <!-- /country: Mauritius -->
 
-                
-                    
+        
+        
 <!-- country: Middle East -->
 <div
-    @click="country = {label: 'Middle East', code: 'sa'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Middle East', code: 'sa'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'sa'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -587,11 +968,11 @@
 </div>
 <!-- /country: Middle East -->
 
-                
-                    
+        
+        
 <!-- country: Philippines -->
 <div
-    @click="country = {label: 'Philippines', code: 'ph'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Philippines', code: 'ph'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'ph'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -603,11 +984,11 @@
 </div>
 <!-- /country: Philippines -->
 
-                
-                    
+        
+        
 <!-- country: Singapore -->
 <div
-    @click="country = {label: 'Singapore', code: 'sg'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Singapore', code: 'sg'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'sg'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -619,11 +1000,11 @@
 </div>
 <!-- /country: Singapore -->
 
-                
-                    
+        
+        
 <!-- country: Sri-Lanka -->
 <div
-    @click="country = {label: 'Sri-Lanka', code: 'lk'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Sri-Lanka', code: 'lk'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'lk'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -635,11 +1016,11 @@
 </div>
 <!-- /country: Sri-Lanka -->
 
-                
-                    
+        
+        
 <!-- country: Vietnam -->
 <div
-    @click="country = {label: 'Vietnam', code: 'vn'}; dropdown1 = false; slideOver = searchNav"
+    @click="country = {label: 'Vietnam', code: 'vn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
     :class="{'bg-gray-100 rounded-lg': country && country.code === 'vn'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
@@ -651,95 +1032,462 @@
 </div>
 <!-- /country: Vietnam -->
 
+        
+    </div>
+</div>
+<!-- /countries -->
+
+        </div>
+        <!-- /dropdown 1 -->
+
+        <!-- dropdown 2 -->
+        <div
+            x-cloak=""
+            x-show="dropdown2"
+            @click.away="dropdown2 = false; slideOver = searchNav"
+            :class="{
+                'top-[85px] bottom-auto rounded-b-2xl rounded-tr-2xl': !navAtTop,
+                'top-auto lg:bottom-[85px] rounded-t-2xl rounded-br-2xl': navAtTop
+            }"
+            class="absolute z-20 bg-white p-5 border drop-shadow-xl w-auto left-[260px]"
+        >
+            
+<!-- study levels -->
+<div class="space-y-4">
+    <h5 class="text-xl font-semibold">Study Level</h5>
+    <div class="grid grid-cols-2 gap-4">
+        
+<!-- study level: Bachelor -->
+<div
+    @click="studyLevel = {label: 'Bachelor\'s', code: 'bachelor'}; dropdown2 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'bachelor'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    <img src="./assets/img/study-level-bachelor.svg" class="w-8 h-8" alt="">
+    <div>Bachelor's</div>
+</div>
+<!-- /study level: Bachelor -->
+
+        
+<!-- study level: Master -->
+<div
+    @click="studyLevel = {label: 'Master\'s', code: 'master'}; dropdown2 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'master'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    <img src="./assets/img/study-level-master.svg" class="w-8 h-8" alt="">
+    <div>Master's</div>
+</div>
+<!-- /study level: Master -->
+
+    </div>
+</div>
+<!-- /study levels -->
+
+        </div>
+        <!-- /dropdown 2 -->
+
+        <div
+            :class="{'z-10': !searchNav}"
+            class="relative flex items-center p-4 border border-gray-300 rounded-2xl bg-white select-none"
+        >
+            <div
+                @click="dropdown1 = true; slideOver = true"
+                role="button"
+                class="py-1.5 pr-5"
+            >
                 
-            </div>
-        </div>
-    </div>
-    <!-- /dropdown 1 -->
-
-    <!-- dropdown 2 -->
-    <div
-        x-cloak=""
-        x-show="dropdown2"
-        @click.away="dropdown2 = false; slideOver = searchNav"
-        class="absolute z-20 bg-white p-5 border drop-shadow-xl w-full lg:w-auto top-auto bottom-0 lg:bottom-[85px] rounded-t-2xl rounded-br-2xl lg:left-[260px]"
-    >
-        <div class="space-y-4">
-            <h5 class="text-xl font-semibold">Study Level</h5>
-            <div class="grid grid-cols-2 gap-4">
-                <div
-                    @click="studyLevel = {label: 'Bachelor\'s', code: 'bachelor'}; dropdown2 = false; slideOver = searchNav"
-                    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'bachelor'}"
-                    role="button"
-                    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
-                >
-                    <img src="./assets/img/study-level-bachelor.svg" class="w-8 h-8" alt="">
-                    <div>Bachelor's</div>
-                </div>
-                <div
-                    @click="studyLevel = {label: 'Master\'s', code: 'master'}; dropdown2 = false; slideOver = searchNav"
-                    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'master'}"
-                    role="button"
-                    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
-                >
-                    <img src="./assets/img/study-level-master.svg" class="w-8 h-8" alt="">
-                    <div>Master's</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /dropdown 2 -->
-
-    <div
-        :class="{'lg:z-10': !searchNav}"
-        class="relative lg:flex lg:items-center space-y-8 lg:space-y-0 p-4 border border-gray-300 rounded-xl lg:rounded-2xl bg-white"
-    >
-        <div
-            @click="dropdown1 = true; slideOver = true"
-            role="button"
-            class="inline-flex items-center lg:py-1.5 lg:pr-5 w-full"
+<!-- select country -->
+<div class="flex items-center justify-between">
+    <div class="flex items-center grow lg:w-52">
+        <span
+            x-cloak=""
+            x-show="country && country.code"
+            :class="country ? 'fi-' + country.code : ''"
+            class="fi fis w-6 h-6 rounded border mr-2">
+        </span>
+        <img
+            x-cloak=""
+            x-show="country && !country.code"
+            src="./assets/img/globe.png" class="w-6 h-6 mr-2"
+            alt=""
         >
-            <div class="flex items-center grow lg:w-52">
-                <span
-                    x-cloak=""
-                    x-show="country && country.code"
-                    :class="country ? 'fi-' + country.code : ''"
-                    class="fi fis w-6 h-6 rounded border mr-2">
-                </span>
-                <img
-                    x-cloak=""
-                    x-show="country && !country.code"
-                    src="./assets/img/globe.png" class="w-6 h-6 mr-2"
-                    alt=""
-                >
-                <div
-                    x-text="country ? country.label : 'Country'"
-                    class="text-gray-400 font-semibold">
-                </div>
+        <div
+            x-text="country ? country.label : 'Country'"
+            class="text-gray-400 font-semibold">
+        </div>
+    </div>
+    <i class="fa-solid fa-angle-down"></i>
+</div>
+<!-- /select country -->
+
             </div>
-            <i class="fa-solid fa-angle-down"></i>
+
+            <div
+                @click="dropdown2 = true; slideOver = true"
+                role="button"
+                class="py-1.5 px-5 border-l"
+            >
+                
+<!-- select study level -->
+<div class="flex items-center justify-between">
+    <div class="flex items-center grow lg:w-52">
+        <template x-if="studyLevel">
+            <img :src="'./assets/img/study-level-' + studyLevel.code + '.svg'" class="w-6 h-6 mr-2" alt="">
+        </template>
+        <div x-text="studyLevel ? studyLevel.label : 'Study Level'" class="text-gray-400 font-semibold"></div>
+    </div>
+    <i class="fa-solid fa-angle-down"></i>
+</div>
+<!-- /select study level -->
+
+            </div>
+
+            
+<!-- search submit button -->
+<button type="submit" class="button font-semibold flex items-center justify-center space-x-2 w-full">
+    <span class="whitespace-nowrap">Get Started</span>
+    <i class="fa-solid fa-arrow-right"></i>
+</button>
+<!-- /search submit button -->
+
+        </div>
+    </form>
+    <!-- /desktop -->
+
+    <!-- mobile -->
+    <form class="lg:hidden">
+        <div
+            @click="searchMobile = true; slideOver = true; dropdown1 = true"
+            class="flex items-center justify-between border rounded-xl py-2 px-3 bg-white w-full select-none"
+        >
+            <span class="text-sm text-gray-400 w-52">Find University</span>
+            <div class="button p-2">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
         </div>
 
         <div
-            @click="dropdown2 = true; slideOver = true"
-            role="button"
-            class="flex items-center lg:py-1.5 lg:border-l lg:px-5"
+            x-cloak=""
+            x-show="searchMobile"
+            @click.away="searchMobile = false"
+            class="fixed bottom-0 inset-x-0 z-20"
         >
-            <div class="flex items-center grow lg:w-52">
-                <template x-if="studyLevel">
-                    <img :src="'./assets/img/study-level-' + studyLevel.code + '.svg'" class="w-6 h-6 mr-2" alt="">
-                </template>
-                <div x-text="studyLevel ? studyLevel.label : 'Study Level'" class="text-gray-400 font-semibold"></div>
+            <div class="flex items-center justify-between p-7 border-t rounded-t-3xl border-b bg-white">
+                <h3 class="text-2xl">Find University</h3>
+                <div
+                    @click="searchMobile = false; slideOver = false"
+                    class="text-2xl"
+                    role="button"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
             </div>
-            <i class="fa-solid fa-angle-down"></i>
-        </div>
 
-        <button type="submit" class="button font-semibold flex items-center justify-center space-x-2 w-full lg:w-auto">
-            <span class="whitespace-nowrap">Get Started</span>
-            <i class="fa-solid fa-arrow-right"></i>
-        </button>
+            <div class="p-7 bg-white space-y-5">
+                <div
+                    x-cloak=""
+                    x-show="dropdown1"
+                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                >
+                    
+<!-- countries -->
+<div class="space-y-4">
+    <h5 class="text-xl font-semibold">Select Region</h5>
+    <div class="grid grid-cols-2 gap-4">
+        
+<!-- country: Everywhere -->
+<div
+    @click="country = {label: 'Everywhere', code: ''}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === ''}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <img src="./assets/img/globe.png" class="w-8 h-8" alt="">
+    
+    <div>Everywhere</div>
+</div>
+<!-- /country: Everywhere -->
+
+        
+        
+<!-- country: Brunei -->
+<div
+    @click="country = {label: 'Brunei', code: 'bn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'bn'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-bn fis w-8 h-8 rounded border"></span>
+    
+    <div>Brunei</div>
+</div>
+<!-- /country: Brunei -->
+
+        
+        
+<!-- country: India -->
+<div
+    @click="country = {label: 'India', code: 'in'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'in'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-in fis w-8 h-8 rounded border"></span>
+    
+    <div>India</div>
+</div>
+<!-- /country: India -->
+
+        
+        
+<!-- country: Indonesia -->
+<div
+    @click="country = {label: 'Indonesia', code: 'id'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'id'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-id fis w-8 h-8 rounded border"></span>
+    
+    <div>Indonesia</div>
+</div>
+<!-- /country: Indonesia -->
+
+        
+        
+<!-- country: Malaysia -->
+<div
+    @click="country = {label: 'Malaysia', code: 'my'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'my'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-my fis w-8 h-8 rounded border"></span>
+    
+    <div>Malaysia</div>
+</div>
+<!-- /country: Malaysia -->
+
+        
+        
+<!-- country: Mauritius -->
+<div
+    @click="country = {label: 'Mauritius', code: 'mu'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'mu'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-mu fis w-8 h-8 rounded border"></span>
+    
+    <div>Mauritius</div>
+</div>
+<!-- /country: Mauritius -->
+
+        
+        
+<!-- country: Middle East -->
+<div
+    @click="country = {label: 'Middle East', code: 'sa'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'sa'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-sa fis w-8 h-8 rounded border"></span>
+    
+    <div>Middle East</div>
+</div>
+<!-- /country: Middle East -->
+
+        
+        
+<!-- country: Philippines -->
+<div
+    @click="country = {label: 'Philippines', code: 'ph'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'ph'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-ph fis w-8 h-8 rounded border"></span>
+    
+    <div>Philippines</div>
+</div>
+<!-- /country: Philippines -->
+
+        
+        
+<!-- country: Singapore -->
+<div
+    @click="country = {label: 'Singapore', code: 'sg'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'sg'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-sg fis w-8 h-8 rounded border"></span>
+    
+    <div>Singapore</div>
+</div>
+<!-- /country: Singapore -->
+
+        
+        
+<!-- country: Sri-Lanka -->
+<div
+    @click="country = {label: 'Sri-Lanka', code: 'lk'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'lk'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-lk fis w-8 h-8 rounded border"></span>
+    
+    <div>Sri-Lanka</div>
+</div>
+<!-- /country: Sri-Lanka -->
+
+        
+        
+<!-- country: Vietnam -->
+<div
+    @click="country = {label: 'Vietnam', code: 'vn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': country && country.code === 'vn'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    
+        <span class="fi fi-vn fis w-8 h-8 rounded border"></span>
+    
+    <div>Vietnam</div>
+</div>
+<!-- /country: Vietnam -->
+
+        
     </div>
-</form>
+</div>
+<!-- /countries -->
+
+                </div>
+                <div
+                    x-cloak=""
+                    x-show="!dropdown1"
+                    @click="dropdown1 = true"
+                    role="button"
+                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                >
+                    
+<!-- select country -->
+<div class="flex items-center justify-between">
+    <div class="flex items-center grow lg:w-52">
+        <span
+            x-cloak=""
+            x-show="country && country.code"
+            :class="country ? 'fi-' + country.code : ''"
+            class="fi fis w-6 h-6 rounded border mr-2">
+        </span>
+        <img
+            x-cloak=""
+            x-show="country && !country.code"
+            src="./assets/img/globe.png" class="w-6 h-6 mr-2"
+            alt=""
+        >
+        <div
+            x-text="country ? country.label : 'Country'"
+            class="text-gray-400 font-semibold">
+        </div>
+    </div>
+    <i class="fa-solid fa-angle-down"></i>
+</div>
+<!-- /select country -->
+
+                </div>
+
+                <div
+                    x-cloak=""
+                    x-show="dropdown2"
+                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                >
+                    
+<!-- study levels -->
+<div class="space-y-4">
+    <h5 class="text-xl font-semibold">Study Level</h5>
+    <div class="grid grid-cols-2 gap-4">
+        
+<!-- study level: Bachelor -->
+<div
+    @click="studyLevel = {label: 'Bachelor\'s', code: 'bachelor'}; dropdown2 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'bachelor'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    <img src="./assets/img/study-level-bachelor.svg" class="w-8 h-8" alt="">
+    <div>Bachelor's</div>
+</div>
+<!-- /study level: Bachelor -->
+
+        
+<!-- study level: Master -->
+<div
+    @click="studyLevel = {label: 'Master\'s', code: 'master'}; dropdown2 = false; slideOver = searchNav || searchMobile"
+    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'master'}"
+    role="button"
+    class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
+>
+    <img src="./assets/img/study-level-master.svg" class="w-8 h-8" alt="">
+    <div>Master's</div>
+</div>
+<!-- /study level: Master -->
+
+    </div>
+</div>
+<!-- /study levels -->
+
+                </div>
+                <div
+                    x-cloak=""
+                    x-show="!dropdown2"
+                    @click="dropdown2 = true"
+                    role="button"
+                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                >
+                    
+<!-- select study level -->
+<div class="flex items-center justify-between">
+    <div class="flex items-center grow lg:w-52">
+        <template x-if="studyLevel">
+            <img :src="'./assets/img/study-level-' + studyLevel.code + '.svg'" class="w-6 h-6 mr-2" alt="">
+        </template>
+        <div x-text="studyLevel ? studyLevel.label : 'Study Level'" class="text-gray-400 font-semibold"></div>
+    </div>
+    <i class="fa-solid fa-angle-down"></i>
+</div>
+<!-- /select study level -->
+
+                </div>
+
+                
+<!-- search submit button -->
+<button type="submit" class="button font-semibold flex items-center justify-center space-x-2 w-full">
+    <span class="whitespace-nowrap">Get Started</span>
+    <i class="fa-solid fa-arrow-right"></i>
+</button>
+<!-- /search submit button -->
+
+            </div>
+        </div>
+    </form>
+    <!-- /mobile -->
+</div>
 <!-- /search form -->
 
             </div>
@@ -755,78 +1503,80 @@
 </div>
 
 <div class="container">
-    <div class="py-10 lg:py-32 space-y-32">
+    <div class="py-10 lg:py-32 space-y-10 lg:space-y-32">
         <div class="text-center">
             <img class="mx-auto" src="./assets/img/banner.png" alt="">
         </div>
 
         <div class="space-y-4">
-            <h2 class="font-heading text-3xl">How EasyUni Can Help You</h2>
-            <div>Our team of advisors is ready to support you at every step of your study abroad journey.<br>Our services are 100% free for students like you because we're funded by universities.</div>
+            <h2 class="font-heading-medium text-2xl lg:text-3xl">How EasyUni Can Help You</h2>
+            <div class="text-lg lg:text-xl">Our team of advisors is ready to support you at every step of your study abroad journey. Our services are 100% free for students like you because we're funded by universities.</div>
         </div>
 
         <div class="space-y-12">
-            <div class="flex justify-between bg-center bg-no-repeat" style="background-image: url(./assets/img/line.png)">
+            <div class="lg:flex lg:justify-between lg:bg-center lg:bg-no-repeat lg:bg-[url('../img/line.png')] space-y-12 lg:space-y-0">
                 <!-- feature 1 -->
-                <div class="w-60 relative">
-                    <div class="w-40 h-40 mx-auto bg-center bg-no-repeat bg-cover"
-                        style="border-radius: 0 70px 70px; background-image: url(./assets/img/feature-1-main.png)">
+                <div class="flex lg:block lg:w-60 space-x-8 lg:space-x-0 lg:space-y-20">
+                    <div class="relative">
+                        <div class="w-20 lg:w-40 h-20 lg:h-40 mx-auto bg-center bg-no-repeat bg-cover"
+                            style="border-radius: 0 70px 70px; background-image: url(./assets/img/feature-1-main.png);">
+                        </div>
+                        <div class="absolute z-10 bottom-0 lg:-bottom-2 right-0 lg:right-5 w-7 lg:w-14 h-7 lg:h-14 drop-shadow-xl bg-center bg-no-repeat bg-contain lg:bg-cover"
+                            style="background-image: url(./assets/img/feature-1-icon.png);">
+                        </div>
+                        <div class="absolute z-0 -top-5 lg:-top-12 -right-6 lg:-right-11 w-12 lg:w-32 h-20 lg:h-44 bg-center bg-no-repeat bg-contain lg:bg-cover"
+                            style="background-image: url(./assets/img/feature-1-plane.png);">
+                        </div>
                     </div>
-                    <div class="absolute z-10 -bottom-2 right-5 w-14 h-14 drop-shadow-xl bg-center bg-no-repeat bg-cover"
-                        style="background-image: url(./assets/img/feature-1-icon.png)">
-                    </div>
-                    <div class="absolute z-0 -top-12 -right-11 w-32 h-44 bg-center bg-no-repeat bg-cover"
-                        style="background-image: url(./assets/img/feature-1-plane.png)">
+                    <div class="lg:text-center">
+                        <div class="font-bold text-lg lg:text-xl">Find your best matches</div>
+                        <div class="leading-6 text-gray-500 text-sm lg:text-base">See programs that best match your eligibility and aspirations</div>
                     </div>
                 </div>
                 <!-- /feature 1 -->
 
                 <!-- feature 2 -->
-                <div class="w-60 relative">
-                    <div class="w-40 h-40 mx-auto bg-center bg-no-repeat bg-cover"
-                        style="border-radius: 70px 0 70px 70px; background-image: url(./assets/img/feature-2-main.png)">
+                <div class="flex lg:block lg:w-60 space-x-reverse space-x-8 lg:space-x-0 lg:space-y-20">
+                    <div class="relative order-2">
+                        <div class="w-20 lg:w-40 h-20 lg:h-40 mx-auto bg-center bg-no-repeat bg-cover"
+                            style="border-radius: 70px 0 70px 70px; background-image: url(./assets/img/feature-2-main.png);">
+                        </div>
+                        <div class="absolute -top-2 -left-2 lg:left-5 w-7 lg:w-14 h-7 lg:h-14 drop-shadow-xl bg-center bg-no-repeat bg-contain lg:bg-cover"
+                            style="background-image: url(./assets/img/feature-2-icon.png);">
+                        </div>
+                        <div class="absolute -left-3 -bottom-1 lg:-bottom-3 drop-shadow-xl">
+                            <img src="./assets/img/feature-2-ask.png" class="w-16 lg:w-full" alt="">
+                        </div>
                     </div>
-                    <div class="absolute -top-2 left-5 w-14 h-14 drop-shadow-xl bg-center bg-no-repeat bg-cover"
-                        style="background-image: url(./assets/img/feature-2-icon.png)">
+                    <div class="lg:text-center order-1">
+                        <div class="font-bold text-lg lg:text-xl">Application guidance</div>
+                        <div class="leading-6 text-gray-500 text-sm lg:text-base">We'll get you to the right place to start your application</div>
                     </div>
                 </div>
                 <!-- /feature 2 -->
 
                 <!-- feature 3 -->
-                <div class="w-60 relative">
-                    <div class="w-40 h-40 mx-auto bg-center bg-no-repeat bg-cover"
-                        style="border-radius: 70px 0 70px 70px; background-image: url(./assets/img/feature-3-main.png)">
+                <div class="flex lg:block lg:w-60 space-x-8 lg:space-x-0 lg:space-y-20">
+                    <div class="relative">
+                        <div class="w-20 lg:w-40 h-20 lg:h-40 mx-auto bg-center bg-no-repeat bg-cover"
+                            style="border-radius: 70px 0 70px 70px; background-image: url(./assets/img/feature-3-main.png);">
+                        </div>
+                        <div class="absolute -bottom-1 lg:left-5 w-7 lg:w-14 h-7 lg:h-14 drop-shadow-xl bg-center bg-no-repeat bg-contain lg:bg-cover"
+                            style="background-image: url(./assets/img/feature-3-icon.png);">
+                        </div>
+                        <div class="absolute -bottom-3 lg:-bottom-6 -right-2 lg:right-0 w-16 lg:w-36 h-24 lg:h-44 bg-left bg-no-repeat bg-cover"
+                            style="background-image: url(./assets/img/feature-3-suitcase.png);">
+                        </div>
+                        <div class="absolute top-2 lg:top-4 -left-2 lg:left-4 w-16 lg:w-36 h-6 lg:h-16 bg-left bg-no-repeat bg-cover"
+                            style="background-image: url(./assets/img/feature-3-plane.png);">
+                        </div>
                     </div>
-                    <div class="absolute -bottom-2 left-5 w-14 h-14 drop-shadow-xl bg-center bg-no-repeat bg-cover"
-                        style="background-image: url(./assets/img/feature-3-icon.png)">
-                    </div>
-                    <div class="absolute -bottom-6 right-0 w-36 h-44 bg-left bg-no-repeat bg-cover"
-                        style="background-image: url(./assets/img/feature-3-suitcase.png)">
-                    </div>
-                    <div class="absolute top-4 left-4 w-36 h-16 bg-left bg-no-repeat bg-cover"
-                        style="background-image: url(./assets/img/feature-3-plane.png)">
+                    <div class="lg:text-center">
+                        <div class="font-bold text-lg lg:text-xl">Visa & travel advice</div>
+                        <div class="leading-6 text-gray-500 text-sm lg:text-base">Get help after application, all the way to your first day at university</div>
                     </div>
                 </div>
                 <!-- /feature 3 -->
-            </div>
-
-            <div class="flex justify-between">
-            
-                <div class="w-60 text-center">
-                    <div class="font-bold text-xl">Find your best matches</div>
-                    <div class="leading-6 text-gray-500">See programs that best match your eligibility and aspirations</div>
-                </div>
-            
-                <div class="w-60 text-center">
-                    <div class="font-bold text-xl">Application guidance</div>
-                    <div class="leading-6 text-gray-500">We'll get you to the right place to start your application</div>
-                </div>
-            
-                <div class="w-60 text-center">
-                    <div class="font-bold text-xl">Visa & travel advice</div>
-                    <div class="leading-6 text-gray-500">Get help after application, all the way to your first day at university</div>
-                </div>
-            
             </div>
 
             <div class="text-center">
@@ -836,8 +1586,8 @@
 
         <div class="space-y-4">
             <div class="flex justify-between items-center">
-                <h2 class="font-heading text-3xl">Featured Universities</h2>
-                <div class="space-x-1">
+                <h2 class="font-heading-medium text-2xl lg:text-3xl">Featured Universities</h2>
+                <div class="hidden lg:block space-x-1">
                     <a href="#" class="button bg-white text-gray-500 border-gray-500 px-3.5 py-3">
                         <i class="fa-solid fa-arrow-left"></i>
                     </a>
@@ -847,60 +1597,59 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-3 gap-8">
-            
-                <div class="rounded-2xl border overflow-hidden">
-                    <div class="h-48 bg-cover bg-center bg-no-repeat relative"
-                        style="background-image: url(./assets/img/univer-bg.jpg)">
-                        <img class="absolute top-auto right-auto bottom-4 left-4" src="./assets/img/univer-logo.png" alt="">
+            <div class="overflow-auto">
+                <div class="flex space-x-8 overflow-x-auto">
+                
+                    <div class="w-72 lg:w-auto flex-none lg:flex-1 lg:basis-1/3 rounded-xl lg:rounded-2xl border overflow-hidden">
+                        <div class="h-44 lg:h-52 bg-cover bg-center bg-no-repeat relative"
+                            style="background-image: url(./assets/img/univer-bg.jpg);">
+                            <img class="absolute top-auto right-auto bottom-4 left-4 w-14 lg:w-auto" src="./assets/img/univer-logo.png" alt="">
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="font-bold text-lg lg:text-xl">Stanford University</div>
+                            <div class="text-sm">Stanford, CA</div>
+                        </div>
                     </div>
-                    <div class="p-4 space-y-3">
-                        <!-- todo: location to bottom? -->
-                        <div class="font-bold text-xl">Stanford University</div>
-                        <div class="text-sm">Stanford, CA</div>
+                
+                    <div class="w-72 lg:w-auto flex-none lg:flex-1 lg:basis-1/3 rounded-xl lg:rounded-2xl border overflow-hidden">
+                        <div class="h-44 lg:h-52 bg-cover bg-center bg-no-repeat relative"
+                            style="background-image: url(./assets/img/univer-bg.jpg);">
+                            <img class="absolute top-auto right-auto bottom-4 left-4 w-14 lg:w-auto" src="./assets/img/univer-logo.png" alt="">
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="font-bold text-lg lg:text-xl">Harvard University</div>
+                            <div class="text-sm">Cambridge, MA</div>
+                        </div>
                     </div>
+                
+                    <div class="w-72 lg:w-auto flex-none lg:flex-1 lg:basis-1/3 rounded-xl lg:rounded-2xl border overflow-hidden">
+                        <div class="h-44 lg:h-52 bg-cover bg-center bg-no-repeat relative"
+                            style="background-image: url(./assets/img/univer-bg.jpg);">
+                            <img class="absolute top-auto right-auto bottom-4 left-4 w-14 lg:w-auto" src="./assets/img/univer-logo.png" alt="">
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="font-bold text-lg lg:text-xl">Massachusetts Institute of Technology</div>
+                            <div class="text-sm">Cambridge, MA</div>
+                        </div>
+                    </div>
+                
                 </div>
-            
-                <div class="rounded-2xl border overflow-hidden">
-                    <div class="h-48 bg-cover bg-center bg-no-repeat relative"
-                        style="background-image: url(./assets/img/univer-bg.jpg)">
-                        <img class="absolute top-auto right-auto bottom-4 left-4" src="./assets/img/univer-logo.png" alt="">
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <!-- todo: location to bottom? -->
-                        <div class="font-bold text-xl">Harvard University</div>
-                        <div class="text-sm">Cambridge, MA</div>
-                    </div>
-                </div>
-            
-                <div class="rounded-2xl border overflow-hidden">
-                    <div class="h-48 bg-cover bg-center bg-no-repeat relative"
-                        style="background-image: url(./assets/img/univer-bg.jpg)">
-                        <img class="absolute top-auto right-auto bottom-4 left-4" src="./assets/img/univer-logo.png" alt="">
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <!-- todo: location to bottom? -->
-                        <div class="font-bold text-xl">Massachusetts Institute of Technology</div>
-                        <div class="text-sm">Cambridge, MA</div>
-                    </div>
-                </div>
-            
             </div>
         </div>
     </div>
 </div>
 
-<div class="py-32 bg-center bg-no-repeat bg-cover" style="background-image: url(./assets/img/gradient-2.png)">
+<div class="py-10 lg:py-32 bg-top lg:bg-center bg-no-repeat bg-cover bg-[url('../img/gradient-2-mobile.png')] lg:bg-[url('../img/gradient-2.png')]">
     <div class="container">
-        <div class="space-y-20">
-            <div class="space-y-4">
-                <h2 class="font-heading text-3xl">About EasyUni</h2>
-                <div class="text-xl">Making education affordable and accessible across the globe</div>
+        <div class="space-y-52 lg:space-y-20">
+            <div class="space-y-2">
+                <h2 class="font-heading-medium text-2xl lg:text-3xl">About EasyUni</h2>
+                <div class="text-lg lg:text-xl">Making education affordable and accessible across the globe</div>
             </div>
 
-            <div class="grid grid-cols-2 gap-16">
-                <div>
-                    <div class="grid grid-cols-2 gap-14">
+            <div class="grid grid-cols-2 lg:gap-16">
+                <div class="col-span-2 lg:col-span-1">
+                    <div class="grid grid-cols-2 gap-10">
                     
                         <div class="space-y-2">
                             <h1 class="text-5xl font-bold">88%</h1>
@@ -930,53 +1679,13 @@
     </div>
 </div>
 
-<div class="bg-top bg-no-repeat bg-cover" style="background-image: url(./assets/img/gradient-3.png)">
-    <div class="py-32">
+<div class="bg-top bg-no-repeat bg-cover" style="background-image: url(./assets/img/gradient-3.png);">
+    <div class="py-10 lg:py-32">
         <div class="container">
             <div class="space-y-4">
-                <h2 class="font-heading text-3xl">Browse by field of study</h2>
-                <div class="rounded-2xl bg-white p-14 relative">
-                    <div class="absolute -right-20 top-24 h-80 bg-gradient-to-r from-violet-400 to-violet-200 border-transparent"
-                         style="border-radius: 10px 100px 100px 100px; width: 500px"
-                    >
-                        <img src="./assets/img/asian-collage-female-woman-smiling-cheerful.png"
-                             class="absolute bottom-0 right-0" alt=""
-                             style="border-bottom-right-radius: 100px"
-                        >
-
-                        <div class="absolute bottom-10 -left-20 overflow-hidden rounded-t-3xl rounded-br-3xl rounded-bl-none border bg-white p-4 w-72 drop-shadow-2xl">
-                            <div class="flex space-x-2">
-                                <div class="flex-none !h-8 !w-8 border rounded-full bg-center bg-no-repeat"
-                                    style="background-image: url(./assets/img/john-donovan.png)">
-                                </div>
-                                <div class="text-sm space-y-1">
-                                    <div class="flex space-x-2">
-                                        <span class="font-bold">John Donovan</span>
-                                        <time>9:30 AM</time>
-                                    </div>
-                                    <span>Hey, Emily. I really appreciate your message 😊👍</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="absolute -bottom-10 -left-20 overflow-hidden rounded-t-2xl rounded-br-2xl rounded-bl-none border bg-white p-3 w-48 drop-shadow-2xl">
-                            <div class="flex space-x-4 animate-pulse">
-                                <div class="rounded-full bg-slate-200 h-8 w-8"></div>
-                                <div class="flex-1 space-y-2">
-                                    <div class="h-2 bg-slate-200 rounded"></div>
-                                    <div class="space-y-2">
-                                        <div class="grid grid-cols-3 gap-4">
-                                            <div class="h-2 bg-slate-200 rounded col-span-2"></div>
-                                            <div class="h-2 bg-slate-200 rounded col-span-1"></div>
-                                        </div>
-                                        <div class="h-2 bg-slate-200 rounded"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="w-2/3 pr-20" x-data="{hidden: true}">
+                <h2 class="font-heading-medium text-2xl lg:text-3xl">Browse by field of study</h2>
+                <div class="rounded-2xl bg-white p-6 lg:p-14 relative">
+                    <div class="lg:w-2/3 lg:pr-20" x-data="{hidden: true}">
                         <div class="flex flex-wrap gap-7">
                         
                             <a href="#" class="flex">Child Care</a>
@@ -1009,38 +1718,39 @@
                         
 
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Child Care</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Child Care</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Business</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Business</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Retail</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Retail</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Education & Teaching</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Education & Teaching</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Work Health & Safety (OH&S)</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Work Health & Safety (OH&S)</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Community Services</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Community Services</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Education Support</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Education Support</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Aged Care</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Aged Care</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Nutrition</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Nutrition</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Psychology</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Psychology</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">First Aid</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">First Aid</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Building & Construction</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Building & Construction</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Human Resources (HR)</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Human Resources (HR)</a>
                         
-                            <a href="#" :class="hidden ? 'hidden' : 'flex'">Project Management</a>
+                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Project Management</a>
                         
                         </div>
 
                         <div class="mt-10">
                             <a href="#" class="font-semibold"
+                                x-cloak=""
                                 :class="hidden ? 'block' : 'hidden'"
                                 @click.prevent="hidden = false"
                             >
@@ -1048,6 +1758,7 @@
                                 <i class="fa-solid fa-angle-down"></i>
                             </a>
                             <a href="#" class="font-semibold"
+                                x-cloak=""
                                 :class="hidden ? 'hidden' : 'block'"
                                 @click.prevent="hidden = true"
                             >
@@ -1057,17 +1768,58 @@
                         </div>
                     </div>
 
+                    <div class="relative lg:absolute lg:-right-20 lg:top-24 mt-14 lg:mt-0 lg:w-[500px] h-36 lg:h-80 rounded-[45px] lg:rounded-[100px] rounded-tl-none bg-gradient-to-r from-violet-400 to-violet-200 border-transparent">
+                        <img
+                            src="./assets/img/asian-collage-female-woman-smiling-cheerful.png"
+                            class="absolute bottom-0 right-0 h-52 lg:h-auto rounded-br-[45px] lg:rounded-br-[100px]"
+                            alt=""
+                        >
+
+                        <!-- todo: mobile -->
+                        <div class="hidden lg:block absolute bottom-10 -left-20 overflow-hidden rounded-t-3xl rounded-br-3xl rounded-bl-none border bg-white p-4 w-72 drop-shadow-2xl">
+                            <div class="flex space-x-2">
+                                <div class="flex-none !h-8 !w-8 border rounded-full bg-center bg-no-repeat"
+                                     style="background-image: url(./assets/img/john-donovan.png);">
+                                </div>
+                                <div class="text-sm space-y-1">
+                                    <div class="flex space-x-2">
+                                        <span class="font-bold">John Donovan</span>
+                                        <time>9:30 AM</time>
+                                    </div>
+                                    <span>Hey, Emily. I really appreciate your message 😊👍</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- todo: mobile -->
+                        <div class="hidden lg:block absolute -bottom-10 -left-20 overflow-hidden rounded-t-2xl rounded-br-2xl rounded-bl-none border bg-white p-3 w-48 drop-shadow-2xl">
+                            <div class="flex space-x-4 animate-pulse">
+                                <div class="rounded-full bg-slate-200 h-8 w-8"></div>
+                                <div class="flex-1 space-y-2">
+                                    <div class="h-2 bg-slate-200 rounded"></div>
+                                    <div class="space-y-2">
+                                        <div class="grid grid-cols-3 gap-4">
+                                            <div class="h-2 bg-slate-200 rounded col-span-2"></div>
+                                            <div class="h-2 bg-slate-200 rounded col-span-1"></div>
+                                        </div>
+                                        <div class="h-2 bg-slate-200 rounded"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <hr class="my-8">
 
                     <div class="space-y-5">
                         <div class="space-y-1">
-                            <h5 class="font-bold text-2xl">Let's find the right option for you!</h5>
-                            <div class="text-xl">Take a look at our full list, or we can help.</div>
+                            <h5 class="font-bold text-xl lg:text-2xl">Let's find the right option for you!</h5>
+                            <div class="text-lg lg:text-xl">Take a look at our full list, or we can help.</div>
                         </div>
 
-                        <div class="space-x-3">
-                            <a href="#" class="button button-outline">Find me an University</a>
-                            <a href="#" class="button">Ask an Advisor</a>
+                        <div class="space-y-3 lg:space-y-0 space-x-0 lg:space-x-3">
+                            <a href="#" class="button button-outline justify-center w-full lg:w-auto">Find me an University</a>
+                            <a href="#" class="button justify-center w-full lg:w-auto">Ask an Advisor</a>
                         </div>
                     </div>
                 </div>
@@ -1078,36 +1830,38 @@
     <div class="container">
         <div class="space-y-4">
             <div class="flex items-center justify-between">
-                <h2 class="font-heading text-3xl">News and Articles</h2>
-                <a href="#" class="button bg-white text-gray-800 border-gray-800">See More</a>
+                <h2 class="hidden lg:block font-heading-medium text-2xl lg:text-3xl">News and Articles</h2>
+                <h2 class="block lg:hidden font-heading-medium text-2xl lg:text-3xl">Interesting</h2>
+                <a href="#" class="hidden lg:block button bg-white text-gray-800 border-gray-800">See More</a>
+                <a href="#" class="block lg:hidden">See More</a>
             </div>
 
-            <div class="grid grid-cols-3 gap-8">
+            <div class="lg:grid lg:grid-cols-3 lg:gap-8 space-y-5 lg:space-y-0">
             
-                <div class="space-y-5">
+                <div class="space-y-1 lg:space-y-5">
                     <div
                         class="h-44 rounded-2xl bg-center bg-cover bg-no-repeat"
-                        style="background-image: url(./assets/img/news-1.png)">
+                        style="background-image: url(./assets/img/news-1.png);">
                     </div>
-                    <div class="text-xl font-semibold">Online learning is actually bad for you (or so they say)</div>
+                    <div class="text-lg lg:text-xl font-semibold">Online learning is actually bad for you (or so they say)</div>
                     <div class="text-gray-500">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</div>
                 </div>
             
-                <div class="space-y-5">
+                <div class="space-y-1 lg:space-y-5">
                     <div
                         class="h-44 rounded-2xl bg-center bg-cover bg-no-repeat"
-                        style="background-image: url(./assets/img/news-2.png)">
+                        style="background-image: url(./assets/img/news-2.png);">
                     </div>
-                    <div class="text-xl font-semibold">An Entrepreneurial University with Industry-ready Programmes</div>
+                    <div class="text-lg lg:text-xl font-semibold">An Entrepreneurial University with Industry-ready Programmes</div>
                     <div class="text-gray-500">Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</div>
                 </div>
             
-                <div class="space-y-5">
+                <div class="space-y-1 lg:space-y-5">
                     <div
                         class="h-44 rounded-2xl bg-center bg-cover bg-no-repeat"
-                        style="background-image: url(./assets/img/news-3.png)">
+                        style="background-image: url(./assets/img/news-3.png);">
                     </div>
-                    <div class="text-xl font-semibold">Scholarships in Malaysia for International Students 2022</div>
+                    <div class="text-lg lg:text-xl font-semibold">Scholarships in Malaysia for International Students 2022</div>
                     <div class="text-gray-500">Сonsequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</div>
                 </div>
             
@@ -1116,15 +1870,15 @@
     </div>
 </div>
 
-<div class="py-32">
+<div class="py-10 lg:py-32">
     <div class="container">
-        <div class="rounded-xl overflow-hidden bg-center bg-no-repeat bg-cover" style="background-image: url(./assets/img/gradient-4.png)">
-            <div class="grid grid-cols-2">
+        <div class="rounded-xl overflow-hidden bg-center bg-no-repeat bg-cover" style="background-image: url(./assets/img/gradient-4.png);">
+            <div class="lg:grid lg:grid-cols-2">
                 <div></div>
                 <div>
-                    <div class="space-y-8 py-32 px-20">
-                        <h2 class="font-semibold text-3xl">See why thousands of students use and love EasyUni for finding Dream University.</h2>
-                        <a href="#" class="button">Speak to Educational Advisor</a>
+                    <div class="space-y-8 py-10 lg:py-32 px-6 lg:px-20">
+                        <h2 class="font-semibold text-2xl lg:text-3xl">See why thousands of students use and love EasyUni for finding Dream University.</h2>
+                        <a href="#" class="button w-full justify-center lg:w-auto">Speak to Educational Advisor</a>
                     </div>
                 </div>
             </div>
@@ -1135,22 +1889,23 @@
     </main>
 
     <footer x-data="{open: false}">
-        <div class="flex items-center justify-between py-3 px-12 border-t border-t-gray-300">
-            <div class="flex items-center space-x-3 text-sm">
+        <div class="flex flex-col lg:flex-row items-center justify-between py-4 px-4 lg:px-12 border-t border-t-gray-300 space-y-reverse space-y-3">
+            <div class="flex space-x-3 text-sm order-2 lg:order-1 w-full lg:w-auto">
                 <div>&copy; 2022 EasyUni All rights reserved</div>
                 <div>&bull;</div>
                 <a href="#" class="text-gray-800">Privacy</a>
                 <div>&bull;</div>
                 <a href="#" class="text-gray-800">Terms</a>
             </div>
-            <div class="flex items-center space-x-3 text-sm">
-                <a href="#" class="text-gray-800">
+
+            <div class="flex justify-between items-center lg:space-x-3 text-sm order-1 lg:order-2 w-full lg:w-auto">
+                <div role="button" class="text-gray-800 order-2 lg:order-1">
                     <i class="fa-solid fa-globe"></i>
-                </a>
+                </div>
                 <div
                     @click.prevent="open = true; slideOver = true"
                     role="button"
-                    class="text-gray-800"
+                    class="text-gray-800 order-1 lg:order-2"
                 >
                     <span>Support &amp; Resources</span>
                     <i class="fa-solid fa-angle-up"></i>
@@ -1162,38 +1917,53 @@
             x-cloak=""
             x-show="open"
             @click.away="open = false; slideOver = false"
-            class="fixed inset-x-0 z-10 bottom-0 max-w-full py-14 bg-white border-t rounded-t-2xl"
+            class="fixed inset-x-0 z-10 bottom-0 max-w-full py-6 lg:py-14 bg-white border-t rounded-t-2xl"
         >
-            <div
-                @click.prevent="open = false; slideOver = false"
-                role="button"
-                class="absolute top-5 right-6 text-lg"
-            >
-                <i class="fa-solid fa-xmark"></i>
+            <div class="hidden lg:block absolute top-5 right-6">
+                
+<!-- footer close button -->
+<div @click.prevent="open = false; slideOver = false" role="button" class="text-lg leading-none">
+  <i class="fa-solid fa-xmark"></i>
+</div>
+<!-- /footer close button -->
+
             </div>
 
             <div class="container">
-                <div class="grid grid-cols-3">
-                    <div class="space-y-5">
-                        <h5 class="font-bold">About</h5>
-                        <ul class="list-none space-y-5">
-                            <li><a href="#" class="text-gray-800">About EasyUni</a></li>
-                            <li><a href="#" class="text-gray-800">Careers</a></li>
-                            <li><a href="#" class="text-gray-800">Press & Media</a></li>
-                            <li><a href="#" class="text-gray-800">Contact us</a></li>
-                        </ul>
+                <div class="flex flex-col lg:flex-row space-y-reverse space-y-10 lg:space-y-0">
+                    <div class="flex basis-2/3 order-2 lg:order-1">
+                        <div class="basis-1/2 space-y-5">
+                            <h5 class="font-bold">About</h5>
+                            <ul class="list-none space-y-5">
+                                <li><a href="#" class="text-gray-800">About EasyUni</a></li>
+                                <li><a href="#" class="text-gray-800">Careers</a></li>
+                                <li><a href="#" class="text-gray-800">Press & Media</a></li>
+                                <li><a href="#" class="text-gray-800">Contact us</a></li>
+                            </ul>
+                        </div>
+
+                        <div class=" basis-1/2 space-y-5">
+                            <h5 class="font-bold">Services & Support</h5>
+                            <ul class="list-none space-y-5">
+                                <li><a href="#" class="text-gray-800">For students and parents</a></li>
+                                <li><a href="#" class="text-gray-800">For universities</a></li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="space-y-5">
-                        <h5 class="font-bold">Services & Support</h5>
-                        <ul class="list-none space-y-5">
-                            <li><a href="#" class="text-gray-800">For students and parents</a></li>
-                            <li><a href="#" class="text-gray-800">For universities</a></li>
-                        </ul>
-                    </div>
+                    <div class="basis-1/3 space-y-5 order-1 lg:order-2">
+                        <div class="flex justify-between items-center">
+                            <h5 class="font-bold">Let us find you the right university</h5>
+                            <div class="block lg:hidden">
+                                
+<!-- footer close button -->
+<div @click.prevent="open = false; slideOver = false" role="button" class="text-lg leading-none">
+  <i class="fa-solid fa-xmark"></i>
+</div>
+<!-- /footer close button -->
 
-                    <div class="space-y-5">
-                        <h5 class="font-bold">Let us find you the right university</h5>
+                            </div>
+                        </div>
                         <div>Get all of the information you need to make an informed decision.</div>
                         <a href="#" class="button bg-white text-gray-800 border-gray-800">Speak to Educational Advisor</a>
                         <div class="text-sm text-gray-400">Our services are 100% free for students because we’re funded by universities.</div>
