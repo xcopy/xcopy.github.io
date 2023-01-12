@@ -19,7 +19,7 @@
         class="fixed top-0 inset-x-0 z-40"
     >
         <div class="container">
-            <div class="flex items-center py-5 space-x-14">
+            <div class="flex items-center justify-between py-5 space-x-7 lg:space-x-14">
                 <a href="/" class="block">
                     
 <!-- logo -->
@@ -28,6 +28,7 @@
 
                 </a>
 
+                <!-- nav: desktop -->
                 <nav class="hidden lg:flex space-x-8">
                 
                     <a href="#" class="text-gray-800">Guides</a>
@@ -41,9 +42,11 @@
                     <a href="#" class="text-gray-800">More</a>
                 
                 </nav>
+                <!-- /nav: desktop -->
 
-                <div class="hidden lg:flex items-center space-x-5">
-                    <div x-data="{open: false}" class="relative">
+                <div class="flex items-center space-x-5">
+                    <!-- search desktop -->
+                    <div x-data="{open: false}" class="relative hidden lg:block">
                         <span @click="open = true; slideOver = true; searchNav = true" role="button">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
@@ -62,7 +65,10 @@
                         >
                             
 <!-- search form -->
-<div x-data="{dropdown1: false, dropdown2: false, country: null, studyLevel: null}">
+<div
+    @notify.window="dropdown1 = $event.detail.dropdown1"
+    x-data="{dropdown1: false, dropdown2: false, country: null, studyLevel: null}"
+>
     <!-- desktop -->
     <form class="hidden lg:block relative w-auto">
         <!-- dropdown 1 -->
@@ -716,91 +722,183 @@
 
                         </div>
                     </div>
+                    <!-- /search desktop -->
+                    <!-- search mobile -->
+                    <div class="block lg:hidden">
+                        <!--
+                            trigger mobile search form come visible by notifying a component
+                            refer to "_includes/search.html", event: @notify.window
+                        -->
+                        <span
+                            @click="$dispatch('notify', {dropdown1: true}); searchMobile = true; slideOver = true"
+                            role="button"
+                        >
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                    </div>
+                    <!-- /search mobile -->
 
-                    <div x-data="{open: false}" class="relative">
+                    
+<!-- select region -->
+<div x-data="{open: false}" class="relative">
+    <span @click="open = true" role="button">
+        <i class="fa-solid fa-globe"></i>
+    </span>
+
+    <div
+        x-cloak=""
+        x-show="open"
+        @click.away="open = false"
+        x-transition:enter="ease-in-out duration-500"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in-out duration-500"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="w-[300px] lg:w-[800px] absolute top-full  right-0 z-10 p-5 bg-white rounded-b-2xl rounded-tl-2xl border drop-shadow-xl"
+    >
+        <div class="space-y-4">
+            <h5 class="text-xl font-semibold">Current</h5>
+            <a href="#" class="inline-flex items-center space-x-2 p-1.5 rounded-lg border">
+                <img src="./assets/img/globe.png" class="w-8 h-8" alt="">
+                <span>Global site</span>
+            </a>
+            <h5 class="text-xl font-semibold">Select Region</h5>
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-bn fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Brunei</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-in fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">India</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-id fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Indonesia</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-my fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Malaysia</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-mu fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Mauritius</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-sa fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Middle East</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-ph fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Philippines</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-sg fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Singapore</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-lk fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Sri-Lanka</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-vn fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Vietnam</span>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /select region -->
+
+
+                    <!-- nav: mobile -->
+                    <div x-data="{open: false}" class="block lg:hidden">
                         <span @click="open = true" role="button">
-                            <i class="fa-solid fa-globe"></i>
+                            <i class="fa-solid fa-bars"></i>
                         </span>
 
                         <div
                             x-cloak=""
                             x-show="open"
-                            @click.away="open = false"
-                            x-transition:enter="ease-in-out duration-500"
-                            x-transition:enter-start="opacity-0"
-                            x-transition:enter-end="opacity-100"
-                            x-transition:leave="ease-in-out duration-500"
-                            x-transition:leave-start="opacity-100"
-                            x-transition:leave-end="opacity-0"
-                            class="w-[800px] absolute top-full right-0 z-10 p-5 bg-white rounded-b-2xl rounded-tl-2xl border drop-shadow-xl"
+                            @keydown.window.escape="open = false"
+                            class="relative z-10"
                         >
-                            <div class="space-y-4">
-                                <h5 class="text-xl font-semibold">Current</h5>
-                                <a href="#" class="inline-flex items-center space-x-2 p-1.5 rounded-lg border">
-                                    <img src="./assets/img/globe.png" class="w-8 h-8" alt="">
-                                    <span>Global site</span>
-                                </a>
-                                <h5 class="text-xl font-semibold">Select Region</h5>
-                                <div class="grid grid-cols-5 gap-4">
-                                    
-                                    <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                                        <span class="fi fi-bn fis w-8 h-8 rounded border"></span>
-                                        <span class="whitespace-nowrap">Brunei</span>
-                                    </a>
-                                    
-                                    <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                                        <span class="fi fi-in fis w-8 h-8 rounded border"></span>
-                                        <span class="whitespace-nowrap">India</span>
-                                    </a>
-                                    
-                                    <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                                        <span class="fi fi-id fis w-8 h-8 rounded border"></span>
-                                        <span class="whitespace-nowrap">Indonesia</span>
-                                    </a>
-                                    
-                                    <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                                        <span class="fi fi-my fis w-8 h-8 rounded border"></span>
-                                        <span class="whitespace-nowrap">Malaysia</span>
-                                    </a>
-                                    
-                                    <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                                        <span class="fi fi-mu fis w-8 h-8 rounded border"></span>
-                                        <span class="whitespace-nowrap">Mauritius</span>
-                                    </a>
-                                    
-                                    <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                                        <span class="fi fi-sa fis w-8 h-8 rounded border"></span>
-                                        <span class="whitespace-nowrap">Middle East</span>
-                                    </a>
-                                    
-                                    <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                                        <span class="fi fi-ph fis w-8 h-8 rounded border"></span>
-                                        <span class="whitespace-nowrap">Philippines</span>
-                                    </a>
-                                    
-                                    <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                                        <span class="fi fi-sg fis w-8 h-8 rounded border"></span>
-                                        <span class="whitespace-nowrap">Singapore</span>
-                                    </a>
-                                    
-                                    <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                                        <span class="fi fi-lk fis w-8 h-8 rounded border"></span>
-                                        <span class="whitespace-nowrap">Sri-Lanka</span>
-                                    </a>
-                                    
-                                    <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                                        <span class="fi fi-vn fis w-8 h-8 rounded border"></span>
-                                        <span class="whitespace-nowrap">Vietnam</span>
-                                    </a>
-                                    
+                            <div
+                                x-show="open"
+                                x-transition:enter="ease-in-out duration-500"
+                                x-transition:enter-start="opacity-0"
+                                x-transition:enter-end="opacity-100"
+                                x-transition:leave="ease-in-out duration-500"
+                                x-transition:leave-start="opacity-100"
+                                x-transition:leave-end="opacity-0"
+                                class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity">
+                            </div>
+                            <div class="fixed inset-0 overflow-hidden">
+                                <div class="absolute inset-0 overflow-hidden">
+                                    <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-20">
+                                        <div
+                                            x-cloak=""
+                                            x-show="open"
+                                            @click.away="open = false"
+                                            x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700"
+                                            x-transition:enter-start="translate-x-full"
+                                            x-transition:enter-end="translate-x-0"
+                                            x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
+                                            x-transition:leave-start="translate-x-0"
+                                            x-transition:leave-end="translate-x-full"
+                                            class="pointer-events-auto w-screen max-w-md"
+                                        >
+                                            <div class="flex h-full flex-col justify-between overflow-y-scroll bg-white p-6 shadow-xl">
+                                                <div class="space-y-8">
+                                                    <div class="flex justify-end">
+                                                        <span @click="open = false" role="button" class="text-2xl text-gray-500 leading-none">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </span>
+                                                    </div>
+                                                    <nav class="space-y-8">
+                                                        
+                                                            <a href="#" class="block text-lg text-gray-800">Guides</a>
+                                                        
+                                                            <a href="#" class="block text-lg text-gray-800">Universities</a>
+                                                        
+                                                            <a href="#" class="block text-lg text-gray-800">Courses</a>
+                                                        
+                                                            <a href="#" class="block text-lg text-gray-800">Online postgrad courses</a>
+                                                        
+                                                            <a href="#" class="block text-lg text-gray-800">More</a>
+                                                        
+                                                        <a href="#" class="block text-lg text-gray-800">Virtual Open Days</a>
+                                                        <a href="#" class="block text-lg text-gray-800">For Universities</a>
+                                                    </nav>
+                                                </div>
+                                                <div>
+                                                    <a href="#" class="button bg-white w-full justify-center text-gray-800 border-gray-800">Speak Advisor</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /nav: mobile -->
 
-                    <a href="#" class="button button-sm !bg-transparent text-gray-800 border-gray-800">Speak Advisor</a>
-
-                    <a href="#" class="text-gray-800">For universities</a>
+                    <div class="hidden lg:block space-x-5">
+                        <a href="#" class="button button-sm !bg-transparent text-gray-800 border-gray-800">Speak Advisor</a>
+                        <a href="#" class="text-gray-800">For universities</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -838,7 +936,10 @@
             <div class="lg:flex lg:justify-center mt-10">
                 
 <!-- search form -->
-<div x-data="{dropdown1: false, dropdown2: false, country: null, studyLevel: null}">
+<div
+    @notify.window="dropdown1 = $event.detail.dropdown1"
+    x-data="{dropdown1: false, dropdown2: false, country: null, studyLevel: null}"
+>
     <!-- desktop -->
     <form class="hidden lg:block relative w-auto">
         <!-- dropdown 1 -->
@@ -1889,7 +1990,7 @@
     </main>
 
     <footer x-data="{open: false}">
-        <div class="flex flex-col lg:flex-row items-center justify-between py-4 px-4 lg:px-12 border-t border-t-gray-300 space-y-reverse space-y-3">
+        <div class="flex flex-col lg:flex-row items-center justify-between py-4 px-4 lg:px-12 border-t border-t-gray-300 space-y-reverse space-y-3 lg:space-y-0">
             <div class="flex space-x-3 text-sm order-2 lg:order-1 w-full lg:w-auto">
                 <div>&copy; 2022 EasyUni All rights reserved</div>
                 <div>&bull;</div>
@@ -1899,9 +2000,93 @@
             </div>
 
             <div class="flex justify-between items-center lg:space-x-3 text-sm order-1 lg:order-2 w-full lg:w-auto">
-                <div role="button" class="text-gray-800 order-2 lg:order-1">
-                    <i class="fa-solid fa-globe"></i>
+                <div class="text-gray-800 order-2 lg:order-1">
+                    
+<!-- select region -->
+<div x-data="{open: false}" class="relative">
+    <span @click="open = true" role="button">
+        <i class="fa-solid fa-globe"></i>
+    </span>
+
+    <div
+        x-cloak=""
+        x-show="open"
+        @click.away="open = false"
+        x-transition:enter="ease-in-out duration-500"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in-out duration-500"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="w-[300px] lg:w-[800px] absolute  bottom-full right-0 z-10 p-5 bg-white rounded-t-2xl rounded-bl-2xl border drop-shadow-xl"
+    >
+        <div class="space-y-4">
+            <h5 class="text-xl font-semibold">Current</h5>
+            <a href="#" class="inline-flex items-center space-x-2 p-1.5 rounded-lg border">
+                <img src="./assets/img/globe.png" class="w-8 h-8" alt="">
+                <span>Global site</span>
+            </a>
+            <h5 class="text-xl font-semibold">Select Region</h5>
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-bn fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Brunei</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-in fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">India</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-id fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Indonesia</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-my fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Malaysia</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-mu fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Mauritius</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-sa fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Middle East</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-ph fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Philippines</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-sg fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Singapore</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-lk fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Sri-Lanka</span>
+                </a>
+                
+                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-vn fis w-8 h-8 rounded border"></span>
+                    <span class="whitespace-nowrap">Vietnam</span>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /select region -->
+
                 </div>
+
                 <div
                     @click.prevent="open = true; slideOver = true"
                     role="button"
@@ -1923,7 +2108,7 @@
                 
 <!-- footer close button -->
 <div @click.prevent="open = false; slideOver = false" role="button" class="text-lg leading-none">
-  <i class="fa-solid fa-xmark"></i>
+    <i class="fa-solid fa-xmark"></i>
 </div>
 <!-- /footer close button -->
 
@@ -1958,7 +2143,7 @@
                                 
 <!-- footer close button -->
 <div @click.prevent="open = false; slideOver = false" role="button" class="text-lg leading-none">
-  <i class="fa-solid fa-xmark"></i>
+    <i class="fa-solid fa-xmark"></i>
 </div>
 <!-- /footer close button -->
 
