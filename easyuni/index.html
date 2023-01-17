@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width">
     <title>EasyUni / Home</title>
     <link href="./assets/css/app.css" rel="stylesheet">
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <script>window.module = window.module || {}</script>
+    <script src="./assets/js/alpine.min.js" defer></script>
+    <script src="./assets/js/anime.min.js"></script>
+    <script src="./assets/js/jquery.min.js"></script>
 </head>
 <body
     x-data="{slideOver: false, searchNav: false, searchMobile: false, navAtTop: true}"
@@ -96,7 +99,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <img src="./assets/img/globe.png" class="w-8 h-8" alt="">
+        <img src="./assets/img/globe.png" class="!w-8 !h-8" alt="">
     
     <div>Everywhere</div>
 </div>
@@ -112,7 +115,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-bn fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-bn fis !w-8 !h-8 rounded border"></span>
     
     <div>Brunei</div>
 </div>
@@ -128,7 +131,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-in fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-in fis !w-8 !h-8 rounded border"></span>
     
     <div>India</div>
 </div>
@@ -144,7 +147,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-id fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-id fis !w-8 !h-8 rounded border"></span>
     
     <div>Indonesia</div>
 </div>
@@ -160,7 +163,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-my fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-my fis !w-8 !h-8 rounded border"></span>
     
     <div>Malaysia</div>
 </div>
@@ -176,7 +179,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-mu fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-mu fis !w-8 !h-8 rounded border"></span>
     
     <div>Mauritius</div>
 </div>
@@ -192,7 +195,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-sa fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-sa fis !w-8 !h-8 rounded border"></span>
     
     <div>Middle East</div>
 </div>
@@ -208,7 +211,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-ph fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-ph fis !w-8 !h-8 rounded border"></span>
     
     <div>Philippines</div>
 </div>
@@ -224,7 +227,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-sg fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-sg fis !w-8 !h-8 rounded border"></span>
     
     <div>Singapore</div>
 </div>
@@ -240,7 +243,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-lk fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-lk fis !w-8 !h-8 rounded border"></span>
     
     <div>Sri-Lanka</div>
 </div>
@@ -256,7 +259,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-vn fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-vn fis !w-8 !h-8 rounded border"></span>
     
     <div>Vietnam</div>
 </div>
@@ -336,17 +339,17 @@
             x-cloak=""
             x-show="country && country.code"
             :class="country ? 'fi-' + country.code : ''"
-            class="fi fis w-6 h-6 rounded border mr-2">
+            class="fi fis !w-6 !h-6 rounded border mr-2">
         </span>
         <img
             x-cloak=""
             x-show="country && !country.code"
-            src="./assets/img/globe.png" class="w-6 h-6 mr-2"
+            src="./assets/img/globe.png" class="!w-6 !h-6 mr-2"
             alt=""
         >
         <div
             x-text="country ? country.label : 'Country'"
-            class="text-gray-400 font-semibold">
+            class="text-gray-400 font-semibold whitespace-nowrap">
         </div>
     </div>
     <i class="fa-solid fa-angle-down"></i>
@@ -365,9 +368,15 @@
 <div class="flex items-center justify-between">
     <div class="flex items-center grow lg:w-52">
         <template x-if="studyLevel">
-            <img :src="'./assets/img/study-level-' + studyLevel.code + '.svg'" class="w-6 h-6 mr-2" alt="">
+            <img
+                :src="'./assets/img/study-level-' + studyLevel.code + '.svg'"
+                class="!w-6 !h-6 mr-2" alt=""
+            >
         </template>
-        <div x-text="studyLevel ? studyLevel.label : 'Study Level'" class="text-gray-400 font-semibold"></div>
+        <div
+            x-text="studyLevel ? studyLevel.label : 'Study Level'"
+            class="text-gray-400 font-semibold whitespace-nowrap">
+        </div>
     </div>
     <i class="fa-solid fa-angle-down"></i>
 </div>
@@ -388,13 +397,13 @@
     <!-- /desktop -->
 
     <!-- mobile -->
-    <form class="lg:hidden">
+    <form class="lg:hidden md:w-1/2 md:mx-auto">
         <div
             @click="searchMobile = true; slideOver = true; dropdown1 = true"
             class="flex items-center justify-between border rounded-xl py-2 px-3 bg-white w-full select-none"
         >
             <span class="text-sm text-gray-400 w-52">Find University</span>
-            <div class="button p-2">
+            <div class="button !p-2">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
@@ -405,7 +414,7 @@
             @click.away="searchMobile = false"
             class="fixed bottom-0 inset-x-0 z-50"
         >
-            <div class="flex items-center justify-between p-7 border-t rounded-t-3xl border-b bg-white">
+            <div class="flex items-center justify-between p-5 border-t rounded-t-3xl border-b bg-white">
                 <h3 class="text-2xl">Find University</h3>
                 <div
                     @click="searchMobile = false; slideOver = false"
@@ -416,13 +425,15 @@
                 </div>
             </div>
 
-            <div class="p-7 bg-white space-y-5">
-                <div
-                    x-cloak=""
-                    x-show="dropdown1"
-                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
-                >
-                    
+            <div class="p-5 bg-white space-y-5">
+                <div class="md:flex md:justify-between md:items-end md:space-x-5 space-y-5 md:space-y-0">
+                    <div class="md:w-1/2">
+                        <div
+                            x-cloak=""
+                            x-show="dropdown1"
+                            class="p-4 border rounded-xl bg-white drop-shadow-lg md:overflow-y-auto md:h-[120px]"
+                        >
+                            
 <!-- countries -->
 <div class="space-y-2 lg:space-y-4">
     <h5 class="text-lg lg:text-xl font-semibold">Select Region</h5>
@@ -436,7 +447,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <img src="./assets/img/globe.png" class="w-8 h-8" alt="">
+        <img src="./assets/img/globe.png" class="!w-8 !h-8" alt="">
     
     <div>Everywhere</div>
 </div>
@@ -452,7 +463,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-bn fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-bn fis !w-8 !h-8 rounded border"></span>
     
     <div>Brunei</div>
 </div>
@@ -468,7 +479,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-in fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-in fis !w-8 !h-8 rounded border"></span>
     
     <div>India</div>
 </div>
@@ -484,7 +495,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-id fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-id fis !w-8 !h-8 rounded border"></span>
     
     <div>Indonesia</div>
 </div>
@@ -500,7 +511,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-my fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-my fis !w-8 !h-8 rounded border"></span>
     
     <div>Malaysia</div>
 </div>
@@ -516,7 +527,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-mu fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-mu fis !w-8 !h-8 rounded border"></span>
     
     <div>Mauritius</div>
 </div>
@@ -532,7 +543,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-sa fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-sa fis !w-8 !h-8 rounded border"></span>
     
     <div>Middle East</div>
 </div>
@@ -548,7 +559,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-ph fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-ph fis !w-8 !h-8 rounded border"></span>
     
     <div>Philippines</div>
 </div>
@@ -564,7 +575,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-sg fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-sg fis !w-8 !h-8 rounded border"></span>
     
     <div>Singapore</div>
 </div>
@@ -580,7 +591,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-lk fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-lk fis !w-8 !h-8 rounded border"></span>
     
     <div>Sri-Lanka</div>
 </div>
@@ -596,7 +607,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-vn fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-vn fis !w-8 !h-8 rounded border"></span>
     
     <div>Vietnam</div>
 </div>
@@ -607,15 +618,15 @@
 </div>
 <!-- /countries -->
 
-                </div>
-                <div
-                    x-cloak=""
-                    x-show="!dropdown1"
-                    @click="dropdown1 = true"
-                    role="button"
-                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
-                >
-                    
+                        </div>
+                        <div
+                            x-cloak=""
+                            x-show="!dropdown1"
+                            @click="dropdown1 = true"
+                            role="button"
+                            class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                        >
+                            
 <!-- select country -->
 <div class="flex items-center justify-between">
     <div class="flex items-center grow lg:w-52">
@@ -623,31 +634,33 @@
             x-cloak=""
             x-show="country && country.code"
             :class="country ? 'fi-' + country.code : ''"
-            class="fi fis w-6 h-6 rounded border mr-2">
+            class="fi fis !w-6 !h-6 rounded border mr-2">
         </span>
         <img
             x-cloak=""
             x-show="country && !country.code"
-            src="./assets/img/globe.png" class="w-6 h-6 mr-2"
+            src="./assets/img/globe.png" class="!w-6 !h-6 mr-2"
             alt=""
         >
         <div
             x-text="country ? country.label : 'Country'"
-            class="text-gray-400 font-semibold">
+            class="text-gray-400 font-semibold whitespace-nowrap">
         </div>
     </div>
     <i class="fa-solid fa-angle-down"></i>
 </div>
 <!-- /select country -->
 
-                </div>
+                        </div>
+                    </div>
 
-                <div
-                    x-cloak=""
-                    x-show="dropdown2"
-                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
-                >
-                    
+                    <div class="md:w-1/2">
+                        <div
+                            x-cloak=""
+                            x-show="dropdown2"
+                            class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                        >
+                            
 <!-- study levels -->
 <div class="space-y-4">
     <h5 class="text-xl font-semibold">Study Level</h5>
@@ -682,27 +695,35 @@
 </div>
 <!-- /study levels -->
 
-                </div>
-                <div
-                    x-cloak=""
-                    x-show="!dropdown2"
-                    @click="dropdown2 = true"
-                    role="button"
-                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
-                >
-                    
+                        </div>
+                        <div
+                            x-cloak=""
+                            x-show="!dropdown2"
+                            @click="dropdown2 = true"
+                            role="button"
+                            class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                        >
+                            
 <!-- select study level -->
 <div class="flex items-center justify-between">
     <div class="flex items-center grow lg:w-52">
         <template x-if="studyLevel">
-            <img :src="'./assets/img/study-level-' + studyLevel.code + '.svg'" class="w-6 h-6 mr-2" alt="">
+            <img
+                :src="'./assets/img/study-level-' + studyLevel.code + '.svg'"
+                class="!w-6 !h-6 mr-2" alt=""
+            >
         </template>
-        <div x-text="studyLevel ? studyLevel.label : 'Study Level'" class="text-gray-400 font-semibold"></div>
+        <div
+            x-text="studyLevel ? studyLevel.label : 'Study Level'"
+            class="text-gray-400 font-semibold whitespace-nowrap">
+        </div>
     </div>
     <i class="fa-solid fa-angle-down"></i>
 </div>
 <!-- /select study level -->
 
+                        </div>
+                    </div>
                 </div>
 
                 
@@ -723,11 +744,12 @@
                         </div>
                     </div>
                     <!-- /search desktop -->
+
                     <!-- search mobile -->
                     <div class="block lg:hidden">
                         <!--
-                            trigger mobile search form come visible by notifying a component
-                            refer to "_includes/search.html", event: @notify.window
+                        trigger mobile search form come visible by notifying a component
+                        refer to "_includes/search.html", event: @notify.window
                         -->
                         <span
                             @click="$dispatch('notify', {dropdown1: true}); searchMobile = true; slideOver = true"
@@ -755,64 +777,64 @@
         x-transition:leave="ease-in-out duration-500"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="w-[300px] lg:w-[800px] absolute top-full  right-0 z-10 p-5 bg-white rounded-b-2xl rounded-tl-2xl border drop-shadow-xl"
+        class="w-[300px] md:w-[500px] lg:w-[800px] absolute top-full  right-0 z-10 p-5 bg-white rounded-b-2xl rounded-tl-2xl border drop-shadow-xl"
     >
-        <div class="space-y-2 lg:space-y-4">
+        <div class="space-y-2 md:space-y-4">
             <h5 class="text-lg lg:text-xl font-semibold">Current</h5>
             <a href="#" class="inline-flex items-center space-x-2 p-1.5 rounded-lg border">
                 <img src="./assets/img/globe.png" class="w-6 lg:w-8 h-6 lg:h-8" alt="">
                 <span>Global site</span>
             </a>
             <h5 class="text-lg lg:text-xl font-semibold">Select Region</h5>
-            <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 lg:gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-4">
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-bn fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-bn fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Brunei</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-in fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-in fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">India</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-id fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-id fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Indonesia</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-my fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-my fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Malaysia</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-mu fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-mu fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Mauritius</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-sa fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-sa fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Middle East</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-ph fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-ph fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Philippines</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-sg fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-sg fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Singapore</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-lk fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-lk fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Sri-Lanka</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-vn fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-vn fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Vietnam</span>
                 </a>
                 
@@ -858,12 +880,12 @@
                                             x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
                                             x-transition:leave-start="translate-x-0"
                                             x-transition:leave-end="translate-x-full"
-                                            class="pointer-events-auto w-screen max-w-md"
+                                            class="pointer-events-auto w-screen max-w-sm"
                                         >
-                                            <div class="flex h-full flex-col justify-between overflow-y-scroll bg-white p-6 shadow-xl">
+                                            <div class="flex h-full flex-col justify-between overflow-y-scroll bg-white p-6 shadow-xl space-y-8">
                                                 <div class="space-y-8">
                                                     <div class="flex justify-end">
-                                                        <span @click="open = false" role="button" class="text-2xl text-gray-500 leading-none">
+                                                        <span @click="open = false" role="button" class="text-2xl text-gray-500 !leading-none">
                                                             <i class="fa-solid fa-xmark"></i>
                                                         </span>
                                                     </div>
@@ -883,9 +905,7 @@
                                                         <a href="#" class="block text-lg text-gray-800">For Universities</a>
                                                     </nav>
                                                 </div>
-                                                <div>
-                                                    <a href="#" class="button bg-white w-full justify-center text-gray-800 border-gray-800">Speak Advisor</a>
-                                                </div>
+                                                <a href="#" class="button button-light w-full">Speak Advisor</a>
                                             </div>
                                         </div>
                                     </div>
@@ -896,7 +916,7 @@
                     <!-- /nav: mobile -->
 
                     <div class="hidden lg:block space-x-5">
-                        <a href="#" class="button button-sm !bg-transparent text-gray-800 border-gray-800">Speak Advisor</a>
+                        <a href="#" class="button button-sm !bg-transparent !text-gray-800 !border-gray-800">Speak Advisor</a>
                         <a href="#" class="text-gray-800">For universities</a>
                     </div>
                 </div>
@@ -905,35 +925,90 @@
     </header>
 
     <main>
-        <div class="pt-20 pb-12 lg:pt-40 lg:pb-32 bg-top bg-cover bg-no-repeat" style="background-image: url(./assets/img/gradient-1.png);">
-    <div class="container" x-data="{selected: 'search'}">
-        <div class="text-center space-x-8 mb-10">
-            
-                <a href="#"
-                    @click.prevent="selected = 'search'"
-                    :class="'search' === selected ? '!text-indigo-700 border-indigo-700 border-b-2' : ''"
-                    class="font-bold py-2">
-                    Search
-                </a>
-            
-                <a href="#"
-                    @click.prevent="selected = 'request'"
-                    :class="'request' === selected ? '!text-indigo-700 border-indigo-700 border-b-2' : ''"
-                    class="font-bold py-2">
-                    Request Consulting
-                </a>
-            
+        <div
+    class="pt-20 pb-12 lg:pt-40 lg:pb-32 bg-top bg-cover bg-no-repeat"
+    style="background-image: url(./assets/img/gradient-1.png);"
+>
+    <div
+        x-data="{selected: 'search'}"
+        class="container space-y-10 lg:space-y-20"
+    >
+        <div class="text-center space-x-8">
+        
+            <span
+                role="button"
+                @click="selected = 'search'"
+                :class="'search' === selected ? 'text-indigo-700 border-indigo-700 border-b-2' : ''"
+                class="font-bold py-2"
+            >
+                Search
+            </span>
+        
+            <span
+                role="button"
+                @click="selected = 'request'"
+                :class="'request' === selected ? 'text-indigo-700 border-indigo-700 border-b-2' : ''"
+                class="font-bold py-2"
+            >
+                Request Consulting
+            </span>
+        
         </div>
 
-
-        <div x-cloak="" x-show="selected === 'search'">
+        <div
+            x-cloak=""
+            x-show="selected === 'search'"
+            class="space-y-10 lg:space-y-20"
+        >
             <div class="text-center">
-                <h1 class="font-heading text-4xl lg:text-8xl leading-relaxed">Find the</h1>
-                <h2 class="font-heading-bold font-bold text-4xl lg:text-8xl leading-relaxed">Right University</h2>
-                <h1 class="font-heading text-4xl lg:text-8xl">For You</h1>
+                <h1 class="font-heading text-4xl lg:text-8xl !leading-normal">Find the</h1>
+
+                <!-- anime: balloon + hat -->
+                <div class="flex items-center justify-center">
+                    <h2 class="font-heading-bold font-bold text-4xl lg:text-8xl !leading-normal">Right</h2>
+                    <div
+                        id="js-anime-balloon1"
+                        class="relative w-4 lg:w-10 h-4 lg:h-10 mx-3 lg:mx-6 bg-gradient-to-r from-violet-400 to-violet-300 rounded-r-full rounded-bl-full"
+                    >
+                        <img
+                            src="./assets/img/anime-hat.png"
+                            id="js-anime-hat"
+                            class="absolute w-14 lg:w-32 left-1/2 -top-3.5 lg:-top-7 -translate-x-1/2 opacity-0"
+                            alt=""
+                        >
+                    </div>
+                    <h2 class="font-heading-bold font-bold text-4xl lg:text-8xl !leading-normal">University</h2>
+                </div>
+                <!-- /anime: balloon + hat -->
+
+                <!-- anime: guys -->
+                <div class="flex items-center justify-center space-x-3 lg:space-x-6">
+                    <h1 class="font-heading text-4xl lg:text-8xl !leading-normal">For You</h1>
+                    <div id="js-anime-guys" class="flex w-[1px] h-8 lg:h-16 relative">
+                        <img
+                            src="./assets/img/anime-guy1.png"
+                            id="js-anime-guy1"
+                            class="absolute w-8 lg:w-16 drop-shadow-lg opacity-0 -left-8 lg:-left-16"
+                            alt=""
+                        >
+                        <img
+                            src="./assets/img/anime-guy2.png"
+                            id="js-anime-guy2"
+                            class="absolute w-8 lg:w-16 drop-shadow-lg opacity-0 -left-8 lg:-left-16"
+                            alt=""
+                        >
+                        <img
+                            src="./assets/img/anime-guy3.png"
+                            id="js-anime-guy3"
+                            class="absolute w-8 lg:w-16 drop-shadow-lg opacity-0 -left-8 lg:-left-16"
+                            alt=""
+                        >
+                    </div>
+                </div>
+                <!-- /anime: guys -->
             </div>
 
-            <div class="lg:flex lg:justify-center mt-10">
+            <div class="lg:flex lg:justify-center">
                 
 <!-- search form -->
 <div
@@ -967,7 +1042,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <img src="./assets/img/globe.png" class="w-8 h-8" alt="">
+        <img src="./assets/img/globe.png" class="!w-8 !h-8" alt="">
     
     <div>Everywhere</div>
 </div>
@@ -983,7 +1058,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-bn fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-bn fis !w-8 !h-8 rounded border"></span>
     
     <div>Brunei</div>
 </div>
@@ -999,7 +1074,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-in fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-in fis !w-8 !h-8 rounded border"></span>
     
     <div>India</div>
 </div>
@@ -1015,7 +1090,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-id fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-id fis !w-8 !h-8 rounded border"></span>
     
     <div>Indonesia</div>
 </div>
@@ -1031,7 +1106,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-my fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-my fis !w-8 !h-8 rounded border"></span>
     
     <div>Malaysia</div>
 </div>
@@ -1047,7 +1122,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-mu fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-mu fis !w-8 !h-8 rounded border"></span>
     
     <div>Mauritius</div>
 </div>
@@ -1063,7 +1138,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-sa fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-sa fis !w-8 !h-8 rounded border"></span>
     
     <div>Middle East</div>
 </div>
@@ -1079,7 +1154,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-ph fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-ph fis !w-8 !h-8 rounded border"></span>
     
     <div>Philippines</div>
 </div>
@@ -1095,7 +1170,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-sg fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-sg fis !w-8 !h-8 rounded border"></span>
     
     <div>Singapore</div>
 </div>
@@ -1111,7 +1186,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-lk fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-lk fis !w-8 !h-8 rounded border"></span>
     
     <div>Sri-Lanka</div>
 </div>
@@ -1127,7 +1202,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-vn fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-vn fis !w-8 !h-8 rounded border"></span>
     
     <div>Vietnam</div>
 </div>
@@ -1207,17 +1282,17 @@
             x-cloak=""
             x-show="country && country.code"
             :class="country ? 'fi-' + country.code : ''"
-            class="fi fis w-6 h-6 rounded border mr-2">
+            class="fi fis !w-6 !h-6 rounded border mr-2">
         </span>
         <img
             x-cloak=""
             x-show="country && !country.code"
-            src="./assets/img/globe.png" class="w-6 h-6 mr-2"
+            src="./assets/img/globe.png" class="!w-6 !h-6 mr-2"
             alt=""
         >
         <div
             x-text="country ? country.label : 'Country'"
-            class="text-gray-400 font-semibold">
+            class="text-gray-400 font-semibold whitespace-nowrap">
         </div>
     </div>
     <i class="fa-solid fa-angle-down"></i>
@@ -1236,9 +1311,15 @@
 <div class="flex items-center justify-between">
     <div class="flex items-center grow lg:w-52">
         <template x-if="studyLevel">
-            <img :src="'./assets/img/study-level-' + studyLevel.code + '.svg'" class="w-6 h-6 mr-2" alt="">
+            <img
+                :src="'./assets/img/study-level-' + studyLevel.code + '.svg'"
+                class="!w-6 !h-6 mr-2" alt=""
+            >
         </template>
-        <div x-text="studyLevel ? studyLevel.label : 'Study Level'" class="text-gray-400 font-semibold"></div>
+        <div
+            x-text="studyLevel ? studyLevel.label : 'Study Level'"
+            class="text-gray-400 font-semibold whitespace-nowrap">
+        </div>
     </div>
     <i class="fa-solid fa-angle-down"></i>
 </div>
@@ -1259,13 +1340,13 @@
     <!-- /desktop -->
 
     <!-- mobile -->
-    <form class="lg:hidden">
+    <form class="lg:hidden md:w-1/2 md:mx-auto">
         <div
             @click="searchMobile = true; slideOver = true; dropdown1 = true"
             class="flex items-center justify-between border rounded-xl py-2 px-3 bg-white w-full select-none"
         >
             <span class="text-sm text-gray-400 w-52">Find University</span>
-            <div class="button p-2">
+            <div class="button !p-2">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
         </div>
@@ -1276,7 +1357,7 @@
             @click.away="searchMobile = false"
             class="fixed bottom-0 inset-x-0 z-50"
         >
-            <div class="flex items-center justify-between p-7 border-t rounded-t-3xl border-b bg-white">
+            <div class="flex items-center justify-between p-5 border-t rounded-t-3xl border-b bg-white">
                 <h3 class="text-2xl">Find University</h3>
                 <div
                     @click="searchMobile = false; slideOver = false"
@@ -1287,13 +1368,15 @@
                 </div>
             </div>
 
-            <div class="p-7 bg-white space-y-5">
-                <div
-                    x-cloak=""
-                    x-show="dropdown1"
-                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
-                >
-                    
+            <div class="p-5 bg-white space-y-5">
+                <div class="md:flex md:justify-between md:items-end md:space-x-5 space-y-5 md:space-y-0">
+                    <div class="md:w-1/2">
+                        <div
+                            x-cloak=""
+                            x-show="dropdown1"
+                            class="p-4 border rounded-xl bg-white drop-shadow-lg md:overflow-y-auto md:h-[120px]"
+                        >
+                            
 <!-- countries -->
 <div class="space-y-2 lg:space-y-4">
     <h5 class="text-lg lg:text-xl font-semibold">Select Region</h5>
@@ -1307,7 +1390,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <img src="./assets/img/globe.png" class="w-8 h-8" alt="">
+        <img src="./assets/img/globe.png" class="!w-8 !h-8" alt="">
     
     <div>Everywhere</div>
 </div>
@@ -1323,7 +1406,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-bn fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-bn fis !w-8 !h-8 rounded border"></span>
     
     <div>Brunei</div>
 </div>
@@ -1339,7 +1422,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-in fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-in fis !w-8 !h-8 rounded border"></span>
     
     <div>India</div>
 </div>
@@ -1355,7 +1438,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-id fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-id fis !w-8 !h-8 rounded border"></span>
     
     <div>Indonesia</div>
 </div>
@@ -1371,7 +1454,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-my fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-my fis !w-8 !h-8 rounded border"></span>
     
     <div>Malaysia</div>
 </div>
@@ -1387,7 +1470,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-mu fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-mu fis !w-8 !h-8 rounded border"></span>
     
     <div>Mauritius</div>
 </div>
@@ -1403,7 +1486,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-sa fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-sa fis !w-8 !h-8 rounded border"></span>
     
     <div>Middle East</div>
 </div>
@@ -1419,7 +1502,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-ph fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-ph fis !w-8 !h-8 rounded border"></span>
     
     <div>Philippines</div>
 </div>
@@ -1435,7 +1518,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-sg fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-sg fis !w-8 !h-8 rounded border"></span>
     
     <div>Singapore</div>
 </div>
@@ -1451,7 +1534,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-lk fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-lk fis !w-8 !h-8 rounded border"></span>
     
     <div>Sri-Lanka</div>
 </div>
@@ -1467,7 +1550,7 @@
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
     
-        <span class="fi fi-vn fis w-8 h-8 rounded border"></span>
+        <span class="fi fi-vn fis !w-8 !h-8 rounded border"></span>
     
     <div>Vietnam</div>
 </div>
@@ -1478,15 +1561,15 @@
 </div>
 <!-- /countries -->
 
-                </div>
-                <div
-                    x-cloak=""
-                    x-show="!dropdown1"
-                    @click="dropdown1 = true"
-                    role="button"
-                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
-                >
-                    
+                        </div>
+                        <div
+                            x-cloak=""
+                            x-show="!dropdown1"
+                            @click="dropdown1 = true"
+                            role="button"
+                            class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                        >
+                            
 <!-- select country -->
 <div class="flex items-center justify-between">
     <div class="flex items-center grow lg:w-52">
@@ -1494,31 +1577,33 @@
             x-cloak=""
             x-show="country && country.code"
             :class="country ? 'fi-' + country.code : ''"
-            class="fi fis w-6 h-6 rounded border mr-2">
+            class="fi fis !w-6 !h-6 rounded border mr-2">
         </span>
         <img
             x-cloak=""
             x-show="country && !country.code"
-            src="./assets/img/globe.png" class="w-6 h-6 mr-2"
+            src="./assets/img/globe.png" class="!w-6 !h-6 mr-2"
             alt=""
         >
         <div
             x-text="country ? country.label : 'Country'"
-            class="text-gray-400 font-semibold">
+            class="text-gray-400 font-semibold whitespace-nowrap">
         </div>
     </div>
     <i class="fa-solid fa-angle-down"></i>
 </div>
 <!-- /select country -->
 
-                </div>
+                        </div>
+                    </div>
 
-                <div
-                    x-cloak=""
-                    x-show="dropdown2"
-                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
-                >
-                    
+                    <div class="md:w-1/2">
+                        <div
+                            x-cloak=""
+                            x-show="dropdown2"
+                            class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                        >
+                            
 <!-- study levels -->
 <div class="space-y-4">
     <h5 class="text-xl font-semibold">Study Level</h5>
@@ -1553,27 +1638,35 @@
 </div>
 <!-- /study levels -->
 
-                </div>
-                <div
-                    x-cloak=""
-                    x-show="!dropdown2"
-                    @click="dropdown2 = true"
-                    role="button"
-                    class="p-4 border rounded-xl bg-white drop-shadow-lg"
-                >
-                    
+                        </div>
+                        <div
+                            x-cloak=""
+                            x-show="!dropdown2"
+                            @click="dropdown2 = true"
+                            role="button"
+                            class="p-4 border rounded-xl bg-white drop-shadow-lg"
+                        >
+                            
 <!-- select study level -->
 <div class="flex items-center justify-between">
     <div class="flex items-center grow lg:w-52">
         <template x-if="studyLevel">
-            <img :src="'./assets/img/study-level-' + studyLevel.code + '.svg'" class="w-6 h-6 mr-2" alt="">
+            <img
+                :src="'./assets/img/study-level-' + studyLevel.code + '.svg'"
+                class="!w-6 !h-6 mr-2" alt=""
+            >
         </template>
-        <div x-text="studyLevel ? studyLevel.label : 'Study Level'" class="text-gray-400 font-semibold"></div>
+        <div
+            x-text="studyLevel ? studyLevel.label : 'Study Level'"
+            class="text-gray-400 font-semibold whitespace-nowrap">
+        </div>
     </div>
     <i class="fa-solid fa-angle-down"></i>
 </div>
 <!-- /select study level -->
 
+                        </div>
+                    </div>
                 </div>
 
                 
@@ -1594,10 +1687,33 @@
             </div>
         </div>
 
-        <div x-cloak="" x-show="selected === 'request'" class="text-center">
-            <h1 class="font-heading text-4xl lg:text-8xl leading-relaxed">We'll help you find and apply to your Dream</h1>
-            <h2 class="font-heading-bold font-bold text-4xl lg:text-8xl leading-relaxed">University or College</h2>
-            <div class="text-xl font-medium leading-6 my-10">Our team of advisors is ready to support you at every step of your study abroad journey. Our services are 100% free for students like you because we're funded by universities.</div>
+        <div
+            x-cloak=""
+            x-show="selected === 'request'"
+            class="text-center space-y-10"
+        >
+            <div>
+                <h1 class="font-heading text-4xl lg:text-8xl !leading-normal">
+                    <span>We'll help you find and apply to your Dream</span>
+                    <img
+                        id="js-anime-rocket"
+                        src="./assets/img/anime-rocket.png"
+                        class="w-[1px] h-10 lg:h-24 inline"
+                        alt=""
+                    >
+                </h1>
+                <div class="flex items-center justify-center space-x-3 lg:space-x-6">
+                    <h2 class="font-heading-bold font-bold text-4xl lg:text-8xl !leading-normal">University</h2>
+                    <div
+                        id="js-anime-balloon2"
+                        class="flex items-center justify-center w-4 lg:w-10 h-4 lg:h-10 mx-3 lg:mx-6 bg-gradient-to-r from-violet-400 to-violet-300 rounded-r-full rounded-tl-full"
+                    >
+                        <span id="js-anime-or" class="opacity-0 font-heading-bold lg:text-5xl text-white">OR</span>
+                    </div>
+                    <h2 class="font-heading-bold font-bold text-4xl lg:text-8xl !leading-normal">College</h2>
+                </div>
+            </div>
+            <div class="text-lg lg:text-xl font-medium">Our team of advisors is ready to support you at every step of your study abroad journey. Our services are 100% free for students like you because we're funded by universities.</div>
             <a href="#" class="button font-semibold">Speak to Educational Advisor</a>
         </div>
     </div>
@@ -1606,7 +1722,7 @@
 <div class="container">
     <div class="py-10 lg:py-32 space-y-10 lg:space-y-32">
         <div class="text-center">
-            <img class="mx-auto" src="./assets/img/banner.png" alt="">
+            <img class="md:w-2/3 lg:w-auto mx-auto" src="./assets/img/banner.png" alt="">
         </div>
 
         <div class="space-y-4">
@@ -1615,66 +1731,66 @@
         </div>
 
         <div class="space-y-12">
-            <div class="lg:flex lg:justify-between lg:bg-center lg:bg-no-repeat lg:bg-[url('../img/line.png')] space-y-12 lg:space-y-0">
+            <div class="md:flex md:justify-between lg:bg-center lg:bg-no-repeat lg:bg-[url('../img/line.png')] space-y-12 md:space-y-0">
                 <!-- feature 1 -->
-                <div class="flex lg:block lg:w-60 space-x-8 lg:space-x-0 lg:space-y-20">
+                <div class="flex md:block md:w-48 lg:w-60 space-x-8 md:space-x-0 md:space-y-5 lg:space-y-20">
                     <div class="relative">
-                        <div class="w-20 lg:w-40 h-20 lg:h-40 mx-auto bg-center bg-no-repeat bg-cover"
+                        <div class="w-20 md:w-28 lg:w-40 h-20 md:h-28 lg:h-40 mx-auto bg-center bg-no-repeat bg-cover"
                             style="border-radius: 0 70px 70px; background-image: url(./assets/img/feature-1-main.png);">
                         </div>
-                        <div class="absolute z-10 bottom-0 lg:-bottom-2 right-0 lg:right-5 w-7 lg:w-14 h-7 lg:h-14 drop-shadow-xl bg-center bg-no-repeat bg-contain lg:bg-cover"
+                        <div class="absolute z-10 bottom-0 md:-bottom-1 lg:-bottom-2 right-0 md:right-6 lg:right-5 w-7 md:w-10 lg:w-14 h-7 md:h-10 lg:h-14 drop-shadow-xl bg-center bg-no-repeat bg-contain md:bg-cover"
                             style="background-image: url(./assets/img/feature-1-icon.png);">
                         </div>
-                        <div class="absolute z-0 -top-5 lg:-top-12 -right-6 lg:-right-11 w-12 lg:w-32 h-20 lg:h-44 bg-center bg-no-repeat bg-contain lg:bg-cover"
+                        <div class="absolute z-0 -top-5 md:-top-10 lg:-top-12 -right-6 md:-right-4 lg:-right-11 w-12 md:w-20 lg:w-32 h-20 md:h-32 lg:h-44 bg-center bg-no-repeat bg-contain lg:bg-cover"
                             style="background-image: url(./assets/img/feature-1-plane.png);">
                         </div>
                     </div>
-                    <div class="lg:text-center">
+                    <div class="md:text-center">
                         <div class="font-bold text-lg lg:text-xl">Find your best matches</div>
-                        <div class="leading-6 text-gray-500 text-sm lg:text-base">See programs that best match your eligibility and aspirations</div>
+                        <div class="!leading-6 text-gray-500 text-sm lg:text-base">See programs that best match your eligibility and aspirations</div>
                     </div>
                 </div>
                 <!-- /feature 1 -->
 
                 <!-- feature 2 -->
-                <div class="flex lg:block lg:w-60 space-x-reverse space-x-8 lg:space-x-0 lg:space-y-20">
+                <div class="flex md:block md:w-48 lg:w-60 space-x-8 md:space-x-0 md:space-y-5 lg:space-y-20">
                     <div class="relative order-2">
-                        <div class="w-20 lg:w-40 h-20 lg:h-40 mx-auto bg-center bg-no-repeat bg-cover"
+                        <div class="w-20 md:w-28 lg:w-40 h-20 md:h-28 lg:h-40 mx-auto bg-center bg-no-repeat bg-cover"
                             style="border-radius: 70px 0 70px 70px; background-image: url(./assets/img/feature-2-main.png);">
                         </div>
-                        <div class="absolute -top-2 -left-2 lg:left-5 w-7 lg:w-14 h-7 lg:h-14 drop-shadow-xl bg-center bg-no-repeat bg-contain lg:bg-cover"
+                        <div class="absolute -top-2 -left-2 md:left-7 lg:left-5 w-7 md:w-10 lg:w-14 h-7 md:h-10 lg:h-14 drop-shadow-xl bg-center bg-no-repeat bg-contain md:bg-cover"
                             style="background-image: url(./assets/img/feature-2-icon.png);">
                         </div>
-                        <div class="absolute -left-3 -bottom-1 lg:-bottom-3 drop-shadow-xl">
-                            <img src="./assets/img/feature-2-ask.png" class="w-16 lg:w-full" alt="">
+                        <div class="absolute -left-3 md:-left-1 -bottom-1 md:-bottom-2 lg:-bottom-3 drop-shadow-xl">
+                            <img src="./assets/img/feature-2-ask.png" class="w-16 md:w-2/3 lg:w-full" alt="">
                         </div>
                     </div>
-                    <div class="lg:text-center order-1">
+                    <div class="md:text-center order-1">
                         <div class="font-bold text-lg lg:text-xl">Application guidance</div>
-                        <div class="leading-6 text-gray-500 text-sm lg:text-base">We'll get you to the right place to start your application</div>
+                        <div class="!leading-6 text-gray-500 text-sm lg:text-base">We'll get you to the right place to start your application</div>
                     </div>
                 </div>
                 <!-- /feature 2 -->
 
                 <!-- feature 3 -->
-                <div class="flex lg:block lg:w-60 space-x-8 lg:space-x-0 lg:space-y-20">
+                <div class="flex md:block md:w-48 lg:w-60 space-x-8 md:space-x-0 md:space-y-5 lg:space-y-20">
                     <div class="relative">
-                        <div class="w-20 lg:w-40 h-20 lg:h-40 mx-auto bg-center bg-no-repeat bg-cover"
+                        <div class="w-20 md:w-28 lg:w-40 h-20 md:h-28 lg:h-40 mx-auto bg-center bg-no-repeat bg-cover"
                             style="border-radius: 70px 0 70px 70px; background-image: url(./assets/img/feature-3-main.png);">
                         </div>
-                        <div class="absolute -bottom-1 lg:left-5 w-7 lg:w-14 h-7 lg:h-14 drop-shadow-xl bg-center bg-no-repeat bg-contain lg:bg-cover"
+                        <div class="absolute -bottom-1 md:left-7 lg:left-5 w-7 md:w-10 lg:w-14 h-7 md:h-10 lg:h-14 drop-shadow-xl bg-center bg-no-repeat bg-contain md:bg-cover"
                             style="background-image: url(./assets/img/feature-3-icon.png);">
                         </div>
-                        <div class="absolute -bottom-3 lg:-bottom-6 -right-2 lg:right-0 w-16 lg:w-36 h-24 lg:h-44 bg-left bg-no-repeat bg-cover"
+                        <div class="absolute -bottom-3 md:-bottom-4 lg:-bottom-6 -right-2 md:right-5 lg:right-0 w-16 md:w-24 lg:w-36 h-24 md:h-32 lg:h-44 bg-left bg-no-repeat bg-cover"
                             style="background-image: url(./assets/img/feature-3-suitcase.png);">
                         </div>
-                        <div class="absolute top-2 lg:top-4 -left-2 lg:left-4 w-16 lg:w-36 h-6 lg:h-16 bg-left bg-no-repeat bg-cover"
+                        <div class="absolute top-2 lg:top-4 -left-2 md:left-4 w-16 md:w-24 lg:w-36 h-6 md:h-10 lg:h-16 bg-left bg-no-repeat bg-cover"
                             style="background-image: url(./assets/img/feature-3-plane.png);">
                         </div>
                     </div>
-                    <div class="lg:text-center">
+                    <div class="md:text-center">
                         <div class="font-bold text-lg lg:text-xl">Visa & travel advice</div>
-                        <div class="leading-6 text-gray-500 text-sm lg:text-base">Get help after application, all the way to your first day at university</div>
+                        <div class="!leading-6 text-gray-500 text-sm lg:text-base">Get help after application, all the way to your first day at university</div>
                     </div>
                 </div>
                 <!-- /feature 3 -->
@@ -1685,90 +1801,95 @@
             </div>
         </div>
 
-        <div class="space-y-4">
-            <div class="flex justify-between items-center">
-                <h2 class="font-heading-medium text-2xl lg:text-3xl">Featured Universities</h2>
-                <div class="hidden lg:block space-x-1">
-                    <a href="#" class="button bg-white text-gray-500 border-gray-500 px-3.5 py-3">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </a>
-                    <a href="#" class="button bg-white text-gray-500 border-gray-500 px-3.5 py-3">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
+        <div class="relative">
+            <div class="hidden lg:block absolute z-0 -top-1/2 -left-1/2 bg-violet-50 rounded-[50%] blur-3xl w-[800px] h-[700px]"></div>
+            <div class="hidden lg:block absolute z-0 -top-1/2 -right-1/2 bg-sky-50 rounded-[50%] blur-3xl w-[800px] h-[700px]"></div>
 
-            <div class="overflow-auto">
-                <div class="flex space-x-8 overflow-x-auto">
-                
-                    <div class="w-72 lg:w-auto flex-none lg:flex-1 lg:basis-1/3 rounded-xl lg:rounded-2xl border overflow-hidden">
-                        <div class="h-44 lg:h-52 bg-cover bg-center bg-no-repeat relative"
-                            style="background-image: url(./assets/img/univer-bg.jpg);">
-                            <img class="absolute top-auto right-auto bottom-4 left-4 w-14 lg:w-auto" src="./assets/img/univer-logo.png" alt="">
-                        </div>
-                        <div class="p-4 space-y-3">
-                            <div class="font-bold text-lg lg:text-xl">Stanford University</div>
-                            <div class="text-sm">Stanford, CA</div>
-                        </div>
+            <div class="space-y-4 relative z-10">
+                <div class="flex justify-between items-center">
+                    <h2 class="font-heading-medium text-2xl lg:text-3xl">Featured Universities</h2>
+                    <div class="hidden lg:block space-x-1">
+                        <a href="#" class="button button-light !px-3.5 !py-3">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                        <a href="#" class="button button-light !px-3.5 !py-3">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
                     </div>
-                
-                    <div class="w-72 lg:w-auto flex-none lg:flex-1 lg:basis-1/3 rounded-xl lg:rounded-2xl border overflow-hidden">
-                        <div class="h-44 lg:h-52 bg-cover bg-center bg-no-repeat relative"
-                            style="background-image: url(./assets/img/univer-bg.jpg);">
-                            <img class="absolute top-auto right-auto bottom-4 left-4 w-14 lg:w-auto" src="./assets/img/univer-logo.png" alt="">
+                </div>
+
+                <div class="overflow-auto">
+                    <div class="flex space-x-6 lg:space-x-8 overflow-x-auto">
+                    
+                        <div class="w-72 md:w-auto flex-none md:flex-1 md:basis-1/3 rounded-xl md:rounded-2xl border overflow-hidden bg-white">
+                            <div class="h-44 md:h-36 lg:h-52 bg-cover bg-center bg-no-repeat relative"
+                                style="background-image: url(./assets/img/univer-bg.jpg);">
+                                <img class="absolute top-auto right-auto bottom-4 left-4 w-14 md:w-10 lg:w-auto" src="./assets/img/univer-logo.png" alt="">
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="font-bold text-lg lg:text-xl">Stanford University</div>
+                                <div class="text-sm">Stanford, CA</div>
+                            </div>
                         </div>
-                        <div class="p-4 space-y-3">
-                            <div class="font-bold text-lg lg:text-xl">Harvard University</div>
-                            <div class="text-sm">Cambridge, MA</div>
+                    
+                        <div class="w-72 md:w-auto flex-none md:flex-1 md:basis-1/3 rounded-xl md:rounded-2xl border overflow-hidden bg-white">
+                            <div class="h-44 md:h-36 lg:h-52 bg-cover bg-center bg-no-repeat relative"
+                                style="background-image: url(./assets/img/univer-bg.jpg);">
+                                <img class="absolute top-auto right-auto bottom-4 left-4 w-14 md:w-10 lg:w-auto" src="./assets/img/univer-logo.png" alt="">
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="font-bold text-lg lg:text-xl">Harvard University</div>
+                                <div class="text-sm">Cambridge, MA</div>
+                            </div>
                         </div>
+                    
+                        <div class="w-72 md:w-auto flex-none md:flex-1 md:basis-1/3 rounded-xl md:rounded-2xl border overflow-hidden bg-white">
+                            <div class="h-44 md:h-36 lg:h-52 bg-cover bg-center bg-no-repeat relative"
+                                style="background-image: url(./assets/img/univer-bg.jpg);">
+                                <img class="absolute top-auto right-auto bottom-4 left-4 w-14 md:w-10 lg:w-auto" src="./assets/img/univer-logo.png" alt="">
+                            </div>
+                            <div class="p-4 space-y-3">
+                                <div class="font-bold text-lg lg:text-xl">MIT</div>
+                                <div class="text-sm">Cambridge, MA</div>
+                            </div>
+                        </div>
+                    
                     </div>
-                
-                    <div class="w-72 lg:w-auto flex-none lg:flex-1 lg:basis-1/3 rounded-xl lg:rounded-2xl border overflow-hidden">
-                        <div class="h-44 lg:h-52 bg-cover bg-center bg-no-repeat relative"
-                            style="background-image: url(./assets/img/univer-bg.jpg);">
-                            <img class="absolute top-auto right-auto bottom-4 left-4 w-14 lg:w-auto" src="./assets/img/univer-logo.png" alt="">
-                        </div>
-                        <div class="p-4 space-y-3">
-                            <div class="font-bold text-lg lg:text-xl">Massachusetts Institute of Technology</div>
-                            <div class="text-sm">Cambridge, MA</div>
-                        </div>
-                    </div>
-                
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="py-10 lg:py-32 bg-top lg:bg-center bg-no-repeat bg-cover bg-[url('../img/gradient-2-mobile.png')] lg:bg-[url('../img/gradient-2.png')]">
+<div class="py-10 lg:py-32 bg-top md:bg-center bg-no-repeat bg-cover bg-[url('../img/gradient-2-mobile.png')] md:bg-[url('../img/gradient-2.png')]">
     <div class="container">
-        <div class="space-y-52 lg:space-y-20">
+        <div class="space-y-52 md:space-y-10 lg:space-y-20">
             <div class="space-y-2">
                 <h2 class="font-heading-medium text-2xl lg:text-3xl">About EasyUni</h2>
                 <div class="text-lg lg:text-xl">Making education affordable and accessible across the globe</div>
             </div>
 
-            <div class="grid grid-cols-2 lg:gap-16">
-                <div class="col-span-2 lg:col-span-1">
+            <div class="grid grid-cols-2 md:gap-10 lg:gap-16">
+                <div class="col-span-2 md:col-span-1">
                     <div class="grid grid-cols-2 gap-10">
                     
                         <div class="space-y-2">
-                            <h1 class="text-5xl font-bold">88%</h1>
+                            <h1 class="md:text-3xl lg:text-5xl font-bold">88%</h1>
                             <div class="text-gray-700">of TOP 100 universities in Malaysia cooperate with us</div>
                         </div>
                     
                         <div class="space-y-2">
-                            <h1 class="text-5xl font-bold">90%</h1>
+                            <h1 class="md:text-3xl lg:text-5xl font-bold">90%</h1>
                             <div class="text-gray-700">of Asian and African students use our university search platform</div>
                         </div>
                     
                         <div class="space-y-2">
-                            <h1 class="text-5xl font-bold">72%</h1>
+                            <h1 class="md:text-3xl lg:text-5xl font-bold">72%</h1>
                             <div class="text-gray-700">higher admission rate when identified as a prospect</div>
                         </div>
                     
                         <div class="space-y-2">
-                            <h1 class="text-5xl font-bold">11</h1>
+                            <h1 class="md:text-3xl lg:text-5xl font-bold">11</h1>
                             <div class="text-gray-700">websites for each country where EasyUni works</div>
                         </div>
                     
@@ -1786,76 +1907,76 @@
             <div class="space-y-4">
                 <h2 class="font-heading-medium text-2xl lg:text-3xl">Browse by field of study</h2>
                 <div class="rounded-2xl bg-white p-6 lg:p-14 relative">
-                    <div class="lg:w-2/3 lg:pr-20" x-data="{hidden: true}">
-                        <div class="flex flex-wrap gap-7">
+                    <div class="md:w-2/3 md:pr-10 lg:pr-20" x-data="{hidden: true}">
+                        <div class="flex flex-wrap gap-7 md:gap-5">
                         
-                            <a href="#" class="flex">Child Care</a>
+                            <a href="#" class="flex md:text-sm">Child Care</a>
                         
-                            <a href="#" class="flex">Business</a>
+                            <a href="#" class="flex md:text-sm">Business</a>
                         
-                            <a href="#" class="flex">Retail</a>
+                            <a href="#" class="flex md:text-sm">Retail</a>
                         
-                            <a href="#" class="flex">Education & Teaching</a>
+                            <a href="#" class="flex md:text-sm">Education & Teaching</a>
                         
-                            <a href="#" class="flex">Work Health & Safety (OH&S)</a>
+                            <a href="#" class="flex md:text-sm">Work Health & Safety (OH&S)</a>
                         
-                            <a href="#" class="flex">Community Services</a>
+                            <a href="#" class="flex md:text-sm">Community Services</a>
                         
-                            <a href="#" class="flex">Education Support</a>
+                            <a href="#" class="flex md:text-sm">Education Support</a>
                         
-                            <a href="#" class="flex">Aged Care</a>
+                            <a href="#" class="flex md:text-sm">Aged Care</a>
                         
-                            <a href="#" class="flex">Nutrition</a>
+                            <a href="#" class="flex md:text-sm">Nutrition</a>
                         
-                            <a href="#" class="flex">Psychology</a>
+                            <a href="#" class="flex md:text-sm">Psychology</a>
                         
-                            <a href="#" class="flex">First Aid</a>
+                            <a href="#" class="flex md:text-sm">First Aid</a>
                         
-                            <a href="#" class="flex">Building & Construction</a>
+                            <a href="#" class="flex md:text-sm">Building & Construction</a>
                         
-                            <a href="#" class="flex">Human Resources (HR)</a>
+                            <a href="#" class="flex md:text-sm">Human Resources (HR)</a>
                         
-                            <a href="#" class="flex">Project Management</a>
+                            <a href="#" class="flex md:text-sm">Project Management</a>
                         
 
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Child Care</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Child Care</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Business</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Business</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Retail</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Retail</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Education & Teaching</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Education & Teaching</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Work Health & Safety (OH&S)</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Work Health & Safety (OH&S)</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Community Services</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Community Services</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Education Support</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Education Support</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Aged Care</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Aged Care</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Nutrition</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Nutrition</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Psychology</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Psychology</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">First Aid</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">First Aid</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Building & Construction</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Building & Construction</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Human Resources (HR)</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Human Resources (HR)</a>
                         
-                            <a href="#" x-cloak="" :class="hidden ? 'hidden' : 'flex'">Project Management</a>
+                            <a href="#" x-cloak="" class="md:text-sm" :class="hidden ? 'hidden' : 'flex'">Project Management</a>
                         
                         </div>
 
-                        <div class="mt-10">
+                        <div class="my-8">
                             <a href="#" class="font-semibold"
                                 x-cloak=""
                                 :class="hidden ? 'block' : 'hidden'"
                                 @click.prevent="hidden = false"
                             >
-                                <span>Show all fields of study</span>
+                                <span class="md:text-sm">Show all fields of study</span>
                                 <i class="fa-solid fa-angle-down"></i>
                             </a>
                             <a href="#" class="font-semibold"
@@ -1863,13 +1984,13 @@
                                 :class="hidden ? 'hidden' : 'block'"
                                 @click.prevent="hidden = true"
                             >
-                                <span>Show less fields of study</span>
+                                <span class="md:text-sm">Show less fields of study</span>
                                 <i class="fa-solid fa-angle-up"></i>
                             </a>
                         </div>
                     </div>
 
-                    <div class="relative lg:absolute lg:-right-20 lg:top-24 mt-14 ml-auto lg:mt-0 w-52 lg:w-[500px] h-36 lg:h-80 rounded-b-[45px] rounded-tr-[45px] lg:rounded-b-[100px] lg:rounded-tr-[100px] bg-gradient-to-r from-violet-400 to-violet-200">
+                    <div class="relative md:absolute md:right-5 lg:-right-20 md:top-20 lg:top-24 mt-14 ml-auto md:mt-0 w-52 md:w-80 md:w-[220px] lg:w-[500px] h-36 lg:h-80 rounded-b-[45px] rounded-tr-[45px] lg:rounded-b-[100px] lg:rounded-tr-[100px] bg-gradient-to-r from-violet-400 to-violet-200">
                         <img
                             src="./assets/img/asian-collage-female-woman-smiling-cheerful.png"
                             class="absolute bottom-0 right-0 h-52 lg:h-auto rounded-br-[45px] lg:rounded-br-[100px]"
@@ -1908,7 +2029,7 @@
                         </div>
                     </div>
 
-                    <hr class="my-8">
+                    <hr class="md:hidden lg:block my-8">
 
                     <div class="space-y-5">
                         <div class="space-y-1">
@@ -1916,9 +2037,9 @@
                             <div class="text-lg lg:text-xl">Take a look at our full list, or we can help.</div>
                         </div>
 
-                        <div class="space-y-3 lg:space-y-0 space-x-0 lg:space-x-3">
-                            <a href="#" class="button button-outline justify-center w-full lg:w-auto">Find me an University</a>
-                            <a href="#" class="button justify-center w-full lg:w-auto">Ask an Advisor</a>
+                        <div class="md:flex space-y-3 md:space-y-0 space-x-0 md:space-x-3">
+                            <a href="#" class="button button-outline w-full lg:w-auto">Find me an University</a>
+                            <a href="#" class="button w-full lg:w-auto">Ask an Advisor</a>
                         </div>
                     </div>
                 </div>
@@ -1931,11 +2052,10 @@
             <div class="flex items-center justify-between">
                 <h2 class="hidden lg:block font-heading-medium text-2xl lg:text-3xl">News and Articles</h2>
                 <h2 class="block lg:hidden font-heading-medium text-2xl lg:text-3xl">Interesting</h2>
-                <a href="#" class="hidden lg:block button bg-white text-gray-800 border-gray-800">See More</a>
-                <a href="#" class="block lg:hidden">See More</a>
+                <a href="#" class="lg:button lg:!bg-transparent lg:!text-gray-800 lg:!border-gray-800">See More</a>
             </div>
 
-            <div class="lg:grid lg:grid-cols-3 lg:gap-8 space-y-5 lg:space-y-0">
+            <div class="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 lg:gap-8 space-y-5 md:space-y-0">
             
                 <div class="space-y-1 lg:space-y-5">
                     <div
@@ -1971,13 +2091,193 @@
 
 <div class="py-10 lg:py-32">
     <div class="container">
-        <div class="rounded-xl overflow-hidden bg-center bg-no-repeat bg-cover" style="background-image: url(./assets/img/gradient-4.png);">
-            <div class="lg:grid lg:grid-cols-2">
-                <div></div>
-                <div>
-                    <div class="space-y-8 py-10 lg:py-32 px-6 lg:px-20">
+        <div class="rounded-xl bg-center bg-no-repeat bg-cover" style="background-image: url(./assets/img/gradient-4.png);">
+            <div class="md:grid md:grid-cols-12">
+                <div id="js-anime-carousel-container" class="md:col-span-7 h-40 md:h-[350px] lg:h-[450px] overflow-x-hidden md:overflow-y-hidden">
+                    <div class="flex flex-col h-full md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 my-auto md:mx-auto">
+                        <!-- mobile -->
+                        <div id="js-anime-carousel1" class="flex md:hidden space-x-4">
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 rounded-r-2xl rounded-tl-2xl bg-[#A899FC33]">
+    <img src="./assets/img/du-msu.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 rounded-r-2xl rounded-tl-2xl bg-[#A899FC33]">
+    <img src="./assets/img/du-numed.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 rounded-r-2xl rounded-tl-2xl bg-[#A899FC33]">
+    <img src="./assets/img/du-taruc.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 rounded-r-2xl rounded-tl-2xl bg-[#A899FC33]">
+    <img src="./assets/img/du-um.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 rounded-r-2xl rounded-tl-2xl bg-[#A899FC33]">
+    <img src="./assets/img/du-xjtlu.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                        </div>
+                        <div id="js-anime-carousel2" class="flex md:hidden space-x-4">
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 rounded-l-2xl rounded-tr-2xl bg-[#E6E3F6]">
+    <img src="./assets/img/du-msu.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 rounded-l-2xl rounded-tr-2xl bg-[#E6E3F6]">
+    <img src="./assets/img/du-numed.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 rounded-l-2xl rounded-tr-2xl bg-[#E6E3F6]">
+    <img src="./assets/img/du-taruc.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 rounded-l-2xl rounded-tr-2xl bg-[#E6E3F6]">
+    <img src="./assets/img/du-um.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 rounded-l-2xl rounded-tr-2xl bg-[#E6E3F6]">
+    <img src="./assets/img/du-xjtlu.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                        </div>
+                        <!-- /mobile -->
+
+                        <!-- mobile landscape and more -->
+                        <div id="js-anime-carousel1-md" class="hidden md:flex flex-col space-y-4 !ml-0">
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 md:rounded-r-3xl lg:rounded-r-[40px] md:rounded-tl-3xl lg:rounded-tl-[40px] bg-[#A899FC33]">
+    <img src="./assets/img/du-msu.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 md:rounded-r-3xl lg:rounded-r-[40px] md:rounded-tl-3xl lg:rounded-tl-[40px] bg-[#A899FC33]">
+    <img src="./assets/img/du-numed.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 md:rounded-r-3xl lg:rounded-r-[40px] md:rounded-tl-3xl lg:rounded-tl-[40px] bg-[#A899FC33]">
+    <img src="./assets/img/du-taruc.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 md:rounded-r-3xl lg:rounded-r-[40px] md:rounded-tl-3xl lg:rounded-tl-[40px] bg-[#A899FC33]">
+    <img src="./assets/img/du-um.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 md:rounded-r-3xl lg:rounded-r-[40px] md:rounded-tl-3xl lg:rounded-tl-[40px] bg-[#A899FC33]">
+    <img src="./assets/img/du-xjtlu.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                        </div>
+                        <div id="js-anime-carousel2-md" class="hidden md:flex flex-col space-y-4">
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 md:rounded-l-3xl lg:rounded-l-[40px] md:rounded-tr-3xl lg:rounded-tr-[40px] bg-[#E6E3F6]">
+    <img src="./assets/img/du-msu.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 md:rounded-l-3xl lg:rounded-l-[40px] md:rounded-tr-3xl lg:rounded-tr-[40px] bg-[#E6E3F6]">
+    <img src="./assets/img/du-numed.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 md:rounded-l-3xl lg:rounded-l-[40px] md:rounded-tr-3xl lg:rounded-tr-[40px] bg-[#E6E3F6]">
+    <img src="./assets/img/du-taruc.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 md:rounded-l-3xl lg:rounded-l-[40px] md:rounded-tr-3xl lg:rounded-tr-[40px] bg-[#E6E3F6]">
+    <img src="./assets/img/du-um.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                            
+<!-- dream university -->
+<div class="flex shrink-0 items-center justify-center w-24 md:w-44 lg:w-60 h-12 md:h-24 lg:h-36 md:rounded-l-3xl lg:rounded-l-[40px] md:rounded-tr-3xl lg:rounded-tr-[40px] bg-[#E6E3F6]">
+    <img src="./assets/img/du-xjtlu.png" class="w-14 md:w-24 lg:w-36" alt="">
+</div>
+<!-- /dream university -->
+
+                        
+                        </div>
+                        <!-- /mobile landscape and more -->
+                    </div>
+                </div>
+                <div class="md:col-span-5 flex flex-col justify-center">
+                    <div class="space-y-8 px-6 pb-6 md:pb-0 md:pl-0 md:pr-16">
                         <h2 class="font-semibold text-2xl lg:text-3xl">See why thousands of students use and love EasyUni for finding Dream University.</h2>
-                        <a href="#" class="button w-full justify-center lg:w-auto">Speak to Educational Advisor</a>
+                        <a href="#" class="button w-full lg:w-auto">Speak to Educational Advisor</a>
                     </div>
                 </div>
             </div>
@@ -1985,22 +2285,24 @@
     </div>
 </div>
 
+
+
     </main>
 
     <footer x-data="{open: false}">
-        <div class="flex flex-col lg:flex-row items-center justify-between py-4 px-4 lg:px-12 border-t border-t-gray-300 space-y-reverse space-y-3 lg:space-y-0">
-            <div class="flex justify-between space-x-2 lg:space-x-3 text-sm order-2 lg:order-1 w-full lg:w-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between py-4 px-4 lf:px-12 border-t border-t-gray-300 space-y-reverse space-y-3 md:space-y-0">
+            <div class="flex justify-between space-x-2 md:space-x-3 text-sm order-2 md:order-1 w-full md:w-auto">
                 <div>&copy; 2022 EasyUni All rights reserved</div>
-                <div class="flex space-x-2 lg:space-x-3">
-                    <div class="hidden lg:block">&bull;</div>
+                <div class="flex space-x-2 md:space-x-3">
+                    <div class="hidden md:block">&bull;</div>
                     <a href="#" class="text-gray-800">Privacy</a>
                     <div>&bull;</div>
                     <a href="#" class="text-gray-800">Terms</a>
                 </div>
             </div>
 
-            <div class="flex justify-between items-center lg:space-x-3 text-sm order-1 lg:order-2 w-full lg:w-auto">
-                <div class="text-gray-800 order-2 lg:order-1">
+            <div class="flex justify-between items-center md:space-x-3 text-sm order-1 md:order-2 w-full md:w-auto">
+                <div class="text-gray-800 order-2 md:order-1">
                     
 <!-- select region -->
 <div x-data="{open: false}" class="relative">
@@ -2018,64 +2320,64 @@
         x-transition:leave="ease-in-out duration-500"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="w-[300px] lg:w-[800px] absolute  bottom-full right-0 z-10 p-5 bg-white rounded-t-2xl rounded-bl-2xl border drop-shadow-xl"
+        class="w-[300px] md:w-[500px] lg:w-[800px] absolute  bottom-full right-0 z-10 p-5 bg-white rounded-t-2xl rounded-bl-2xl border drop-shadow-xl"
     >
-        <div class="space-y-2 lg:space-y-4">
+        <div class="space-y-2 md:space-y-4">
             <h5 class="text-lg lg:text-xl font-semibold">Current</h5>
             <a href="#" class="inline-flex items-center space-x-2 p-1.5 rounded-lg border">
                 <img src="./assets/img/globe.png" class="w-6 lg:w-8 h-6 lg:h-8" alt="">
                 <span>Global site</span>
             </a>
             <h5 class="text-lg lg:text-xl font-semibold">Select Region</h5>
-            <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 lg:gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-4">
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-bn fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-bn fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Brunei</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-in fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-in fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">India</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-id fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-id fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Indonesia</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-my fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-my fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Malaysia</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-mu fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-mu fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Mauritius</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-sa fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-sa fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Middle East</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-ph fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-ph fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Philippines</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-sg fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-sg fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Singapore</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-lk fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-lk fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Sri-Lanka</span>
                 </a>
                 
-                <a href="#" class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
-                    <span class="fi fi-vn fis w-6 lg:w-8 h-6 lg:h-8 rounded border"></span>
+                <a href="#" class="inline-flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg">
+                    <span class="fi fi-vn fis !w-6 lg:w-8 !h-6 lg:h-8 rounded border"></span>
                     <span class="whitespace-nowrap">Vietnam</span>
                 </a>
                 
@@ -2090,7 +2392,7 @@
                 <div
                     @click.prevent="open = true; slideOver = true"
                     role="button"
-                    class="text-gray-800 order-1 lg:order-2"
+                    class="text-gray-800 order-1 md:order-2"
                 >
                     <span>Support &amp; Resources</span>
                     <i class="fa-solid fa-angle-up"></i>
@@ -2102,9 +2404,9 @@
             x-cloak=""
             x-show="open"
             @click.away="open = false; slideOver = false"
-            class="fixed inset-x-0 z-10 bottom-0 max-w-full py-6 lg:py-14 bg-white border-t rounded-t-2xl"
+            class="fixed inset-x-0 z-10 bottom-0 max-w-full py-6 md:py-14 bg-white border-t rounded-t-2xl"
         >
-            <div class="hidden lg:block absolute top-5 right-6">
+            <div class="hidden md:block absolute top-5 right-6">
                 
 <!-- footer close button -->
 <div @click.prevent="open = false; slideOver = false" role="button" class="text-lg leading-none">
@@ -2115,8 +2417,8 @@
             </div>
 
             <div class="container">
-                <div class="flex flex-col lg:flex-row space-y-reverse space-y-10 lg:space-y-0">
-                    <div class="flex basis-2/3 order-2 lg:order-1">
+                <div class="flex flex-col md:flex-row space-y-reverse space-y-10 md:space-y-0">
+                    <div class="flex basis-2/3 order-2 md:order-1">
                         <div class="basis-1/2 space-y-5">
                             <h5 class="font-bold">About</h5>
                             <ul class="list-none space-y-5">
@@ -2136,10 +2438,10 @@
                         </div>
                     </div>
 
-                    <div class="basis-1/3 space-y-5 order-1 lg:order-2">
+                    <div class="basis-1/3 space-y-5 order-1 md:order-2">
                         <div class="flex justify-between items-center">
                             <h5 class="font-bold">Let us find you the right university</h5>
-                            <div class="block lg:hidden">
+                            <div class="block md:hidden">
                                 
 <!-- footer close button -->
 <div @click.prevent="open = false; slideOver = false" role="button" class="text-lg leading-none">
@@ -2150,7 +2452,7 @@
                             </div>
                         </div>
                         <div>Get all of the information you need to make an informed decision.</div>
-                        <a href="#" class="button bg-white text-gray-800 border-gray-800">Speak to Educational Advisor</a>
+                        <a href="#" class="button button-light w-full md:w-auto">Speak to Educational Advisor</a>
                         <div class="text-sm text-gray-400">Our services are 100% free for students because we’re funded by universities.</div>
                     </div>
                 </div>
@@ -2170,5 +2472,107 @@
         x-transition:leave-end="opacity-0"
         class="fixed inset-0 z-0 bg-gray-500 bg-opacity-75 transition-opacity">
     </div>
+
+    
+<script>
+    const tl1 = anime.timeline({
+        easing: 'easeOutBounce'
+    });
+
+    tl1.add({
+        targets: '#js-anime-balloon1',
+        width: '*=3.8',
+        height: '*=1.5',
+        borderTopLeftRadius: ['9999px', 0],
+        delay: 500
+    });
+    tl1.add({
+        targets: '#js-anime-hat',
+        opacity: 1,
+    });
+
+    const tl2 = anime.timeline({
+        easing: 'easeInOutQuad',
+        duration: 500,
+    });
+
+    tl2.add({
+        targets: '#js-anime-guys',
+        width: (el) => $(el).height() * 3 - 30,
+        delay: 1000
+    });
+    tl2.add({
+        targets: '#js-anime-guy1',
+        opacity: 1,
+        left: 0,
+    });
+    tl2.add({
+        targets: '#js-anime-guy2',
+        opacity: 1,
+        left: function (el) {
+            const w = $(el).width();
+            return w - (w / 4.25);
+        },
+    });
+    tl2.add({
+        targets: '#js-anime-guy3',
+        opacity: 1,
+        left: function (el) {
+            const w = $(el).width();
+            return (w - (w / 4.25)) * 2;
+        },
+    });
+
+    const tl3 = anime.timeline({
+        easing: 'easeOutBounce'
+    });
+    tl3.add({
+        targets: '#js-anime-rocket',
+        width: (el) => $(el).height(),
+        height: (el) => [0, $(el).height()]
+    });
+    tl3.add({
+        targets: '#js-anime-balloon2',
+        width: '*=3.8',
+        height: '*=1.5',
+        borderBottomLeftRadius: ['9999px', 0],
+        delay: 500
+    });
+    tl3.add({
+        targets: '#js-anime-or',
+        opacity: 1
+    });
+
+    const carouselContainer = $('#js-anime-carousel-container'),
+        height = carouselContainer.height(),
+        width = carouselContainer.width(),
+        params = {
+            loop: true,
+            easing: 'linear',
+            duration: 5000
+        };
+
+    anime({
+        targets: '#js-anime-carousel1 > div',
+        translateX: [width, width * -2],
+        ...params
+    });
+    anime({
+        targets: '#js-anime-carousel1-md > div',
+        translateY: [height, height * -2],
+        ...params
+    });
+    anime({
+        targets: '#js-anime-carousel2 > div',
+        translateX: [width * -2, width],
+        ...params
+    });
+    anime({
+        targets: '#js-anime-carousel2-md > div',
+        translateY: [height * -2, height],
+        ...params
+    });
+</script>
+
 </body>
 </html>
