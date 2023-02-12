@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>EasyUni / </title>
+    <title>EasyUni / Components</title>
     <link href="./assets/css/app.css" rel="stylesheet">
     <script>window.module = window.module || {}</script>
     <script src="./assets/js/alpinejs/cdn.min.js" defer></script>
@@ -943,8 +943,67 @@
     </header>
 
     <main>
-        <h1 class="text-4xl">404 Page Not Found</h1>
-<p>The requested page could not be found.</p>
+        <div class="container">
+    <div class="py-32 space-y-5">
+        <div class="text-5xl">Buttons</div>
+
+        <div class="card-xl p-10">
+            <div class="text-3xl">Default</div>
+            <div class="flex items-end space-x-10">
+                <!--
+                note: any custom styles you add to the will only be included
+                in your compiled CSS if those styles are actually used in your HTML
+                -->
+                <button class="button">Button</button>
+                <button class="button button-md">Button md</button>
+                <button class="button button-lg">Button lg</button>
+                <button class="button button-xl">Button xl</button>
+            </div>
+        </div>
+
+        <div class="card-xl p-10">
+            <div class="text-3xl">Outline</div>
+            <div class="flex items-end space-x-10">
+                <button class="button button-outline">Button outline</button>
+                
+                <button class="button button-md button-outline">Button outline md</button>
+                
+                <button class="button button-lg button-outline">Button outline lg</button>
+                
+                <button class="button button-xl button-outline">Button outline xl</button>
+                
+            </div>
+        </div>
+
+        <div class="card-xl p-10">
+            <div class="text-3xl">Light</div>
+            <div class="flex items-end space-x-10">
+                <button class="button button-light">Button light</button>
+                
+                <button class="button button-md button-light">Button light md</button>
+                
+                <button class="button button-lg button-light">Button light lg</button>
+                
+                <button class="button button-xl button-light">Button light xl</button>
+                
+            </div>
+        </div>
+
+        <div class="card-xl p-10">
+            <div class="text-3xl">Transparent</div>
+            <div class="flex items-end space-x-10 bg-indigo-100">
+                <button class="button button-transparent">Button transparent</button>
+                
+                <button class="button button-md button-transparent">Button transparent md</button>
+                
+                <button class="button button-lg button-transparent">Button transparent lg</button>
+                
+                <button class="button button-xl button-transparent">Button transparent xl</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
 
     </main>
 
