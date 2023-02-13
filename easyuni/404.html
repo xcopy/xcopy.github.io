@@ -11,7 +11,14 @@
     <script src="./assets/js/jquery/jquery.min.js"></script>
 </head>
 <body
-    x-data="{slideOver: false, searchNav: false, searchMobile: false, navAtTop: true}"
+    x-data="{
+        slideOver: false,
+        searchNav: false,
+        searchMobileHome: false,
+        searchMobileHeader: false,
+        search: {country: null, studyLevel: null},
+        navAtTop: true
+    }"
     :class="{'overflow-hidden': slideOver}"
     class="flex h-full flex-col"
 >
@@ -49,7 +56,7 @@
 
                 <div class="flex items-center space-x-5">
                     <!-- search desktop -->
-                    <div x-data="{open: false}" class="relative hidden lg:block">
+                    <div x-data="{open: false}" class="hidden lg:block relative">
                         <span
                             @click="open = true; slideOver = true; searchNav = true"
                             role="button"
@@ -71,12 +78,7 @@
                         >
                             
 <!-- search form -->
-<div x-data="{
-    dropdown1: false,
-    dropdown2: false,
-    country: null,
-    studyLevel: null
-}">
+<div x-data="{dropdown1: false, dropdown2: false}">
     <form class="relative w-auto">
         <!-- dropdown 1 -->
         <div
@@ -97,8 +99,8 @@
         
 <!-- country: Everywhere -->
 <div
-    @click="country = {label: 'Everywhere', code: ''}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === ''}"
+    @click="search.country = {label: 'Everywhere', code: ''}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === ''}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -113,8 +115,8 @@
         
 <!-- country: Brunei -->
 <div
-    @click="country = {label: 'Brunei', code: 'bn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'bn'}"
+    @click="search.country = {label: 'Brunei', code: 'bn'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'bn'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -129,8 +131,8 @@
         
 <!-- country: India -->
 <div
-    @click="country = {label: 'India', code: 'in'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'in'}"
+    @click="search.country = {label: 'India', code: 'in'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'in'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -145,8 +147,8 @@
         
 <!-- country: Indonesia -->
 <div
-    @click="country = {label: 'Indonesia', code: 'id'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'id'}"
+    @click="search.country = {label: 'Indonesia', code: 'id'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'id'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -161,8 +163,8 @@
         
 <!-- country: Malaysia -->
 <div
-    @click="country = {label: 'Malaysia', code: 'my'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'my'}"
+    @click="search.country = {label: 'Malaysia', code: 'my'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'my'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -177,8 +179,8 @@
         
 <!-- country: Mauritius -->
 <div
-    @click="country = {label: 'Mauritius', code: 'mu'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'mu'}"
+    @click="search.country = {label: 'Mauritius', code: 'mu'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'mu'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -193,8 +195,8 @@
         
 <!-- country: Middle East -->
 <div
-    @click="country = {label: 'Middle East', code: 'sa'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'sa'}"
+    @click="search.country = {label: 'Middle East', code: 'sa'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'sa'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -209,8 +211,8 @@
         
 <!-- country: Philippines -->
 <div
-    @click="country = {label: 'Philippines', code: 'ph'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'ph'}"
+    @click="search.country = {label: 'Philippines', code: 'ph'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'ph'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -225,8 +227,8 @@
         
 <!-- country: Singapore -->
 <div
-    @click="country = {label: 'Singapore', code: 'sg'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'sg'}"
+    @click="search.country = {label: 'Singapore', code: 'sg'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'sg'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -241,8 +243,8 @@
         
 <!-- country: Sri-Lanka -->
 <div
-    @click="country = {label: 'Sri-Lanka', code: 'lk'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'lk'}"
+    @click="search.country = {label: 'Sri-Lanka', code: 'lk'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'lk'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -257,8 +259,8 @@
         
 <!-- country: Vietnam -->
 <div
-    @click="country = {label: 'Vietnam', code: 'vn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'vn'}"
+    @click="search.country = {label: 'Vietnam', code: 'vn'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'vn'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -296,8 +298,8 @@
         
 <!-- study level: Bachelor -->
 <div
-    @click="studyLevel = {label: 'Bachelor\'s', code: 'bachelor'}; dropdown2 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'bachelor'}"
+    @click="search.studyLevel = {label: 'Bachelor\'s', code: 'bachelor'}; dropdown2 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.studyLevel && search.studyLevel.code === 'bachelor'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -309,8 +311,8 @@
         
 <!-- study level: Master -->
 <div
-    @click="studyLevel = {label: 'Master\'s', code: 'master'}; dropdown2 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'master'}"
+    @click="search.studyLevel = {label: 'Master\'s', code: 'master'}; dropdown2 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.studyLevel && search.studyLevel.code === 'master'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -341,18 +343,18 @@
     <div class="flex items-center grow lg:w-52">
         <span
             x-cloak=""
-            x-show="country && country.code"
-            :class="country ? 'fi-' + country.code : ''"
+            x-show="search.country && search.country.code"
+            :class="search.country ? 'fi-' + search.country.code : ''"
             class="fi fis !w-6 !h-6 rounded border mr-2">
         </span>
         <img
             x-cloak=""
-            x-show="country && !country.code"
+            x-show="search.country && !search.country.code"
             src="./assets/img/globe.png" class="!w-6 !h-6 mr-2"
             alt=""
         >
         <div
-            x-text="country ? country.label : 'Country'"
+            x-text="search.country ? search.country.label : 'Country'"
             class="text-gray-400 font-semibold whitespace-nowrap">
         </div>
     </div>
@@ -371,14 +373,14 @@
 <!-- select study level -->
 <div class="flex items-center justify-between">
     <div class="flex items-center grow lg:w-52">
-        <template x-if="studyLevel">
+        <template x-if="search.studyLevel">
             <img
-                :src="'./assets/img/study-level-' + studyLevel.code + '.svg'"
+                :src="'./assets/img/study-level-' + search.studyLevel.code + '.svg'"
                 class="!w-6 !h-6 mr-2" alt=""
             >
         </template>
         <div
-            x-text="studyLevel ? studyLevel.label : 'Study Level'"
+            x-text="search.studyLevel ? search.studyLevel.label : 'Study Level'"
             class="text-gray-400 font-semibold whitespace-nowrap">
         </div>
     </div>
@@ -407,52 +409,27 @@
 
                     <!-- search mobile -->
                     <div class="block lg:hidden">
-                        <!--
-                        trigger mobile search form come visible by notifying a component
-                        refer to "_includes/search-mobile.html", event: @notify.window
-                        -->
                         <span
-                            @click="slideOver = true; searchMobile = true; $dispatch('notify', {dropdown1: true});"
+                            @click="slideOver = true; searchMobileHeader = true"
                             role="button"
                         >
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
 
-                        
+                        <div
+                            x-cloak=""
+                            x-show="searchMobileHeader"
+                            @click.away="searchMobileHeader = false; slideOver = false"
+                        >
+                            
 <!-- mobile search -->
-<div
-    x-data="{
-        open: 'false' === 'true',
-        dropdown1: false,
-        dropdown2: false,
-        country: null,
-        studyLevel: null
-    }"
-    @notify.window="dropdown1 = $event.detail.dropdown1"
->
+<div x-data="{dropdown1: true, dropdown2: false}">
     <form>
-        <div
-            x-cloak=""
-            x-show="open"
-            @click="searchMobile = true; slideOver = true; dropdown1 = true"
-            class="flex items-center justify-between border rounded-xl mx-auto py-2 px-3 bg-white w-full sm:w-2/3 md:w-1/2 select-none"
-        >
-            <span class="text-sm text-gray-400 w-52">Find University</span>
-            <div class="button">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-        </div>
-
-        <div
-            x-cloak=""
-            x-show="searchMobile"
-            @click.away="searchMobile = false"
-            class="fixed bottom-0 inset-x-0 z-50"
-        >
+        <div class="fixed bottom-0 inset-x-0 z-50">
             <div class="flex items-center justify-between p-5 border-t rounded-t-3xl border-b bg-white">
                 <h3 class="text-2xl">Find University</h3>
                 <div
-                    @click="searchMobile = false; slideOver = false"
+                    @click="searchMobileHome = false; searchMobileHeader = false; slideOver = false"
                     class="text-2xl"
                     role="button"
                 >
@@ -476,8 +453,8 @@
         
 <!-- country: Everywhere -->
 <div
-    @click="country = {label: 'Everywhere', code: ''}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === ''}"
+    @click="search.country = {label: 'Everywhere', code: ''}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === ''}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -492,8 +469,8 @@
         
 <!-- country: Brunei -->
 <div
-    @click="country = {label: 'Brunei', code: 'bn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'bn'}"
+    @click="search.country = {label: 'Brunei', code: 'bn'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'bn'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -508,8 +485,8 @@
         
 <!-- country: India -->
 <div
-    @click="country = {label: 'India', code: 'in'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'in'}"
+    @click="search.country = {label: 'India', code: 'in'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'in'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -524,8 +501,8 @@
         
 <!-- country: Indonesia -->
 <div
-    @click="country = {label: 'Indonesia', code: 'id'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'id'}"
+    @click="search.country = {label: 'Indonesia', code: 'id'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'id'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -540,8 +517,8 @@
         
 <!-- country: Malaysia -->
 <div
-    @click="country = {label: 'Malaysia', code: 'my'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'my'}"
+    @click="search.country = {label: 'Malaysia', code: 'my'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'my'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -556,8 +533,8 @@
         
 <!-- country: Mauritius -->
 <div
-    @click="country = {label: 'Mauritius', code: 'mu'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'mu'}"
+    @click="search.country = {label: 'Mauritius', code: 'mu'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'mu'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -572,8 +549,8 @@
         
 <!-- country: Middle East -->
 <div
-    @click="country = {label: 'Middle East', code: 'sa'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'sa'}"
+    @click="search.country = {label: 'Middle East', code: 'sa'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'sa'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -588,8 +565,8 @@
         
 <!-- country: Philippines -->
 <div
-    @click="country = {label: 'Philippines', code: 'ph'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'ph'}"
+    @click="search.country = {label: 'Philippines', code: 'ph'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'ph'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -604,8 +581,8 @@
         
 <!-- country: Singapore -->
 <div
-    @click="country = {label: 'Singapore', code: 'sg'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'sg'}"
+    @click="search.country = {label: 'Singapore', code: 'sg'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'sg'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -620,8 +597,8 @@
         
 <!-- country: Sri-Lanka -->
 <div
-    @click="country = {label: 'Sri-Lanka', code: 'lk'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'lk'}"
+    @click="search.country = {label: 'Sri-Lanka', code: 'lk'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'lk'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -636,8 +613,8 @@
         
 <!-- country: Vietnam -->
 <div
-    @click="country = {label: 'Vietnam', code: 'vn'}; dropdown1 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': country && country.code === 'vn'}"
+    @click="search.country = {label: 'Vietnam', code: 'vn'}; dropdown1 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.country && search.country.code === 'vn'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -667,18 +644,18 @@
     <div class="flex items-center grow lg:w-52">
         <span
             x-cloak=""
-            x-show="country && country.code"
-            :class="country ? 'fi-' + country.code : ''"
+            x-show="search.country && search.country.code"
+            :class="search.country ? 'fi-' + search.country.code : ''"
             class="fi fis !w-6 !h-6 rounded border mr-2">
         </span>
         <img
             x-cloak=""
-            x-show="country && !country.code"
+            x-show="search.country && !search.country.code"
             src="./assets/img/globe.png" class="!w-6 !h-6 mr-2"
             alt=""
         >
         <div
-            x-text="country ? country.label : 'Country'"
+            x-text="search.country ? search.country.label : 'Country'"
             class="text-gray-400 font-semibold whitespace-nowrap">
         </div>
     </div>
@@ -703,8 +680,8 @@
         
 <!-- study level: Bachelor -->
 <div
-    @click="studyLevel = {label: 'Bachelor\'s', code: 'bachelor'}; dropdown2 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'bachelor'}"
+    @click="search.studyLevel = {label: 'Bachelor\'s', code: 'bachelor'}; dropdown2 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.studyLevel && search.studyLevel.code === 'bachelor'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -716,8 +693,8 @@
         
 <!-- study level: Master -->
 <div
-    @click="studyLevel = {label: 'Master\'s', code: 'master'}; dropdown2 = false; slideOver = searchNav || searchMobile"
-    :class="{'bg-gray-100 rounded-lg': studyLevel && studyLevel.code === 'master'}"
+    @click="search.studyLevel = {label: 'Master\'s', code: 'master'}; dropdown2 = false; slideOver = searchNav || searchMobileHome || searchMobileHeader"
+    :class="{'bg-gray-100 rounded-lg': search.studyLevel && search.studyLevel.code === 'master'}"
     role="button"
     class="flex items-center space-x-2 p-1.5 hover:bg-gray-100 hover:rounded-lg"
 >
@@ -742,14 +719,14 @@
 <!-- select study level -->
 <div class="flex items-center justify-between">
     <div class="flex items-center grow lg:w-52">
-        <template x-if="studyLevel">
+        <template x-if="search.studyLevel">
             <img
-                :src="'./assets/img/study-level-' + studyLevel.code + '.svg'"
+                :src="'./assets/img/study-level-' + search.studyLevel.code + '.svg'"
                 class="!w-6 !h-6 mr-2" alt=""
             >
         </template>
         <div
-            x-text="studyLevel ? studyLevel.label : 'Study Level'"
+            x-text="search.studyLevel ? search.studyLevel.label : 'Study Level'"
             class="text-gray-400 font-semibold whitespace-nowrap">
         </div>
     </div>
@@ -775,6 +752,7 @@
 </div>
 <!-- /mobile search -->
 
+                        </div>
                     </div>
                     <!-- /search mobile -->
 
